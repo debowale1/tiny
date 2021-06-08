@@ -1,0 +1,27 @@
+[
+  {
+    "name": "Programming",
+    "slug": "programming",
+    "description": "anything related to programming"
+  },
+  {
+    "name": "Technology",
+    "slug": "technology",
+    "description": "anything related to technology"
+  },
+  {
+    "name": "Backend Development",
+    "slug": "backend-development",
+    "description": "anything related to backend development"
+  },
+  {
+    "name": "Frontend Development",
+    "slug": "frontend-development",
+    "description": "anything related to frontend development"
+  },
+  {
+    "name": "Interview",
+    "slug": "interview",
+    "description": "anything related to passing your tech interviews"
+  }
+]
