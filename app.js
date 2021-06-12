@@ -1,6 +1,7 @@
 const express = require('express');
+const morgan = require('morgan')
 const dotenv = require('dotenv');
-const postsController = require('./controllers/postsController');
+const postsRouter = require('./routes/postRouter');
 
 
 dotenv.config();
@@ -9,13 +10,14 @@ const app = express();
 // 1) Middleware
 app.use(express.json())
 
+if(process.env.NODE_ENV === 'development'){
+  app.use(morgan('dev'));
+}
 
-app.get('/api/v1/posts', postsController.getAllPosts);
-app.post('/api/v1/posts', postsController.createPost);
 
-app.get('/api/v1/posts/:slug', postsController.getPost);
-app.patch('/api/v1/posts/:slug', postsController.updatePost)
-app.delete('/api/v1/posts/:slug', postsController.deletePost);
+
+//Mounting Routes
+app.use('/api/v1/posts', postsRouter);
 
 
 
