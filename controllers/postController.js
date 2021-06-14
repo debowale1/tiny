@@ -89,7 +89,10 @@ exports.updatePost = async (req, res) => {
 exports.deletePost = async (req, res) => {
   try {
     const { slug } = req.params
-    await Post.findOneAndDelete(slug)
+    const post = await Post.findOneAndDelete({slug})
+    if(!post) return res.status(404).json({status: 'error', message: 'post not found'});
+
+    //send response to client
     res.status(204).json({
       status: 'success',
       data: {
