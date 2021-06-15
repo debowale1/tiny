@@ -30,6 +30,14 @@ exports.getAllPosts = async (req,res) => {
       query.select('-__v -_id');
     }
 
+    //3) PAGINATION
+    if(req.query.page){
+      const page = +req.query.page || 1;
+      const limit = +req.query.limit || 100;
+      const skip = limit * (page - 1);
+      query.skip(skip).limit(limit);
+    }
+
     // await posts here
     const posts = await query;
 
