@@ -8,13 +8,14 @@ exports.getAllPosts = async (req,res) => {
     const queryObj = {...req.query};
   
     //remove some keywords from req.query
+    //1) Filtering
     const excludedFields = ['fields', 'sort', 'limit', 'page'];
     excludedFields.forEach(el => delete queryObj[el]);
 
     // console.log(queryObj);
     let query = Post.find(queryObj); //returns a query
 
-    // 1) SORTING: if query object consists of 'sort' field
+    // 2) SORTING: if query object consists of 'sort' field
     if(req.query.sort){
       const sortBy = req.query.sort.split(',').join(' ');
       query.sort(sortBy);
@@ -22,15 +23,15 @@ exports.getAllPosts = async (req,res) => {
       query.sort('-createdAt');
     }
 
-    //2) Field selection
+    //3) FIELDS SELECTION
     if(req.query.fields){
       const fields = req.query.fields.split(',').join(' ');
       query.select(fields);
     }else{
-      query.select('-__v -_id');
+      query.select('-__v');
     }
 
-    //3) PAGINATION
+    //4) PAGINATION
     if(req.query.page){
       const page = +req.query.page || 1;
       const limit = +req.query.limit || 100;
