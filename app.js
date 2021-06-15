@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan')
 const dotenv = require('dotenv');
-const postsRouter = require('./routes/postRouter');
+const postRouter = require('./routes/postRouter');
+const userRouter = require('./routes/userRouter');
 
 
 dotenv.config();
@@ -17,7 +18,8 @@ if(process.env.NODE_ENV === 'development'){
 
 
 //Mounting Routes
-app.use('/api/v1/posts', postsRouter);
+app.use('/api/v1/posts', postRouter);
+app.use('/api/v1/users', userRouter);
 
 
 
