@@ -14,13 +14,23 @@ exports.getAllPosts = async (req,res) => {
     // console.log(queryObj);
     let query = Post.find(queryObj); //returns a query
 
-    //if query parameters consist of sort
+    // 1) SORTING: if query object consists of 'sort' field
     if(req.query.sort){
       const sortBy = req.query.sort.split(',').join(' ');
       query.sort(sortBy);
-      // console.log(sortBy);
+    }else{
+      query.sort('-createdAt');
     }
 
+    //2) Field selection
+    if(req.query.fields){
+      const fields = req.query.fields.split(',').join(' ');
+      query.select(fields);
+    }else{
+      query.select('-__v -_id');
+    }
+
+    // await posts here
     const posts = await query;
 
     res.status(200).json({
