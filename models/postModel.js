@@ -13,8 +13,8 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A post must have a body'],
   },
-  categories: {
-    type: [String],
+  category: {
+    type: String,
     required: [true, 'A post must have at least one category'],
   },
   featuredImage: {
