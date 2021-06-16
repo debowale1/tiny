@@ -1,9 +1,10 @@
 const Post = require('./../models/postModel');
 
+
+
+
 exports.getAllPosts = async (req,res) => {
   try {
-    console.log(req.query);
-
     //save a copy of req.query
     const queryObj = {...req.query};
   
