@@ -1,10 +1,16 @@
 const Post = require('./../models/postModel');
 
 
-
+exports.aliasBackendPosts = async (req, res, next) => {
+  req.query.category = "Backend Development";
+  req.query.limit = '5';
+  req.query.fields = 'title,body,category'
+  next();
+}
 
 exports.getAllPosts = async (req,res) => {
   try {
+    // console.log(req.query)
     //save a copy of req.query
     const queryObj = {...req.query};
   
@@ -59,12 +65,13 @@ exports.getAllPosts = async (req,res) => {
   }
 }
 
-exports.getPost = async (req, res) => {
+exports.getPost = async (req, res, next) => {
   // const post = posts.find(el => el.slug === req.params.slug);
   const {slug} = req.params;
   const post = await Post.findOne({slug});
 
-  if(!post) return res.status(404).json({status: 'fail', message: 'Not Found'})
+  // if(!post) return res.status(404).json({status: 'fail', message: 'Not Found'})
+  if(!post) return next(res.status(404).json({status: 'fail', message: 'Not Found'}));
 
   res.status(200).json({
     status: 'success',
@@ -146,3 +153,4 @@ exports.deletePost = async (req, res) => {
     })
   }
 }
+
