@@ -7,6 +7,8 @@ const router = express.Router();
 //aliasing
 router.route('/backend-posts').get(postController.aliasBackendPosts, postController.getAllPosts);
 
+router.route('/post-stats').get(postController.getPostStats);
+
 router.route('/')
       .get(authController.protect, postController.getAllPosts)
       .post(postController.createPost);

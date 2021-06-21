@@ -150,7 +150,36 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({
       status: 'error',
       error
-    })
+    });
   }
 }
 
+exports.getPostStats = async (req, res) => {
+  try {
+    const stats = await Post.aggregate([
+      { 
+        $match: { numComment: { $gte: 10 } }
+      },{
+        $group: {
+          _id: { $toUpper: '$category'},
+          numPosts: { $sum: 1 },
+          totalComment: { $sum: '$numComment' },
+          minComment: { $min: '$numComent' },
+          maxComment: { $max: '$numComent' },
+         }
+      },{
+        $sort: {totalComment: 1}
+      }
+    ]);
+
+    res.status(200).json({
+      status: 'success',
+      stats
+    });
+  } catch (error) {
+    res.status(404).json({
+      status: 'error',
+      error
+    });
+  }
+}

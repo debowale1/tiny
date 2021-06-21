@@ -17,6 +17,14 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A post must have at least one category'],
   },
+  numComment: {
+    type: Number,
+    default: 0
+  },
+  author: {
+    type: String,
+    required: [true, 'A post must have an author'],
+  },
   featuredImage: {
     type: String,
     required: [true, 'A post must have a featured image'],
