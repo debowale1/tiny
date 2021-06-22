@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema({
   active: {
     type: Boolean,
     default: true,
+    select: false
   }
 },{
   timestamps: true,
@@ -62,6 +63,12 @@ userSchema.pre('save', async function(next) {
 userSchema.methods.comparePassword = async function(candidatePassword, userPassword) {
   return await bcrypt.compare(candidatePassword, userPassword);
 }
+
+//QUERY MIDDLEWARE
+userSchema.pre(/^find/, function(next){
+  this.find({ active: { $ne: false } });
+  next();
+})
 
 
 const User = mongoose.model('User', userSchema);

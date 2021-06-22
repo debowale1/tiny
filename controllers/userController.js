@@ -51,6 +51,19 @@ exports.updateMe = async(req, res, next) => {
 
 }
 
+exports.deleteMe = async (req, res, next) => {
+  //find user by id
+  await User.findByIdAndUpdate(req.user.id, { active: false});
+  
+  res.status(204).json({
+    status: 'success',
+    data: {
+      user: null
+    }
+  })
+
+}
+
 
 // exports.createUser = async (req, res) => {
 //   const { name, email, password, passwordConfirm, photo } = req.body;
