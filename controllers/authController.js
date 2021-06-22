@@ -15,7 +15,7 @@ const createSendToken = (user, statusCode, res) => {
       status: 'success',
       token,
       data: {
-        user: user
+        user
       }
     });
 }
@@ -33,14 +33,6 @@ exports.signup = async (req, res) => {
     });
 
     createSendToken(newUser, 201, res);
-    // const token = generateToken(newUser._id);
-    // res.status(201).json({
-    //   status: 'success',
-    //   token,
-    //   data: {
-    //     user: newUser
-    //   }
-    // });
   } catch (error) {
     res.status(400).json({
       status: 'fail',
@@ -64,13 +56,7 @@ exports.login = async (req, res) => {
     }
 
     //IF everything fine, create a valid token and send to the user for login
-    createSendToken(user, 200, res);
-    // const token = generateToken(user._id);
-    // res.status(200).json({
-    //   status: 'success',
-    //   token
-    // });
-    
+    createSendToken(user, 200, res);    
   } catch (error) {
     res.status(400).json({
       status: 'fail',
@@ -98,7 +84,6 @@ exports.protect = async (req, res, next) => {
     if(!user) return res.status(401).json({status: 'fail', message: 'the user no longer exist'});
     //save the current user in reqest object
     req.user = user;
-    console.log(req);
     next()
   } catch (err) {
     res.status(400).json({
@@ -133,12 +118,4 @@ exports.updatePassword = async (req, res, next) => {
   await user.save();
   // 4) Log user in, send JWT
   createSendToken(user, 200, res)
-  // const token = generateToken(user._id);
-  // res.status(200).json({
-  //   status: 'success',
-  //   token,
-  //   data: {
-  //     user
-  //   }
-  // });
 }
