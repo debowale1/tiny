@@ -3,10 +3,21 @@ const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 
 
-const generateToken = (id) => {
+const generateToken = id => {
   return jwt.sign({id}, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRES_IN,
   })
+}
+
+const createSendToken = (user, statusCode, res) => {
+  const token = generateToken(user._id);
+    res.status(statusCode).json({
+      status: 'success',
+      token,
+      data: {
+        user: user
+      }
+    });
 }
 
 
@@ -21,16 +32,15 @@ exports.signup = async (req, res) => {
       photo
     });
 
-    const token = generateToken(newUser._id);
-
-
-    res.status(201).json({
-      status: 'success',
-      token,
-      data: {
-        user: newUser
-      }
-    });
+    createSendToken(newUser, 201, res);
+    // const token = generateToken(newUser._id);
+    // res.status(201).json({
+    //   status: 'success',
+    //   token,
+    //   data: {
+    //     user: newUser
+    //   }
+    // });
   } catch (error) {
     res.status(400).json({
       status: 'fail',
@@ -49,18 +59,17 @@ exports.login = async (req, res) => {
     //check if the user exists and password is correct
     const user = await User.findOne({email}).select('+password');
     // const correctPassword = user.comparePassword(password, user.password);
-    if(!user || !(await user.comparePassword(password, user.password))) return res.status(401).json({ status: 'fail', message: 'invalid email or password'});
+    if(!user || !(await user.comparePassword(password, user.password))) {
+      return next(res.status(401).json({ status: 'fail', message: 'invalid email or password'}));
+    }
 
     //IF everything fine, create a valid token and send to the user for login
-    const token = generateToken(user._id);
-
-    // req.user = user;
-    // console.log(req)
-
-    res.status(200).json({
-      status: 'success',
-      token
-    })
+    createSendToken(user, 200, res);
+    // const token = generateToken(user._id);
+    // res.status(200).json({
+    //   status: 'success',
+    //   token
+    // });
     
   } catch (error) {
     res.status(400).json({
@@ -89,6 +98,7 @@ exports.protect = async (req, res, next) => {
     if(!user) return res.status(401).json({status: 'fail', message: 'the user no longer exist'});
     //save the current user in reqest object
     req.user = user;
+    console.log(req);
     next()
   } catch (err) {
     res.status(400).json({
@@ -96,6 +106,39 @@ exports.protect = async (req, res, next) => {
       err
     });
   }
+}
 
-  // next();
+exports.restrictTo =  (...roles) => {
+  return async (req, res, next) => {
+    if(!roles.includes(req.user.role)){
+      return next(res.status(403).json({status: 'error', message: "you do not have permission to perform this action"}))
+    }
+    next();
+  }
+}
+
+
+exports.updatePassword = async (req, res, next) => {
+  // 1) get user from collection
+  const user = await User.findById(req.user.id).select('+password');
+  
+  // 2) Check if POSTed current password is correct
+  if(!(await user.comparePassword(req.body.passwordCurrent, user.password))){
+    return next(res.status(403).json({ status: 'error', message: "the password provided is incorrect" }));
+  }
+  // 3) if so, update password
+  // User.findByIdAndUpdate() will NOT work because of our validator and presave hooks
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await user.save();
+  // 4) Log user in, send JWT
+  createSendToken(user, 200, res)
+  // const token = generateToken(user._id);
+  // res.status(200).json({
+  //   status: 'success',
+  //   token,
+  //   data: {
+  //     user
+  //   }
+  // });
 }
