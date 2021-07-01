@@ -65,30 +65,13 @@ exports.deleteMe = async (req, res, next) => {
 }
 
 
-// exports.createUser = async (req, res) => {
-//   const { name, email, password, passwordConfirm, photo } = req.body;
-//   try {
-//     const newUser = await User.create({
-//       name,
-//       email,
-//       password,
-//       passwordConfirm,
-//       photo
-//     });
-//     res.status(201).json({
-//       status: 'success',
-//       data: {
-//         users: newUser
-//       }
-//     });
-    
-//   } catch (error) {
-//     res.status(500).json({
-//       status: 'error',
-//       error
-//     })
-//   }
-// }
+exports.createUser = async (req, res) => {
+    res.status(500).json({
+      status: 'error',
+      message: "please use the /signup route"
+    })
+  
+}
 
 exports.getUser = async(req, res) => {
   try {
