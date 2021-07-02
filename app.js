@@ -3,6 +3,7 @@ const morgan = require('morgan')
 const dotenv = require('dotenv');
 const postRouter = require('./routes/postRouter');
 const userRouter = require('./routes/userRouter');
+const categoryRouter = require('./routes/categoryRouter');
 
 
 dotenv.config();
@@ -21,6 +22,7 @@ if(process.env.NODE_ENV === 'development'){
 //Mounting Routes
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/categories', categoryRouter);
 
 
 
