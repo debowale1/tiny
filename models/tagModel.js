@@ -8,6 +8,14 @@ const tagSchema = new mongoose.Schema({
     required: [true, 'A Tag must have a name'],
   },
   slug: String,
+  description: {
+    type: String,
+    trim: true
+  },
+  count:{
+    type: Number,
+    default: 0
+  },
 }, {
   timestamps: true,
   toJSON: {virtuals: true},

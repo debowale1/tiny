@@ -8,6 +8,14 @@ const categorySchema = new mongoose.Schema({
     required: [true, 'A category must have a name'],
   },
   slug: String,
+  description: {
+    type: String,
+    trim: true
+  },
+  count:{
+    type: Number,
+    default: 0
+  },
 }, {
   timestamps: true,
   toJSON: {virtuals: true},

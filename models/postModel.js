@@ -17,7 +17,8 @@ const postSchema = new mongoose.Schema({
     required: [true, 'A post must have a body'],
   },
   category: {
-    type: String,
+    type: mongoose.Schema.ObjectId,
+    ref: 'Category',
     required: [true, 'A post must have a category'],
   },
   numComment: {
@@ -59,6 +60,10 @@ postSchema.pre('save', function(next) {
 //Query Middleware
 postSchema.pre(/^find/, function(next){
   this.populate({path: 'tags', select: '-__v -createdAt -updatedAt'})
+  next();
+})
+postSchema.pre(/^find/, function(next){
+  this.populate({path: 'category', select: '-__v -createdAt -updatedAt'})
   next();
 })
 
