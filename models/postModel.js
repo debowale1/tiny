@@ -8,14 +8,17 @@ const postSchema = new mongoose.Schema({
     trim: true,
     minLength: [10, 'A post title must be at least 10 characters long']
   },
-  slug: String,
+  slug: {
+    type: String,
+    unique: true
+  },
   body: {
     type: String,
     required: [true, 'A post must have a body'],
   },
   category: {
     type: String,
-    required: [true, 'A post must have at least one category'],
+    required: [true, 'A post must have a category'],
   },
   numComment: {
     type: Number,
@@ -29,7 +32,12 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A post must have a featured image'],
   },
-  tags: [String],
+  tags: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Tag'
+    }
+  ],
   createdAt: {
     type: Date,
     default: Date.now(),
@@ -45,6 +53,12 @@ const postSchema = new mongoose.Schema({
 // 1) Document Middleware: alway call next()
 postSchema.pre('save', function(next) {
   this.slug = slugify(this.title, { lower: true } )
+  next();
+})
+
+//Query Middleware
+postSchema.pre(/^find/, function(next){
+  this.populate({path: 'tags', select: '-__v -createdAt -updatedAt'})
   next();
 })
 

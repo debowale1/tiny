@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const postRouter = require('./routes/postRouter');
 const userRouter = require('./routes/userRouter');
 const categoryRouter = require('./routes/categoryRouter');
+const tagRouter = require('./routes/tagRouter');
 
 
 dotenv.config();
@@ -23,6 +24,7 @@ if(process.env.NODE_ENV === 'development'){
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/categories', categoryRouter);
+app.use('/api/v1/tags', tagRouter);
 
 
 

@@ -9,8 +9,9 @@ router.route('/backend-posts').get(postController.aliasBackendPosts, postControl
 
 router.route('/post-stats').get(postController.getPostStats);
 
+router.use(authController.protect);
 router.route('/')
-      .get(authController.protect, postController.getAllPosts)
+      .get(postController.getAllPosts)
       .post(postController.createPost);
 
 router.route('/:slug')

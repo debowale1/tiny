@@ -3,7 +3,7 @@
     "category":"Technology",
     "author": "John",
     "numComment": 100,
-    "featuredImage":"images/post-image-1.jpg","tags":["javascript","tech","laravel"]
+    "featuredImage":"images/post-image-1.jpg"
   },
   {
     "title":"qui est esse",
@@ -11,7 +11,7 @@
     "category":"Frontend",
     "author": "Jane",
     "numComment": 63,
-    "featuredImage":"images/post-image-2.jpg","tags":["React","Vue"]
+    "featuredImage":"images/post-image-2.jpg"
   },
   {
     "title":"eum et est occaecati",
@@ -19,15 +19,14 @@
     "category":"Backend",
     "author": "Mike",
     "numComment": 61,
-    "featuredImage":"images/post-image-2.jpg",
-    "tags":["Nodejs","Express","Mongodb"]
+    "featuredImage":"images/post-image-2.jpg"
   },
 
   {
     "title":"dolorem eum magni eos aperiam quia","body":"Sed ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!\nDolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, exercitation ullamco laboris nisi ut aliquip. Lorem ipsum dolor sit amet, consectetur adipisicing elit!","category":"Programming",
     "author": "Sarah",
     "numComment": 78,
-    "featuredImage":"images/post-image-2.jpg","tags":["AWS","CI/CD"]
+    "featuredImage":"images/post-image-2.jpg"
   },
     
     {
@@ -36,8 +35,7 @@
       "category":"Interview",
       "author": "John",
     "numComment": 14,
-      "featuredImage":"images/post-image-2.jpg",
-      "tags":["Hackerrank","Leetcode","BigO"]
+      "featuredImage":"images/post-image-2.jpg"
     },
       
       {
@@ -46,8 +44,7 @@
         "category":"Backend",
         "author": "Sarah",
         "numComment": 23,
-        "featuredImage":"images/post-image-6.jpg",
-        "tags":["Nest","Ruby","RoR"]
+        "featuredImage":"images/post-image-6.jpg"
       },
       {
         "title":"lorem ipsum dolot sit amet",
@@ -55,8 +52,7 @@
         "category":"Frontend",
         "author": "Mike",
         "numComment": 47,
-        "featuredImage":"images/post-image-7.jpg",
-        "tags":["React"]
+        "featuredImage":"images/post-image-7.jpg"
       },
       {
         "title":"nesciunt iure omnisaccusa omnis ntium",
@@ -64,7 +60,6 @@
         "category":"Technology",
         "author": "John",
         "numComment": 27,
-        "featuredImage":"images/post-image-8.jpg",
-        "tags":["Apple"]
+        "featuredImage":"images/post-image-8.jpg"
       }
 ]

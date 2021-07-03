@@ -82,18 +82,19 @@ exports.getPost = async (req, res, next) => {
 }
 
 exports.createPost = async (req, res) => {
-  const { title, body, featuredImage, categories, tags } = req.body;
+  const { title, body, featuredImage, category, tags } = req.body;
 
+  console.log(req.user);
   try {
-  
+
     const post = await Post.create({
       title,
       body,
-      categories,
+      author: req.user.name,
+      category,
       tags,
       featuredImage
     });
-    
     res.status(201).json({
       status: 'success',
       data: {
