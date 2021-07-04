@@ -68,7 +68,7 @@ exports.getAllPosts = async (req,res) => {
 exports.getPost = async (req, res, next) => {
   // const post = posts.find(el => el.slug === req.params.slug);
   const {slug} = req.params;
-  const post = await Post.findOne({slug});
+  const post = await Post.findOne({slug}).populate('comments');
 
   // if(!post) return res.status(404).json({status: 'fail', message: 'Not Found'})
   if(!post) return next(res.status(404).json({status: 'fail', message: 'Not Found'}));

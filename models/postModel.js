@@ -65,11 +65,15 @@ postSchema.pre(/^find/, function(next){
 postSchema.pre(/^find/, function(next){
   this.populate({path: 'category', select: '-__v -createdAt -updatedAt'})
   next();
-})
+});
 
-
-
-// 2) Query Middleware: alway call next()
+//Virtual Populate: 
+postSchema.virtual('comments', {
+  ref: 'Comment', // The model to use
+  localField: '_id', // Find people where `localField`
+  foreignField: 'postId', // is equal to `foreignField`
+  // count: true // And only get the number of docs
+});
 
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;
