@@ -6,6 +6,7 @@ const tagSchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: [true, 'A Tag must have a name'],
+    unique: true
   },
   slug: String,
   description: {

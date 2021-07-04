@@ -6,6 +6,7 @@ const categorySchema = new mongoose.Schema({
     type: String,
     trim: true,
     required: [true, 'A category must have a name'],
+    unique: true
   },
   slug: String,
   description: {

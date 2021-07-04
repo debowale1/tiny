@@ -14,8 +14,11 @@ exports.getAllCategories = async(req, res, next) => {
 }
 
 exports.createcategory = async (req, res, next) => {
-  const {name} = req.body;
-  newCategory = await Category.create({name});
+  const {name, description} = req.body;
+  newCategory = await Category.create({ 
+    name,
+    description
+  });
   
   res.status(201).json({
     status: 'success',

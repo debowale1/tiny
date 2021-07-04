@@ -14,8 +14,8 @@ exports.getAllTags = async(req, res, next) => {
 }
 
 exports.createTag = async (req, res, next) => {
-  const {name} = req.body;
-  newTag = await Tag.create({name});
+  const {name, description} = req.body;
+  newTag = await Tag.create({name, description});
   
   res.status(201).json({
     status: 'success',
