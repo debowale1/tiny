@@ -23,11 +23,19 @@ const commentSchema = new mongoose.Schema({
   toJSon: {virtuals: true},
 })
 
+// commentSchema.pre(/^find/, function(next){
+//   this.populate({
+//     path: 'postId',
+//     select: 'title'
+//   }).populate({
+//     path: 'userId',
+//     select: 'name photo'
+//   })
+
+//   next()
+// })
 commentSchema.pre(/^find/, function(next){
   this.populate({
-    path: 'postId',
-    select: 'title'
-  }).populate({
     path: 'userId',
     select: 'name photo'
   })

@@ -28,3 +28,15 @@ exports.createComment = catchAsync(async(req, res, next) => {
     }
   })
 })
+//delete comment
+exports.deleteComment = catchAsync(async(req, res, next) => {
+  
+  await Comment.findById(req.params.id);
+
+  res.status(204).json({
+    status: 'success',
+    data: {
+      comment: null
+    }
+  })
+})
