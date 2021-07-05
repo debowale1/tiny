@@ -67,8 +67,8 @@ exports.getAllPosts = async (req,res) => {
 
 exports.getPost = async (req, res, next) => {
   // const post = posts.find(el => el.slug === req.params.slug);
-  const {slug} = req.params;
-  const post = await Post.findOne({slug}).populate('comments');
+  const {id} = req.params;
+  const post = await Post.findById(id).populate('comments');
 
   // if(!post) return res.status(404).json({status: 'fail', message: 'Not Found'})
   if(!post) return next(res.status(404).json({status: 'fail', message: 'Not Found'}));
@@ -112,9 +112,9 @@ exports.createPost = async (req, res) => {
 }
 
 exports.updatePost = async (req, res) => {
-  const { slug } = req.params;
+  const { id } = req.params;
   try {
-    const updatedPost = await Post.findOneAndUpdate(slug, req.body, {
+    const updatedPost = await Post.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true
     });
@@ -135,8 +135,8 @@ exports.updatePost = async (req, res) => {
 
 exports.deletePost = async (req, res) => {
   try {
-    const { slug } = req.params
-    const post = await Post.findOneAndDelete({slug})
+    const { id } = req.params
+    const post = await Post.findByIdAndDelete(id)
     if(!post) return res.status(404).json({status: 'error', message: 'post not found'});
 
     //send response to client

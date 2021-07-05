@@ -13,13 +13,10 @@ exports.getAllComments = catchAsync(async(req, res, next) => {
   })
 })
 exports.createComment = catchAsync(async(req, res, next) => {
-  const { comment, postId } = req.body;
-  const comments = await Comment.create({
-    comment,
-    userId: req.user.id,
-    postId
-
-  });
+  //Allow nested routes
+  if(!req.body.postId) req.body.postId = req.params.postId;
+  if(!req.body.userId) req.body.userId = req.user.id;
+  const comments = await Comment.create(req.body);
 
   res.status(201).json({
     status: 'success',
