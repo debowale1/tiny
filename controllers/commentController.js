@@ -1,6 +1,6 @@
-const catchAsync = require('./../utils/catchAsync');
 const Comment = require('./../models/commentModel');
-const { deleteOne } = require('./factory');
+const catchAsync = require('./../utils/catchAsync');
+const { deleteOne, updateOne, createOne, getOne, getAll } = require('./factory');
 
 exports.getAllComments = catchAsync(async(req, res, next) => {
   let filter = {};
@@ -17,19 +17,16 @@ exports.getAllComments = catchAsync(async(req, res, next) => {
       comments
     }
   })
-})
-exports.createComment = catchAsync(async(req, res, next) => {
+});
+
+exports.setPostUserIds = (req, res, next) => {
   //Allow nested routes
   if(!req.body.postId) req.body.postId = req.params.postId;
   if(!req.body.userId) req.body.userId = req.user.id;
-  const comments = await Comment.create(req.body);
-
-  res.status(201).json({
-    status: 'success',
-    data: {
-      comments
-    }
-  })
-})
-//delete comment
-exports.deleteComment = deleteOne(Comment)
+  next()
+}
+// exports.getAllComments = getAll(Comment);
+exports.getComment = getOne(Comment);
+exports.createComment = createOne(Comment);
+exports.updateComment = updateOne(Comment);
+exports.deleteComment = deleteOne(Comment);

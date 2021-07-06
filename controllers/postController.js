@@ -1,5 +1,5 @@
 const Post = require('./../models/postModel');
-const { deleteOne } = require('./factory');
+const { deleteOne, updateOne, createOne, getOne, getAll } = require('./factory');
 
 
 exports.aliasBackendPosts = async (req, res, next) => {
@@ -66,96 +66,13 @@ exports.getAllPosts = async (req,res) => {
   }
 }
 
-exports.getPost = async (req, res, next) => {
-  // const post = posts.find(el => el.slug === req.params.slug);
-  const {id} = req.params;
-  const post = await Post.findById(id).populate('comments');
 
-  // if(!post) return res.status(404).json({status: 'fail', message: 'Not Found'})
-  if(!post) return next(res.status(404).json({status: 'fail', message: 'Not Found'}));
+exports.getAllPosts = getAll(Post);
 
-  res.status(200).json({
-    status: 'success',
-    data: {
-      post
-    }
-  })
-}
+exports.getPost = getOne(Post, { path: 'comments' })
 
-exports.createPost = async (req, res) => {
-  const { title, body, featuredImage, category, tags } = req.body;
-
-  console.log(req.user);
-  try {
-
-    const post = await Post.create({
-      title,
-      body,
-      author: req.user.name,
-      category,
-      tags,
-      featuredImage
-    });
-    res.status(201).json({
-      status: 'success',
-      data: {
-        post
-      }
-    })
-    
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      error
-    })
-  }
-
-}
-
-exports.updatePost = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const updatedPost = await Post.findByIdAndUpdate(id, req.body, {
-      new: true,
-      runValidators: true
-    });
-    res.status(200).json({
-      status: 'success',
-      data: {
-        post: updatedPost
-      }
-    })
-    
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      error
-    })
-  }
-}
-
-exports.deletePost = async (req, res) => {
-  try {
-    const { id } = req.params
-    const post = await Post.findByIdAndDelete(id)
-    if(!post) return res.status(404).json({status: 'error', message: 'post not found'});
-
-    //send response to client
-    res.status(204).json({
-      status: 'success',
-      data: {
-        post: null
-      }
-    });
-    
-  } catch (error) {
-    res.status(500).json({
-      status: 'error',
-      error
-    });
-  }
-}
-
+exports.createPost = createOne(Post)
+exports.updatePost = updateOne(Post)
 exports.deletePost = deleteOne(Post);
 
 exports.getPostStats = async (req, res) => {
