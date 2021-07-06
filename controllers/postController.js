@@ -1,4 +1,5 @@
 const Post = require('./../models/postModel');
+const { deleteOne } = require('./factory');
 
 
 exports.aliasBackendPosts = async (req, res, next) => {
@@ -154,6 +155,8 @@ exports.deletePost = async (req, res) => {
     });
   }
 }
+
+exports.deletePost = deleteOne(Post);
 
 exports.getPostStats = async (req, res) => {
   try {

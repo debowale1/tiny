@@ -1,8 +1,14 @@
 const catchAsync = require('./../utils/catchAsync');
 const Comment = require('./../models/commentModel');
+const { deleteOne } = require('./factory');
 
 exports.getAllComments = catchAsync(async(req, res, next) => {
-  const comments = await Comment.find();
+  let filter = {};
+  
+  if(req.params.postId) filter = {postId: req.params.postId};
+  
+  comments = await Comment.find(filter);
+
 
   res.status(200).json({
     status: 'success',
@@ -26,14 +32,4 @@ exports.createComment = catchAsync(async(req, res, next) => {
   })
 })
 //delete comment
-exports.deleteComment = catchAsync(async(req, res, next) => {
-  
-  await Comment.findById(req.params.id);
-
-  res.status(204).json({
-    status: 'success',
-    data: {
-      comment: null
-    }
-  })
-})
+exports.deleteComment = deleteOne(Comment)
