@@ -3,20 +3,6 @@ const { updateOne, deleteOne, getOne, createOne, getAll } = require('./factory')
 
 exports.getAllCategories = getAll(Category) 
 
-// async(req, res, next) => {
-//   const categories = await Category.find();
-
-//   if(!categories) return next(res.status(500).json({ status: 'error', message:'No categories'}));
-//   res.status(200).json({
-//     status: 'success',
-//     result: categories.length,
-//     data: {
-//       categories
-//     }
-//   });
-// }
-
-
 // exports.updateCategory = async (req, res, next) => {
 //   const {id} = req.params;
 
