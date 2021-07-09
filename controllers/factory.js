@@ -37,16 +37,8 @@ exports.updateOne = Model => catchAsync(async (req, res) => {
 })
 
 exports.createOne = Model => catchAsync( async (req, res, next) => {
-  const { title, body, featuredImage, category, tags } = req.body;
 
-    const doc = await Model.create({
-      title,
-      body,
-      author: req.user.name,
-      category,
-      tags,
-      featuredImage
-    });
+    const doc = await Model.create(req.body);
     res.status(201).json({
       status: 'success',
       data: {
