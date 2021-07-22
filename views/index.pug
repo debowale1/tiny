@@ -1,0 +1,83 @@
+extends base
+
+block content
+  // ====== Banner Area Start ======
+  section.banner-section
+    .banner-slider
+      .sinlge-banner
+        .banner-wrapper
+          .banner-bg(style='background-image: url(/img/banner/01.jpg);')
+          .banner-content(data-animation='fadeInUp' data-delay='0.3s')
+            h3.title(data-animation='fadeInUp' data-delay='0.6s')
+              a(href='#')
+                | The Olivier da Costa restaurant experience in Lisbon
+            ul.meta(data-animation='fadeInUp' data-delay='0.8s')
+              li
+                a(href='#') By - Zhon Smith
+              li
+                a(href='#') Travel,
+                a(href='#') Design,
+                a(href='#') Nature
+            p(data-animation='fadeInUp' data-delay='1s')
+              | When it comes to creating is a website for your busin an attractive design will only get you
+              | far. With people increasingly using their tablets and smartphones and shop online,...
+            a.read-more(href='blog-details.html' data-animation='fadeInUp' data-delay='1.2s')
+              | Read More 
+              i.fas.fa-long-arrow-right
+      .sinlge-banner
+        .banner-wrapper
+          .banner-bg(style='background-image: url(/img/banner/02.jpg);')
+          .banner-content(data-animation='fadeInUp' data-delay='0.3s')
+            h3.title(data-animation='fadeInUp' data-delay='0.6s')
+              a(href='#')
+                | The Olivier da Costa restaurant experience in Spain
+            ul.meta(data-animation='fadeInUp' data-delay='0.8s')
+              li
+                a(href='#') By - Zhon Smith
+              li
+                a(href='#') Travel,
+                a(href='#') Design,
+                a(href='#') Nature
+            p(data-animation='fadeInUp' data-delay='1s')
+              | When it comes to creating is a website for your busin an attractive design will only get you
+              | far. With people increasingly using their tablets and smartphones and shop online,...
+            a.read-more(href='blog-details.html' data-animation='fadeInUp' data-delay='1.2s')
+              | Read More 
+              i.fas.fa-long-arrow-right
+    .banner-nav
+  // ====== Banner Area End ======
+  // ====== Post Area Start ======
+  section#postWarpperLoaded.post-area.with-sidebar
+    .container-fluid
+      .post-area-inner
+        // Entry Post
+        .entry-posts.clearfix.masonary-posts.row
+          each post in posts
+            .col-xl-4.col-sm-6
+              .entry-post
+                .entry-thumbnail
+                  img(src='/img/posts/05.jpg' alt='Image')
+                .entry-content
+                  h4.title
+                    a(href=`${post.slug}`)= post.title
+                  ul.post-meta
+                    li.date
+                      - const postedAt = new Date(post.createdAt).toISOString().substring(0, 10)
+                      a(href='#')= postedAt
+                    li.categories
+                      a(href='#')= post.category.name
+                  p
+                    | When it comes to creating is a website for your business, an attractive design
+                    | will only get you far. With people increasingly using their tablets and
+                    | smartphones and shop online,...
+                  a.read-more(href=`${post.slug}`)
+                    | Read More 
+                    i.fas.fa-long-arrow-right
+          .col-12
+            .text-center
+              a.load-more-btn(href='#') Load More
+        // Sidebar
+        include _sidebar
+  // ====== Post Area End ======
+
+

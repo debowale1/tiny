@@ -13,6 +13,7 @@ const userRouter = require('./routes/userRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const tagRouter = require('./routes/tagRouter');
 const commentRouter = require('./routes/commentRouter');
+const viewsRouter = require('./routes/viewsRouter');
 
 
 dotenv.config();
@@ -25,8 +26,10 @@ if(process.env.NODE_ENV === 'development'){
   app.use(morgan('dev'));
 }
 //views engine
-app.set('views engine', 'pug');
+app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'))
+
+
 
 //body parser
 app.use(express.json( { limit: '50kb' }))
@@ -45,6 +48,8 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 // Data sanitize mongo db
 app.use(mongoSanitize())
+// serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
 
 
@@ -54,6 +59,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/tags', tagRouter);
+app.use('/', viewsRouter);
 
 
 

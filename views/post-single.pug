@@ -1,0 +1,132 @@
+extends base
+
+block content
+  // ====== Post Details Start ======
+  section.post-details-area
+    .container.container-1000
+      .post-details
+        .entry-header
+          h2.title= post.title
+          ul.post-meta
+            li September 07 - 2020
+            li
+              a(href='#') Design,
+              a(href='#') Travel,
+              a(href='#') photography
+          p.short-desc
+            | When it comes to creating is a website for your busi-ness, an attreactive design will only get
+            | you far. With people increasingly using their tablets and smartphones and website for your
+            | business, an attractive design will only get you far. With people increasingly using their
+            | tablets and smartphones shop online,...
+        .entry-media.text-center
+          img(src='/img/post-details/01.jpg' alt='image')
+        .entry-content
+          p.has-dropcap
+            | Adipiscing elit com-modo ligula eget dolor Morlem ipsuim dolor sit amiet nec, isc thua sdfk
+            | onsec tetuer adipi scing elit. Aenean commeod ligula eget dolor Cuem sociis thena toquhte thigp
+            | enatibus et magnis dis partu rient montes. Morlem ipsum doelor sit amet nec penatib et thjem
+            | agnis dis part urient montes. Morlem ipsum dolor sit amet nerc, conseec tetuer adipiscing elit.
+            | Aenean commodo ligulaits eget dolior. Aenean type massa. Cum sociis nato que pena tibus et
+            | magnis dis partu rient moentes. Morlm ipsum dolor tibushrde set amet nec, consec tetuer
+            | adipiscing elit. Aenean commodo ligula eget dolor.
+          p
+            | Enatibus et magnis dis partu rient montes. Morlem ipsum doelor sit amet nec penatib et thjem
+            | agnis dis part uriet montes. Morlem ipsium dolor sit amet nerc, conseec tetuer adipi scing elit.
+            | Aenean commodo ligulaits eget doilior. Aenean type massa. Cum sociis nato que pena tibus et
+            | magns dihtres partu rient moentes. Morlm ipsum dolor set amet nec, consec tetuer adipiscing
+            | elit. Aenean comiodo ligula eget dolor. magnis dis partu rient moentes. Morlm ipsum dolor set am
+            | nec, consec tetuer adipiscing elit
+        .entry-footer
+          .post-tags
+            span Tag:
+            a(href='#') burger,
+            a(href='#') pixxa,
+            a(href='#') drink,
+            a(href='#') hot,
+            a(href='#') spacial,
+          .social-share
+            span Share:
+            a(href='#')
+              i.fab.fa-instagram
+            a(href='#')
+              i.fas.fa-heart
+            a(href='#')
+              i.fab.fa-facebook-f
+            a(href='#')
+              i.fab.fa-twitter
+          .post-author
+            .author-img
+              img(src='assets/img/post-details/post-author.png' alt='PostAuthor')
+            h5
+              a(href='#') Maisha Smith
+            p Article Writer, Senior Designer, Wordpress Developer Father of 2 Daughters
+        .post-nav
+          .prev-post
+            a(href='#')
+              i.far.fa-angle-left
+            span.title Previous Post
+          .next-post
+            span.title Next Post
+            a(href='#')
+              i.far.fa-angle-right
+        .related-posts
+          h4.related-title Related Posts
+          .related-loop.row.justify-content-center
+            .col-lg-6.col-md-6.col-sm-10
+              .related-post-box
+                .thumb
+                  img(src='assets/img/post-details/related-01.jpg' alt='image')
+                h5.title
+                  a(href='#')
+                    | The Olivier da Costa restaurant experience in Lisbon
+            .col-lg-6.col-md-6.col-sm-10
+              .related-post-box
+                .thumb
+                  img(src='assets/img/post-details/related-02.jpg' alt='image')
+                h5.title
+                  a(href='#')
+                    | The Olivier da Costa restaurant experience in Lisbon
+      .comment-template
+        h4.template-title 04 Comments
+        ul.comment-list
+          li
+            .comment-body
+              .comment-author
+                img(src='assets/img/post-details/comment-01.jpg' alt='image')
+              .comment-content
+                h6.comment-author Zhon Andarson
+                p
+                  | Coding is used in almost all aspects of life and work now, be it directly or
+                  | indirectly. It&rsquo;s not just for companies in the tech sector. &ldquo;An increasing number of
+                  | businesses rely on computer code,
+                .comment-footer
+                  span.date  10:35pm, 27 jan 2015.
+                  a.reply-link(href='#') Reply
+          li
+            .comment-body
+              .comment-author
+                img(src='assets/img/post-details/comment-02.jpg' alt='image')
+              .comment-content
+                h6.comment-author Andro Smith Doe
+                p
+                  | Coding is used in almost all aspects of life and work now, be it directly or
+                  | indirectly. It&rsquo;s not just for companies in the tech sector. &ldquo;An increasing number of
+                  | businesses rely on computer code,
+                .comment-footer
+                  span.date  10:35pm, 27 jan 2015.
+                  a.reply-link(href='#') Reply
+        h4.template-title Leave your comment
+        .comment-form
+          form(action='#')
+            .row
+              .col-sm-6
+                input(type='text' placeholder='Enter your name')
+              .col-sm-6
+                input(type='email' placeholder='Your Email')
+              .col-12
+                textarea(placeholder='Your message here')
+              .col-12
+                button(type='submit')
+                  | Post 
+                  i.far.fa-arrow-right
+  // ====== Post Details End ======
