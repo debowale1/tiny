@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan')
 const dotenv = require('dotenv');
@@ -14,6 +15,10 @@ const app = express();
 // 1) Middleware
 app.use(express.json())
 app.use(express.static(`${__dirname}/public`))
+
+app.set('views engine', 'pug');
+app.set('views', path.join(__dirname, 'views'))
+
 
 if(process.env.NODE_ENV === 'development'){
   app.use(morgan('dev'));
