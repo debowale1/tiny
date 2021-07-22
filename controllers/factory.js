@@ -39,6 +39,7 @@ exports.updateOne = Model => catchAsync(async (req, res) => {
 exports.createOne = Model => catchAsync( async (req, res, next) => {
 
     const doc = await Model.create(req.body);
+    if(!doc) return next(res.status(404).json({status: 'error', message: 'No document created'}));
     res.status(201).json({
       status: 'success',
       data: {
@@ -52,7 +53,7 @@ exports.getOne = (Model, populateOption) => catchAsync(async (req, res, next) =>
   
   // const doc = await Model.findById(req.params.id).populate('comments');
 
-  const query = Model.findById(req.params.id);
+  let query = Model.findById(req.params.id);
   if(populateOption) {
     query = query.populate(populateOption);
   }

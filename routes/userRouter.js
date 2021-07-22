@@ -1,7 +1,12 @@
 const express = require('express');
 const userController = require('./../controllers/userController');
 const authController = require('./../controllers/authController');
+const commentRouter = require('./commentRouter')
 const router = express.Router();
+
+
+// GET /user/:id
+router.use('/:userId/comments', commentRouter);
 
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);

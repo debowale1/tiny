@@ -39,7 +39,7 @@ app.use(xss());
 //rate limiter
 const limiter = rateLimit({
   windowsMs: 60 * 60 * 1000, // 1 hour
-  max: 3,
+  max: 100,
   message: 'You have exhausted your request limit/hour. Please come back after an hour!'
 });
 app.use('/api', limiter);
