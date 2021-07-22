@@ -2,6 +2,9 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan')
 const dotenv = require('dotenv');
+const rateLimit = require('express-rate-limit');
+
+
 const postRouter = require('./routes/postRouter');
 const userRouter = require('./routes/userRouter');
 const categoryRouter = require('./routes/categoryRouter');
@@ -13,16 +16,27 @@ dotenv.config();
 const app = express();
 
 // 1) Middleware
-app.use(express.json())
-app.use(express.static(`${__dirname}/public`))
-
-app.set('views engine', 'pug');
-app.set('views', path.join(__dirname, 'views'))
-
-
+//logging
 if(process.env.NODE_ENV === 'development'){
   app.use(morgan('dev'));
 }
+//views engine
+app.set('views engine', 'pug');
+app.set('views', path.join(__dirname, 'views'))
+
+//body parser
+app.use(express.json( { limit: '50kb' }))
+//serve static files
+app.use(express.static(`${__dirname}/public`))
+
+//rate limiter
+const limiter = rateLimit({
+  windowsMs: 60 * 60 * 1000, // 1 hour
+  max: 3,
+  message: 'You have exhausted your request limit/hour. Please come back after an hour!'
+});
+app.use('/api', limiter);
+
 
 
 
