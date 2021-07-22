@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan')
 const dotenv = require('dotenv');
+const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 
@@ -17,6 +18,7 @@ dotenv.config();
 const app = express();
 
 // 1) Middleware
+app.use(helmet());
 //logging
 if(process.env.NODE_ENV === 'development'){
   app.use(morgan('dev'));
