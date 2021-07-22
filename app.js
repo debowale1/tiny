@@ -5,6 +5,7 @@ const dotenv = require('dotenv');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
+const xss = require('xss-clean');
 
 
 const postRouter = require('./routes/postRouter');
@@ -31,6 +32,9 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.json( { limit: '50kb' }))
 //serve static files
 app.use(express.static(`${__dirname}/public`))
+
+// data sanitization of req.body, req.query, req.params
+app.use(xss());
 
 //rate limiter
 const limiter = rateLimit({
