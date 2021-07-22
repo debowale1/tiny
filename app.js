@@ -3,6 +3,7 @@ const express = require('express');
 const morgan = require('morgan')
 const dotenv = require('dotenv');
 const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
 
 
 const postRouter = require('./routes/postRouter');
@@ -36,7 +37,8 @@ const limiter = rateLimit({
   message: 'You have exhausted your request limit/hour. Please come back after an hour!'
 });
 app.use('/api', limiter);
-
+// Data sanitize mongo db
+app.use(mongoSanitize())
 
 
 
