@@ -14,9 +14,7 @@ exports.index = catchAsync( async (req, res) => {
 })
 
 exports.getPost = catchAsync( async (req, res) => {
-  const post = await Post.findOne({
-    slug: req.params.slug
-  });
+  const post = await Post.findOne({ slug: req.params.slug }).populate('comments');
   res.render('post-single', {
     post,
     title: post.title

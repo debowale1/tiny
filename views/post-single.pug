@@ -53,47 +53,46 @@ block content
             .col-lg-6.col-md-6.col-sm-10
               .related-post-box
                 .thumb
-                  img(src='assets/img/post-details/related-01.jpg' alt='image')
+                  img(src='/img/post-details/related-01.jpg' alt='image')
                 h5.title
                   a(href='#')
                     | The Olivier da Costa restaurant experience in Lisbon
             .col-lg-6.col-md-6.col-sm-10
               .related-post-box
                 .thumb
-                  img(src='assets/img/post-details/related-02.jpg' alt='image')
+                  img(src='/img/post-details/related-02.jpg' alt='image')
                 h5.title
                   a(href='#')
                     | The Olivier da Costa restaurant experience in Lisbon
       .comment-template
-        h4.template-title= `${post.comments} Comments`
+        - const numComments = post.comments.length
+        h4.template-title= `${numComments} Comments`
         ul.comment-list
-          li
-            .comment-body
-              .comment-author
-                img(src='assets/img/post-details/comment-01.jpg' alt='image')
-              .comment-content
-                h6.comment-author Zhon Andarson
-                p
-                  | Coding is used in almost all aspects of life and work now, be it directly or
-                  | indirectly. It&rsquo;s not just for companies in the tech sector. &ldquo;An increasing number of
-                  | businesses rely on computer code,
-                .comment-footer
-                  span.date  10:35pm, 27 jan 2015.
-                  a.reply-link(href='#') Reply
-          li
-            .comment-body
-              .comment-author
-                img(src='assets/img/post-details/comment-02.jpg' alt='image')
-              .comment-content
-                h6.comment-author Andro Smith Doe
-                p
-                  | Coding is used in almost all aspects of life and work now, be it directly or
-                  | indirectly. It&rsquo;s not just for companies in the tech sector. &ldquo;An increasing number of
-                  | businesses rely on computer code,
-                .comment-footer
-                  span.date  10:35pm, 27 jan 2015.
-                  a.reply-link(href='#') Reply
-        h4.template-title Leave your comment
+          each comment in post.comments
+            li
+              .comment-body
+                .comment-author
+                  img(src='/img/post-details/comment-01.jpg' alt='image')
+                .comment-content
+                  h6.comment-author= `${comment.userId.name}`
+                  p= `${comment.comment}`
+                  .comment-footer
+                    span.date= new Date(comment.userId.createdAt).toLocaleString('en-GB', { month: 'long', year: 'numeric', day: 'numeric', weekday: 'short' })
+                    a.reply-link(href='#') Reply
+          //-   li
+          //-     .comment-body
+          //-       .comment-author
+          //-         img(src='/img/post-details/comment-02.jpg' alt='image')
+          //-       .comment-content
+          //-         h6.comment-author Andro Smith Doe
+          //-         p
+          //-           | Coding is used in almost all aspects of life and work now, be it directly or
+          //-           | indirectly. It&rsquo;s not just for companies in the tech sector. &ldquo;An increasing number of
+          //-           | businesses rely on computer code,
+          //-         .comment-footer
+          //-           span.date  10:35pm, 27 jan 2015.
+          //-           a.reply-link(href='#') Reply
+          //- h4.template-title Leave your comment
         .comment-form
           form(action='#')
             .row
