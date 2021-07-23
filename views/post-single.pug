@@ -8,42 +8,20 @@ block content
         .entry-header
           h2.title= post.title
           ul.post-meta
-            li September 07 - 2020
+            li= new Date(post.createdAt).toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric', weekday: 'short' })
             li
-              a(href='#') Design,
-              a(href='#') Travel,
-              a(href='#') photography
-          p.short-desc
-            | When it comes to creating is a website for your busi-ness, an attreactive design will only get
-            | you far. With people increasingly using their tablets and smartphones and website for your
-            | business, an attractive design will only get you far. With people increasingly using their
-            | tablets and smartphones shop online,...
+              a(href='#')= post.category.name
+          p.short-desc= post.shortDescription
         .entry-media.text-center
           img(src='/img/post-details/01.jpg' alt='image')
         .entry-content
-          p.has-dropcap
-            | Adipiscing elit com-modo ligula eget dolor Morlem ipsuim dolor sit amiet nec, isc thua sdfk
-            | onsec tetuer adipi scing elit. Aenean commeod ligula eget dolor Cuem sociis thena toquhte thigp
-            | enatibus et magnis dis partu rient montes. Morlem ipsum doelor sit amet nec penatib et thjem
-            | agnis dis part urient montes. Morlem ipsum dolor sit amet nerc, conseec tetuer adipiscing elit.
-            | Aenean commodo ligulaits eget dolior. Aenean type massa. Cum sociis nato que pena tibus et
-            | magnis dis partu rient moentes. Morlm ipsum dolor tibushrde set amet nec, consec tetuer
-            | adipiscing elit. Aenean commodo ligula eget dolor.
-          p
-            | Enatibus et magnis dis partu rient montes. Morlem ipsum doelor sit amet nec penatib et thjem
-            | agnis dis part uriet montes. Morlem ipsium dolor sit amet nerc, conseec tetuer adipi scing elit.
-            | Aenean commodo ligulaits eget doilior. Aenean type massa. Cum sociis nato que pena tibus et
-            | magns dihtres partu rient moentes. Morlm ipsum dolor set amet nec, consec tetuer adipiscing
-            | elit. Aenean comiodo ligula eget dolor. magnis dis partu rient moentes. Morlm ipsum dolor set am
-            | nec, consec tetuer adipiscing elit
+          p.has-dropcap= post.body
+          p= post.body
         .entry-footer
           .post-tags
             span Tag:
-            a(href='#') burger,
-            a(href='#') pixxa,
-            a(href='#') drink,
-            a(href='#') hot,
-            a(href='#') spacial,
+            each tag in post.tags
+              a(href='#')= tag.name
           .social-share
             span Share:
             a(href='#')
@@ -56,9 +34,9 @@ block content
               i.fab.fa-twitter
           .post-author
             .author-img
-              img(src='assets/img/post-details/post-author.png' alt='PostAuthor')
+              img(src='/img/post-details/post-author.png' alt=`${post.author}`)
             h5
-              a(href='#') Maisha Smith
+              a(href='#')= post.author
             p Article Writer, Senior Designer, Wordpress Developer Father of 2 Daughters
         .post-nav
           .prev-post
@@ -87,7 +65,7 @@ block content
                   a(href='#')
                     | The Olivier da Costa restaurant experience in Lisbon
       .comment-template
-        h4.template-title 04 Comments
+        h4.template-title= `${post.comments} Comments`
         ul.comment-list
           li
             .comment-body
