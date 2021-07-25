@@ -39,6 +39,10 @@ const postSchema = new mongoose.Schema({
       ref: 'Tag'
     }
   ],
+  isFeatured: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

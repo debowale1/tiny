@@ -4,46 +4,23 @@ block content
   // ====== Banner Area Start ======
   section.banner-section
     .banner-slider
-      .sinlge-banner
-        .banner-wrapper
-          .banner-bg(style='background-image: url(/img/banner/01.jpg);')
-          .banner-content(data-animation='fadeInUp' data-delay='0.3s')
-            h3.title(data-animation='fadeInUp' data-delay='0.6s')
-              a(href='#')
-                | The Olivier da Costa restaurant experience in Lisbon
-            ul.meta(data-animation='fadeInUp' data-delay='0.8s')
-              li
-                a(href='#') By - Zhon Smith
-              li
-                a(href='#') Travel,
-                a(href='#') Design,
-                a(href='#') Nature
-            p(data-animation='fadeInUp' data-delay='1s')
-              | When it comes to creating is a website for your busin an attractive design will only get you
-              | far. With people increasingly using their tablets and smartphones and shop online,...
-            a.read-more(href='blog-details.html' data-animation='fadeInUp' data-delay='1.2s')
-              | Read More 
-              i.fas.fa-long-arrow-right
-      .sinlge-banner
-        .banner-wrapper
-          .banner-bg(style='background-image: url(/img/banner/02.jpg);')
-          .banner-content(data-animation='fadeInUp' data-delay='0.3s')
-            h3.title(data-animation='fadeInUp' data-delay='0.6s')
-              a(href='#')
-                | The Olivier da Costa restaurant experience in Spain
-            ul.meta(data-animation='fadeInUp' data-delay='0.8s')
-              li
-                a(href='#') By - Zhon Smith
-              li
-                a(href='#') Travel,
-                a(href='#') Design,
-                a(href='#') Nature
-            p(data-animation='fadeInUp' data-delay='1s')
-              | When it comes to creating is a website for your busin an attractive design will only get you
-              | far. With people increasingly using their tablets and smartphones and shop online,...
-            a.read-more(href='blog-details.html' data-animation='fadeInUp' data-delay='1.2s')
-              | Read More 
-              i.fas.fa-long-arrow-right
+      each featured in featuredPosts
+        .sinlge-banner
+          .banner-wrapper
+            .banner-bg(style='background-image: url(/img/banner/01.jpg);')
+            .banner-content(data-animation='fadeInUp' data-delay='0.3s')
+              h3.title(data-animation='fadeInUp' data-delay='0.6s')
+                a(href=`/${featured.slug}`)= featured.title
+              ul.meta(data-animation='fadeInUp' data-delay='0.8s')
+                li
+                  a(href='#')= `By - ${featured.author}`
+                li
+                  each tag in featured.tags
+                    a(href='#')= `${tag.name}, `
+              p(data-animation='fadeInUp' data-delay='1s')= featured.body.split('\n')[0]
+              a.read-more(href=`/${featured.slug}` data-animation='fadeInUp' data-delay='1.2s')
+                | Read More 
+                i.fas.fa-long-arrow-right
     .banner-nav
   // ====== Banner Area End ======
   // ====== Post Area Start ======

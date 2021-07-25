@@ -4,10 +4,12 @@ const catchAsync = require('./../utils/catchAsync')
 
 
 exports.index = catchAsync( async (req, res) => {
-  const posts = await Post.find().select('+createdAt');
+  const posts = await Post.find({isFeatured: { $ne: true}}).select('+createdAt');
+  const featuredPosts = await Post.find( {isFeatured: true});
   const categories = await Category.find();
   res.render('index', { 
     posts,
+    featuredPosts,
     categories, 
     title: 'All Posts' 
   });
