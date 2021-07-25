@@ -44,30 +44,30 @@ block content
             p Article Writer, Senior Designer, Wordpress Developer Father of 2 Daughters
         .post-nav
           .prev-post
-            a(href='#')
+            a(href=`#`)
               i.far.fa-angle-left
             span.title Previous Post
           .next-post
             span.title Next Post
-            a(href='#')
+            a(href=`#`)
               i.far.fa-angle-right
         .related-posts
           h4.related-title Related Posts
           .related-loop.row.justify-content-center
-            .col-lg-6.col-md-6.col-sm-10
-              .related-post-box
-                .thumb
-                  img(src='/img/post-details/related-01.jpg' alt='image')
-                h5.title
-                  a(href='#')
-                    | The Olivier da Costa restaurant experience in Lisbon
-            .col-lg-6.col-md-6.col-sm-10
-              .related-post-box
-                .thumb
-                  img(src='/img/post-details/related-02.jpg' alt='image')
-                h5.title
-                  a(href='#')
-                    | The Olivier da Costa restaurant experience in Lisbon
+            each item in relatedPosts
+              .col-lg-6.col-md-6.col-sm-10
+                .related-post-box
+                  .thumb
+                    img(src='/img/post-details/related-01.jpg' alt='image')
+                  h5.title
+                    a(href=`${item.slug}`)= item.title
+            //- .col-lg-6.col-md-6.col-sm-10
+            //-   .related-post-box
+            //-     .thumb
+            //-       img(src='/img/post-details/related-02.jpg' alt='image')
+            //-     h5.title
+            //-       a(href='#')
+            //-         | The Olivier da Costa restaurant experience in Lisbon
       .comment-template
         - const numComments = post.comments.length
         h4.template-title= `${numComments} Comments`

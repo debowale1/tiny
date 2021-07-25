@@ -22,7 +22,7 @@ router.route('/post-stats').get(postController.getPostStats);
 
 router.route('/')
       .get(postController.getAllPosts)
-      .post(postController.createPost);
+      .post(postController.getAuthor, postController.createPost);
 
 router.route('/:id')
       .get(postController.getPost)

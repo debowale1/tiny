@@ -66,6 +66,12 @@ exports.getAllPosts = async (req,res) => {
   }
 }
 
+exports.getAuthor = (req, res, next) => {
+  req.body.author = req.user.name;
+  next();
+ }
+    
+
 
 exports.getAllPosts = getAll(Post);
 
