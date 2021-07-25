@@ -14,28 +14,25 @@ exports.index = catchAsync( async (req, res) => {
 })
 
 exports.getPost = catchAsync( async (req, res) => {
+  //get the post with the :slug and populate with the comment
   const post = await Post.findOne({ slug: req.params.slug }).populate('comments');
+  // get 2 related posts (by category) of the current post  
   const relatedPosts = await Post.find({ category: post.category, slug: { $ne: post.slug} }).select('title slug').sort('+createdAt').limit(2);
-  // const prev = await Post.findOne({
-  //   slug: { $ne: req.params.slug },
-  // }).select('slug').sort({
-  //   createdAt: -1
-  // }).limit(1);
-  // const next = await Post.findOne({
-  //   slug: { $ne: req.params.slug },
-  // }).select('slug').sort({
-  //   createdAt: 1
-  // }).limit(1);
+  // get the previous post to the current post
+  let prevPost = await Post.findOne({ _id: {$lt : post._id} }).select('slug').sort({_id: -1}).limit(1);
+  if(!prevPost) {
+    prevPost = await Post.findOne().select('slug').sort({_id: -1 }).limit(1);
+  }
+  // get the next post to the current post
+  let nextPost = await Post.findOne({ _id: {$gt : post._id} }).select('slug').sort({_id: 1}).limit(1);
+  if(!nextPost) {
+     nextPost = await Post.findOne().select('slug').sort({_id: 1 }).limit(1);
+  }
   res.render('post-single', {
     post,
     relatedPosts,
-    // prev,
-    // next,
+    prevPost,
+    nextPost,
     title: post.title
   });
-})
-  // res.render('post-single', {
-  //   post,
-  //   title: post.title
-  // });
-// })
+});
