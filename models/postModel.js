@@ -59,13 +59,15 @@ postSchema.pre('save', function(next) {
 
 //Query Middleware
 postSchema.pre(/^find/, function(next){
-  this.populate({path: 'tags', select: '-__v -createdAt -updatedAt'})
+  this.populate({
+    path: 'tags', 
+    select: '-__v -createdAt -updatedAt'
+  }).populate({
+    path: 'category', 
+    select: '-__v -createdAt -updatedAt'
+  })
   next();
 })
-postSchema.pre(/^find/, function(next){
-  this.populate({path: 'category', select: '-__v -createdAt -updatedAt'})
-  next();
-});
 
 //Virtual Populate: 
 postSchema.virtual('comments', {

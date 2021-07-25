@@ -11,12 +11,16 @@ block content
             li= new Date(post.createdAt).toLocaleString('en-US', { month: 'long', year: 'numeric', day: 'numeric', weekday: 'short' })
             li
               a(href='#')= post.category.name
-          p.short-desc= post.shortDescription
+          p.short-desc= post.body.split('\n')[0]
         .entry-media.text-center
           img(src='/img/post-details/01.jpg' alt='image')
         .entry-content
-          p.has-dropcap= post.body
-          p= post.body
+          - const paragraphs = post.body.split('\n') 
+          - for (let i = 0; i < paragraphs.length; i++)
+            - if(paragraphs[i] === paragraphs[0])
+              p.has-dropcap= paragraphs[i]
+            - else
+              p= paragraphs[i]
         .entry-footer
           .post-tags
             span Tag:
