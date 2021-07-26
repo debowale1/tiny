@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
+const cookieParser = require('cookie-parser');
 
 
 const postRouter = require('./routes/postRouter');
@@ -33,8 +34,8 @@ app.set('views', path.join(__dirname, 'views'))
 
 //body parser
 app.use(express.json( { limit: '50kb' }))
-//serve static files
-app.use(express.static(`${__dirname}/public`))
+//cookie parser
+app.use(cookieParser());
 
 // data sanitization of req.body, req.query, req.params
 app.use(xss());
@@ -51,15 +52,26 @@ app.use(mongoSanitize())
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+  console.log(req.cookies);
+  next();
+})
+
+
+app.use(function(req, res, next) { 
+  res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net" ); 
+  next(); 
+})
+
 
 
 //Mounting Routes
+app.use('/', viewsRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/tags', tagRouter);
-app.use('/', viewsRouter);
 
 
 

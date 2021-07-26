@@ -7,7 +7,7 @@ exports.index = catchAsync( async (req, res) => {
   const posts = await Post.find({isFeatured: { $ne: true}}).select('+createdAt');
   const featuredPosts = await Post.find( {isFeatured: true});
   const categories = await Category.find();
-  res.render('index', { 
+  res.status(200).render('index', { 
     posts,
     featuredPosts,
     categories, 
@@ -30,7 +30,7 @@ exports.getPost = catchAsync( async (req, res) => {
   if(!nextPost) {
      nextPost = await Post.findOne().select('slug').sort({_id: 1 }).limit(1);
   }
-  res.render('post-single', {
+  res.status(200).render('post-single', {
     post,
     relatedPosts,
     prevPost,
@@ -38,3 +38,7 @@ exports.getPost = catchAsync( async (req, res) => {
     title: post.title
   });
 });
+
+exports.login = catchAsync( async (req, res) => {
+  res.render('login', { title: 'Login' });
+})

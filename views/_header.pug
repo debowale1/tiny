@@ -34,21 +34,23 @@ header.sticky-header
                 a(href='/about') About Tiny
               li
                 a(href='/contact') Contact
-              li
-                a(href='/login') Login
-              li
-                a(href='/signup') Sign Up
-              li
-                a(href='/user') username
-                ul.submenu
-                  li
-                    a(href='product-details.html') My Posts
-                  li
-                    a(href='product-details.html') Update Password
-                  li
-                    a(href='product-details-2.html') Update My Details
-                  li
-                    a(href='myaccount.html') Logout
+              if user
+                li
+                  a(href='#')= user.name.split(' ')[0]
+                  ul.submenu
+                    li
+                      a(href='/my-posts') My Posts
+                    li
+                      a(href='/users/update-password') Update Password
+                    li
+                      a(href='/users/update-details') Update My Details
+                    li
+                      a(href='/logout') Logout
+              else
+                li
+                  a(href='/login') Login
+                li
+                  a(href='/signup') Sign Up
             .social-icons
               ul
                 li
