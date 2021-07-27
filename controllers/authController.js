@@ -77,6 +77,15 @@ exports.login = async (req, res) => {
   }
 }
 
+// logout
+exports.logout = async (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({status: 'success'});
+}
+
 //protect middleware is where you verify if a user is signed in
 exports.protect = async (req, res, next) => {
   try {
@@ -108,22 +117,26 @@ exports.protect = async (req, res, next) => {
 }
 
 // is logged in middleware, no errors
-exports.isLoggedIn = catchAsync( async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {
 
     if(req.cookies.jwt){  
-      //verify the token
-      const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
-  
-      //get the user with the payload
-      const user = await User.findById(decoded.id);
-      if(!user) return next();
-      //THERE IS A LOGGED IN USER. save the current user in res.locals
-      res.locals.user = user;
-      return next();
-    }
+      try {
+        //verify the token
+        const decoded = await promisify(jwt.verify)(req.cookies.jwt, process.env.JWT_SECRET);
+    
+        //get the user with the payload
+        const user = await User.findById(decoded.id);
+        if(!user) return next();
+        //THERE IS A LOGGED IN USER. save the current user in res.locals
+        res.locals.user = user;
+        return next();
 
-  next();
-})
+      }catch(err){
+        return next();
+      }
+    }
+    next();
+}
 
 exports.restrictTo =  (...roles) => {
   return async (req, res, next) => {

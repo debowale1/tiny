@@ -10,6 +10,8 @@ router.use('/:userId/comments', commentRouter);
 
 router.post('/signup', authController.signup);
 router.post('/login', authController.login);
+router.post('/logout', authController.logout)
+
 //only signed in user can access these routes
 router.use(authController.protect);
 

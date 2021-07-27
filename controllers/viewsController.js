@@ -3,7 +3,7 @@ const Category = require('./../models/categoryModel');
 const catchAsync = require('./../utils/catchAsync')
 
 
-exports.index = catchAsync( async (req, res) => {
+exports.index = catchAsync( async (req, res, next) => {
   const posts = await Post.find({isFeatured: { $ne: true}}).select('+createdAt');
   const featuredPosts = await Post.find( {isFeatured: true});
   const categories = await Category.find();
