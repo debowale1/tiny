@@ -52,10 +52,10 @@ app.use(mongoSanitize())
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use((req, res, next) => {
-  console.log(req.cookies);
-  next();
-})
+// app.use((req, res, next) => {
+//   console.log(req.cookies);
+//   next();
+// })
 
 
 app.use(function(req, res, next) { 

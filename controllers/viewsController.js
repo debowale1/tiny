@@ -39,6 +39,10 @@ exports.getPost = catchAsync( async (req, res) => {
   });
 });
 
-exports.login = catchAsync( async (req, res) => {
+exports.login = async (req, res) => {
   res.render('login', { title: 'Login' });
-})
+}
+
+exports.signup = async (req, res) => {
+  res.render('register', { title: 'Register'});
+} 
