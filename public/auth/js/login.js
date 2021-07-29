@@ -20,7 +20,7 @@ const login = async (email, password) => {
 const logout = async () => {
     try {
       const res = await axios({
-          method: "POST",
+          method: "GET",
           url: `http://127.0.0.1:2021/api/v1/users/logout`,
       });
       if (res.data.status === 'success'){
