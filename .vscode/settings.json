@@ -1,0 +1,11 @@
+{
+  "editor.fontSize": 18,
+  "debug.console.fontSize": 15,
+  "editor.wordWrap": "on",
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "prettier.semi": false,
+  "editor.formatOnSave": true,
+  "javascript.format.semicolons": "remove",
+  "liveServer.settings.donotVerifyTags": true
+}

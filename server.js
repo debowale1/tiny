@@ -12,7 +12,7 @@ mongoose.connect(DB, {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false
-}).then(con => console.log('Database connected successfully!'));
+}).then(con => console.log(`Database connected to ${con.connection.host}`));
 
 
 

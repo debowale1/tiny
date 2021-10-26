@@ -7,7 +7,10 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
-
+const flash = require('connect-flash')
+const session = require('express-session')
+const fileUpload = require('express-fileupload')
+const expressLayouts = require('express-ejs-layouts')
 
 const postRouter = require('./routes/postRouter');
 const userRouter = require('./routes/userRouter');
@@ -26,20 +29,13 @@ app.use(helmet());
 if(process.env.NODE_ENV === 'development'){
   app.use(morgan('dev'));
 }
-//views engine
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'))
-
-
 
 //body parser
 app.use(express.json( { limit: '50kb' }))
 //cookie parser
-app.use(cookieParser());
-
+app.use(cookieParser('TinyBlogSecret'));
 // data sanitization of req.body, req.query, req.params
 app.use(xss());
-
 //rate limiter
 const limiter = rateLimit({
   windowsMs: 60 * 60 * 1000, // 1 hour
@@ -51,6 +47,23 @@ app.use('/api', limiter);
 app.use(mongoSanitize())
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(expressLayouts)
+app.use(fileUpload())
+app.use(flash())
+app.use(session({
+  saveUninitialized: true,
+  secret: 'TinySessionSecret',
+  resave: true
+}))
+
+app.use(express.urlencoded({ extended: true }))
+// express ejs layout
+app.set('layout', './layouts/main')
+// set views engine
+app.set('view engine', 'ejs');
+// set directory to views folder
+app.set('views', path.join(__dirname, 'views'))
 
 // app.use((req, res, next) => {
 //   console.log(req.cookies);

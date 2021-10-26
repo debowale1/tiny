@@ -15,11 +15,11 @@ exports.index = catchAsync( async (req, res, next) => {
   });
 })
 
-exports.getPost = catchAsync( async (req, res) => {
+exports.getPost = catchAsync( async (req, res, next) => {
   //get the post with the :slug and populate with the comment
   const post = await Post.findOne({ slug: req.params.slug }).populate('comments');
   if(!post){
-    return next(status(404).json({ status: 'fail', message: 'No post with that slug' }))
+    return next(res.status(404).json({ status: 'fail', message: 'No post with that slug' }))
   }
   // get 2 related posts (by category) of the current post  
   const relatedPosts = await Post.find({ category: post.category, slug: { $ne: post.slug} }).select('title slug').sort('+createdAt').limit(2);
