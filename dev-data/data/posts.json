@@ -3,7 +3,7 @@
     "category":"60df48831084580a8c60f7e1",
     "author": "John",
     "numComment": 100,
-    "featuredImage":"images/post-image-1.jpg"
+    "image":"images/post-image-1.jpg"
   },
   {
     "title":"qui est esse",
@@ -11,7 +11,8 @@
     "category":"60df48831084580a8c60f7e1",
     "author": "Jane",
     "numComment": 63,
-    "featuredImage":"images/post-image-2.jpg"
+    "image":"images/post-image-2.jpg",
+    "isFeatured": true
   },
   {
     "title":"eum et est occaecati",
@@ -19,14 +20,15 @@
     "category":"60df48831084580a8c60f7e1",
     "author": "Mike",
     "numComment": 61,
-    "featuredImage":"images/post-image-2.jpg"
+    "image":"images/post-image-2.jpg",
+    "isFeatured": true
   },
 
   {
     "title":"dolorem eum magni eos aperiam quia","body":"Sed ut aspernatur corporis harum nihil quis provident sequi\nmollitia nobis aliquid molestiae\nperspiciatis et ea nemo ab reprehenderit accusantium quas\nvoluptate dolores velit et doloremque molestiae do eiusmod tempor incididunt ut labore et dolore magna aliqua, ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum!\nDolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, exercitation ullamco laboris nisi ut aliquip. Lorem ipsum dolor sit amet, consectetur adipisicing elit!","category":"60df48831084580a8c60f7e1",
     "author": "Sarah",
     "numComment": 78,
-    "featuredImage":"images/post-image-2.jpg"
+    "image":"images/post-image-2.jpg"
   },
     
     {
@@ -35,7 +37,7 @@
       "category":"60df48831084580a8c60f7e1",
       "author": "John",
     "numComment": 14,
-      "featuredImage":"images/post-image-2.jpg"
+      "image":"images/post-image-2.jpg"
     },
       
       {
@@ -44,7 +46,7 @@
         "category":"60df48831084580a8c60f7e1",
         "author": "Sarah",
         "numComment": 23,
-        "featuredImage":"images/post-image-6.jpg"
+        "image":"images/post-image-6.jpg"
       },
       {
         "title":"lorem ipsum dolot sit amet",
@@ -52,7 +54,8 @@
         "category":"60df48831084580a8c60f7e1",
         "author": "Mike",
         "numComment": 47,
-        "featuredImage":"images/post-image-7.jpg"
+        "image":"images/post-image-7.jpg",
+        "isFeatured": true
       },
       {
         "title":"nesciunt iure omnisaccusa omnis ntium",
@@ -60,6 +63,6 @@
         "category":"60df48831084580a8c60f7e1",
         "author": "John",
         "numComment": 27,
-        "featuredImage":"images/post-image-8.jpg"
+        "image":"images/post-image-8.jpg"
       }
 ]

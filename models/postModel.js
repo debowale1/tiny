@@ -29,9 +29,9 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: [true, 'A post must have an author'],
   },
-  featuredImage: {
+  image: {
     type: String,
-    required: [true, 'A post must have a featured image'],
+    required: [true, 'A post must have an image'],
   },
   tags: [
     {

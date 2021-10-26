@@ -11,7 +11,7 @@ mongoose.connect(URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-}).then(con => console.log(con.host));
+}).then(con => console.log(con.connection.host));
 
 const posts = JSON.parse(fs.readFileSync(`${__dirname}/data/posts.json`, 'utf-8'));
 
