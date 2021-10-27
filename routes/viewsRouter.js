@@ -6,8 +6,9 @@ const router = express.Router();
 router.use(authController.isLoggedIn);
 
 router.get('/', viewsController.index)
+router.get('/:slug', viewsController.singlePost)
+router.get('/category/:name', viewsController.postsByCategory)
 router.get('/login', viewsController.login)
 router.get('/register', viewsController.signup)
-router.get('/:slug', viewsController.singlePost)
 
 module.exports = router;

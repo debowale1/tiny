@@ -3,11 +3,10 @@ const Category = require('./../models/categoryModel');
 const catchAsync = require('./../utils/catchAsync')
 
 
-exports.index = catchAsync( async (req, res, next) => {
+exports.index = catchAsync( async (req, res, next) => { 
   const posts = await Post.find({ isFeatured: { $ne: true } }).sort({ _id: -1});
   const featuredPosts = await Post.find( {isFeatured: true} ).sort({ _id: -1}).limit(3);
   const categories = await Category.find();
-  console.log(featuredPosts);
   res.status(200).render('index', { 
     title: 'Tiny Blog | All Posts', 
     posts,
@@ -44,6 +43,19 @@ exports.singlePost = catchAsync( async (req, res, next) => {
     title: `TinyBlog | ${post.title}`
   });
 });
+
+exports.postsByCategory = catchAsync( async (req, res, next) => {
+  const category = await Category.findOne({ 'name': req.params.name })
+  const posts = await Post.find({ 'category': category._id }).sort({ _id: -1});
+  const categories = await Category.find();
+  // console.log(category);
+  res.status(200).render('posts-by-category', { 
+    title: `Tiny Blog | All Posts in ${category.name}`, 
+    category,
+    posts,
+    categories, 
+  });
+})
 
 exports.login = async (req, res) => {
   res.render('login', { title: 'Login' });

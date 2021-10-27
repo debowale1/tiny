@@ -1,9 +1,15 @@
 <div class="row g-5">
   <!-- main post body  -->
   <div class="col-md-9">
-    <h3 class="pb-4 mb-4 fst-italic border-bottom">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb pb-4 mb-4 border-bottom">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page"> Post</li>
+      </ol>
+    </nav>
+    <!-- <h3 class="pb-4 mb-4 fst-italic border-bottom">
       From the Firehose
-    </h3>
+    </h3> -->
 
     <article class="blog-post">
       <h2 class="blog-post-title"><%= post.title %></h2>
