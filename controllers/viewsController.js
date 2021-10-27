@@ -57,6 +57,20 @@ exports.postsByCategory = catchAsync( async (req, res, next) => {
   });
 })
 
+exports.searchPosts = catchAsync( async (req, res, next) => {
+  // const category = await Category.findOne({ 'name': req.params.name })
+  const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
+  // console.log(req.body.searchTerm);
+  const categories = await Category.find();
+  // console.log(category);
+  res.status(200).render('search', { 
+    title: `Tiny Blog | All Posts`, 
+    // category,
+    posts,
+    categories, 
+  });
+})
+
 exports.login = async (req, res) => {
   res.render('login', { title: 'Login' });
 }

@@ -81,5 +81,8 @@ postSchema.virtual('comments', {
   // count: true // And only get the number of docs
 });
 
+//enable search
+postSchema.index({title: 'text', body: 'text'})
+
 const Post = mongoose.model('Post', postSchema);
 module.exports = Post;

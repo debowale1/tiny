@@ -1,0 +1,39 @@
+ <!-- other blog posts  -->
+ <div class="row g-5">
+  <div class="col-md-9">
+    <div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/category">Category</a></li>
+          <li class="breadcrumb-item active" aria-current="page">search </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row mb-2">
+      <% if(typeof posts !== 'undefined' && posts.length > 0){ %> 
+      <% posts.forEach((post, index) => { %> 
+        <div class="col-md-12">
+          <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+            <div class="col p-4 d-flex flex-column position-static">
+              <strong class="d-inline-block mb-2 text-primary"><%= post.category.name %></strong>
+              <h3 class="mb-0"><%= post.title %></h3>
+              <div class="mb-1 text-muted"><%- post.createdAt.toLocaleString('en-US', {month: 'long', day: 'numeric'}) %></div>
+              <p class="card-text mb-auto"><%= `${post.body.substr(0, 90)}...` %></p>
+              <a href="/<%= post.slug %>" class="stretched-link">Continue reading</a>
+            </div>
+            <div class="col-auto d-none d-lg-block">
+              <img src="/img/about-img.jpg" alt="<%= post.title%>" width="200" loading='lazy' img-fluid>
+      
+            </div>
+          </div>
+        </div>
+        <% }) %>  
+        <% }else{ %>  
+          <p>No posts in this category yet. Check back later</p>   
+        <% } %>   
+    </div>
+  </div>
+  <div class="col-md-3">
+    <%- include('partials/_sidebar') %> 
+  </div>
+</div>
