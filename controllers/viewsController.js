@@ -4,7 +4,7 @@ const catchAsync = require('./../utils/catchAsync')
 
 
 exports.index = catchAsync( async (req, res, next) => {
-  const posts = await Post.find({isFeatured: { $ne: true}}).select('+createdAt');
+  const posts = await Post.find({ isFeatured: { $ne: true } }).sort({ _id: -1});
   const featuredPosts = await Post.find( {isFeatured: true} ).sort({ _id: -1}).limit(3);
   const categories = await Category.find();
   console.log(featuredPosts);
@@ -41,7 +41,7 @@ exports.singlePost = catchAsync( async (req, res, next) => {
     // relatedPosts,
     // prevPost,
     // nextPost,
-    title: post.title
+    title: `TinyBlog | ${post.title}`
   });
 });
 
