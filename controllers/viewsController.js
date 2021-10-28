@@ -58,7 +58,6 @@ exports.postsByCategory = catchAsync( async (req, res, next) => {
 })
 
 exports.searchPosts = catchAsync( async (req, res, next) => {
-  // const category = await Category.findOne({ 'name': req.params.name })
   const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
   // console.log(req.body.searchTerm);
   const categories = await Category.find();
