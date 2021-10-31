@@ -55,7 +55,18 @@ exports.postsByCategory = catchAsync( async (req, res, next) => {
     posts,
     categories, 
   });
-})
+});
+
+exports.submitArticle = catchAsync( async (req, res, next) => {
+  // const category = await Category.findOne({ 'name': req.params.name })
+  // const posts = await Post.find({ 'category': category._id }).sort({ _id: -1});
+  const categories = await Category.find();
+  // console.log(category);
+  res.status(200).render('submit-article', { 
+    title: `Tiny Blog | Submit Article`, 
+    categories, 
+  });
+});
 
 exports.searchPosts = catchAsync( async (req, res, next) => {
   const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
@@ -68,7 +79,15 @@ exports.searchPosts = catchAsync( async (req, res, next) => {
     posts,
     categories, 
   });
-})
+});
+
+// exports.submitArticle = catchAsync( async (req, res, next) => {
+//   const categories = await Category.find();
+//   res.render('submit-article', { 
+//     title: `Tiny Blog | Submit Articles`, 
+//     categories, 
+//   });
+// })
 
 exports.login = async (req, res) => {
   res.render('login', { title: 'Login' });
