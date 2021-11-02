@@ -15,7 +15,7 @@
       <h2 class="blog-post-title"><%= post.title %></h2>
       <p class="blog-post-meta"><%= post.createdAt.toLocaleString('en-US', {month: 'long', day: 'numeric', year: 'numeric' }) %>  <a href="/user/author/name"><%= post.author %> </a></p>
 
-      <p><%= post.body %> </p>
+      <p><%- post.body %> </p>
       <hr>      
     </article>
 

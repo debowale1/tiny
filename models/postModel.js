@@ -1,5 +1,12 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
+const domPurifier = require('dompurify')
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+const htmlPurify = domPurifier(new JSDOM().window)
+
+const {stripHtml} = require('string-strip-html')
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -15,6 +22,10 @@ const postSchema = new mongoose.Schema({
   body: {
     type: String,
     required: [true, 'A post must have a body'],
+  },
+  snippet: {
+    type: String,
+    required: [true, 'A post must have a snippet']
   },
   category: {
     type: mongoose.Schema.ObjectId,
@@ -59,6 +70,14 @@ const postSchema = new mongoose.Schema({
 postSchema.pre('save', function(next) {
   this.slug = slugify(this.title, { lower: true } )
   next();
+})
+
+postSchema.pre('validate', function(next){
+  if(this.body){
+    this.body = htmlPurify.sanitize(this.body)
+    this.snippet = stripHtml(this.body.substr(0, 90)).result
+  }
+  next()
 })
 
 //Query Middleware
