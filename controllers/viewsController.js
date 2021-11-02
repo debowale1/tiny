@@ -48,7 +48,6 @@ exports.postsByCategory = catchAsync( async (req, res, next) => {
   const category = await Category.findOne({ 'name': req.params.name })
   const posts = await Post.find({ 'category': category._id }).sort({ _id: -1});
   const categories = await Category.find();
-  // console.log(category);
   res.status(200).render('posts-by-category', { 
     title: `Tiny Blog | All Posts in ${category.name}`, 
     category,
@@ -70,9 +69,7 @@ exports.submitArticle = catchAsync( async (req, res, next) => {
 });
 
 exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
-
   const category = await Category.findOne({ 'name': req.body.category})
-
   const post = new Post({
     title: req.body.title,
     body: req.body.body,
