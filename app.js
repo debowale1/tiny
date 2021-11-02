@@ -65,7 +65,7 @@ app.set('view engine', 'ejs');
 // set directory to views folder
 app.set('views', path.join(__dirname, 'views'))
 
-app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
+// app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 
 // app.use((req, res, next) => {
@@ -77,7 +77,7 @@ app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce
 
 
 app.use(function(req, res, next) { 
-  res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net" ); 
+  res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tiny.cloud" ); 
   next(); 
 })
 

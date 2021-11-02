@@ -58,14 +58,39 @@ exports.postsByCategory = catchAsync( async (req, res, next) => {
 });
 
 exports.submitArticle = catchAsync( async (req, res, next) => {
-  // const category = await Category.findOne({ 'name': req.params.name })
-  // const posts = await Post.find({ 'category': category._id }).sort({ _id: -1});
+  const infoErrorsObj = req.flash('infoErrors')
+  const infoSuccessObj = req.flash('infoSuccess')
   const categories = await Category.find();
-  // console.log(category);
   res.status(200).render('submit-article', { 
     title: `Tiny Blog | Submit Article`, 
     categories, 
+    infoErrorsObj,
+    infoSuccessObj
   });
+});
+
+exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
+
+  const category = await Category.findOne({ 'name': req.body.category})
+
+  const post = new Post({
+    title: req.body.title,
+    body: req.body.body,
+    author: 'Jane',
+    category: category._id,
+    image: 'image.jpg'
+  })
+  const savedPost = await post.save()
+  // console.log(req.body);
+  if(savedPost){
+    req.flash('infoSuccess', 'post has been submitted! An admin/Editor will go through before it can apper on the front page')
+    res.redirect('/submit-article');
+  }else{
+    req.flash('infoErrors', 'someting went wrong')
+    res.redirect('/submit-recipe')
+
+  }
+
 });
 
 exports.searchPosts = catchAsync( async (req, res, next) => {

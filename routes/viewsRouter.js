@@ -10,6 +10,7 @@ router.get('/submit-article', viewsController.submitArticle)
 router.get('/:slug', viewsController.singlePost)
 router.get('/category/:name', viewsController.postsByCategory)
 router.post('/search', viewsController.searchPosts)
+router.post('/submit-article', viewsController.submitArticleOnPost)
 
 
 
