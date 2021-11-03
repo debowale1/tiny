@@ -68,6 +68,15 @@ exports.submitArticle = catchAsync( async (req, res, next) => {
   });
 });
 
+exports.login = catchAsync( async (req, res, next) => {
+  const categories = await Category.find();
+  res.status(200).render('login', { 
+    layout: './layouts/auth',
+    title: `Tiny Blog | Login`, 
+    categories, 
+  });
+});
+
 exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
   const category = await Category.findOne({ 'name': req.body.category})
   const post = new Post({
@@ -90,6 +99,8 @@ exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
 
 });
 
+
+
 exports.searchPosts = catchAsync( async (req, res, next) => {
   const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
   // console.log(req.body.searchTerm);
@@ -103,18 +114,12 @@ exports.searchPosts = catchAsync( async (req, res, next) => {
   });
 });
 
-// exports.submitArticle = catchAsync( async (req, res, next) => {
-//   const categories = await Category.find();
-//   res.render('submit-article', { 
-//     title: `Tiny Blog | Submit Articles`, 
-//     categories, 
-//   });
+
+
+// exports.login = catchAsync(async (req, res, next) => {
+//   res.status(200).render('login', { title: 'Login' });
 // })
 
-exports.login = async (req, res) => {
-  res.render('login', { title: 'Login' });
-}
-
-exports.signup = async (req, res) => {
-  res.render('register', { title: 'Register'});
-} 
+// exports.signup = async (req, res) => {
+//   res.render('register', { title: 'Register'});
+// } 

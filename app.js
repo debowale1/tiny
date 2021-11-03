@@ -60,12 +60,12 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }))
 // express ejs layout
 app.set('layout', './layouts/main')
+// app.set('layout', './layouts/auth')
 // set views engine
 app.set('view engine', 'ejs');
 // set directory to views folder
 app.set('views', path.join(__dirname, 'views'))
 
-// app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
 
 // app.use((req, res, next) => {
