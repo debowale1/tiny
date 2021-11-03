@@ -13,6 +13,8 @@ router.get('/:slug', viewsController.singlePost)
 router.get('/category/:name', viewsController.postsByCategory)
 router.post('/search', viewsController.searchPosts)
 router.post('/submit-article', viewsController.submitArticleOnPost)
+router.post('/register', viewsController.signupOnSubmit)
+router.post('/login', viewsController.loginOnSubmit)
 
 
 

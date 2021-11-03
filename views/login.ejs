@@ -1,4 +1,15 @@
-<form>
+<% if(infoSuccessObj != '') { %>
+  <div class="col-12 alert alert-success alert-dismissible fade show" role="alert">
+    <%= infoSuccessObj %>
+  </div>
+<% } %>
+
+<% if(infoErrorsObj != '') { %>
+  <div class="col-12 alert alert-danger alert-dismissible fade show" role="alert">
+    <%= infoErrorsObj %>
+  </div>
+<% } %>
+<form method="POST" action="/login" enctype="multipart/form-data">
   <img class="mb-4" src="https://getbootstrap.com/docs/5.1/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
   <h1 class="h3 mb-3 fw-normal">Sign In</h1>
 

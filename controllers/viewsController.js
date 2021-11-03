@@ -1,5 +1,6 @@
 const Post = require('./../models/postModel');
 const Category = require('./../models/categoryModel');
+const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync')
 
 
@@ -69,20 +70,68 @@ exports.submitArticle = catchAsync( async (req, res, next) => {
 });
 
 exports.signin = catchAsync( async (req, res, next) => {
-  const categories = await Category.find();
+  const infoErrorsObj = req.flash('infoErrors')
+  const infoSuccessObj = req.flash('infoSuccess')
   res.status(200).render('login', { 
     layout: './layouts/auth',
     title: `Tiny Blog | Login to your account`, 
-    categories, 
+    infoErrorsObj,
+    infoSuccessObj 
   });
 });
 exports.signup = catchAsync( async (req, res, next) => {
-  const categories = await Category.find();
+  const infoErrorsObj = req.flash('infoErrors')
+  const infoSuccessObj = req.flash('infoSuccess')
+  
   res.status(200).render('register', { 
     layout: './layouts/auth',
     title: `Tiny Blog | Register new account`, 
-    categories, 
+    infoErrorsObj,
+    infoSuccessObj
   });
+});
+
+exports.signupOnSubmit = catchAsync( async (req, res, next) => {
+  
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+    
+  })
+  const savedUser = await user.save()
+  // console.log(req.body);
+  if(savedUser){
+    req.flash('infoSuccess', 'Your account has been created. Check your email to activate your account')
+    res.redirect('/login');
+  }else{
+    req.flash('infoErrors', 'someting went wrong')
+    res.redirect('/register')
+
+  }
+
+});
+exports.loginOnSubmit = catchAsync( async (req, res, next) => {
+  
+  const user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: req.body.password,
+    passwordConfirm: req.body.passwordConfirm,
+    
+  })
+  const savedUser = await user.save()
+  // console.log(req.body);
+  if(savedUser){
+    req.flash('infoSuccess', 'Your account has been created. Check your email to activate your account')
+    res.redirect('/login');
+  }else{
+    req.flash('infoErrors', 'someting went wrong')
+    res.redirect('/register')
+
+  }
+
 });
 
 exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
@@ -101,7 +150,7 @@ exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
     res.redirect('/submit-article');
   }else{
     req.flash('infoErrors', 'someting went wrong')
-    res.redirect('/submit-recipe')
+    res.redirect('/submit-article')
 
   }
 
