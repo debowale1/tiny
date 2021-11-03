@@ -68,11 +68,19 @@ exports.submitArticle = catchAsync( async (req, res, next) => {
   });
 });
 
-exports.login = catchAsync( async (req, res, next) => {
+exports.signin = catchAsync( async (req, res, next) => {
   const categories = await Category.find();
   res.status(200).render('login', { 
     layout: './layouts/auth',
-    title: `Tiny Blog | Login`, 
+    title: `Tiny Blog | Login to your account`, 
+    categories, 
+  });
+});
+exports.signup = catchAsync( async (req, res, next) => {
+  const categories = await Category.find();
+  res.status(200).render('register', { 
+    layout: './layouts/auth',
+    title: `Tiny Blog | Register new account`, 
     categories, 
   });
 });
