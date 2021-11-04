@@ -9,12 +9,14 @@ router.get('/', viewsController.index)
 router.get('/submit-article', viewsController.submitArticle)
 router.get('/login', viewsController.signin)
 router.get('/register', viewsController.signup)
+router.get('/tiny-admin', viewsController.adminIndex)
 router.get('/:slug', viewsController.singlePost)
 router.get('/category/:name', viewsController.postsByCategory)
 router.post('/search', viewsController.searchPosts)
 router.post('/submit-article', viewsController.submitArticleOnPost)
 router.post('/register', viewsController.signupOnSubmit)
 router.post('/login', viewsController.loginOnSubmit)
+
 
 
 

@@ -4,6 +4,9 @@ const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync')
 
 
+
+
+
 exports.index = catchAsync( async (req, res, next) => { 
   const posts = await Post.find({ isFeatured: { $ne: true } }).sort({ _id: -1});
   const featuredPosts = await Post.find( {isFeatured: true} ).sort({ _id: -1}).limit(3);
@@ -91,8 +94,17 @@ exports.signup = catchAsync( async (req, res, next) => {
   });
 });
 
+exports.searchPosts = catchAsync( async (req, res, next) => {
+  const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
+  const categories = await Category.find();
+  res.status(200).render('search', { 
+    title: `Tiny Blog | All Posts`, 
+    posts,
+    categories, 
+  });
+});
+
 exports.signupOnSubmit = catchAsync( async (req, res, next) => {
-  
   const user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -157,26 +169,11 @@ exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
 });
 
 
+// Admin
+exports.adminIndex = catchAsync(async(req, res, next) => {
+  res.status(200).render('admin/index', {
+    layout: './layouts/admin',
+    title: 'Tiny Blog | Dashboard'
+  })
+})
 
-exports.searchPosts = catchAsync( async (req, res, next) => {
-  const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
-  // console.log(req.body.searchTerm);
-  const categories = await Category.find();
-  // console.log(category);
-  res.status(200).render('search', { 
-    title: `Tiny Blog | All Posts`, 
-    // category,
-    posts,
-    categories, 
-  });
-});
-
-
-
-// exports.login = catchAsync(async (req, res, next) => {
-//   res.status(200).render('login', { title: 'Login' });
-// })
-
-// exports.signup = async (req, res) => {
-//   res.render('register', { title: 'Register'});
-// } 
