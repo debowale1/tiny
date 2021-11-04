@@ -124,27 +124,27 @@ exports.signupOnSubmit = catchAsync( async (req, res, next) => {
   }
 
 });
-exports.loginOnSubmit = catchAsync( async (req, res, next) => {
+// exports.loginOnSubmit = catchAsync( async (req, res, next) => {
   
-  const user = new User({
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    passwordConfirm: req.body.passwordConfirm,
+//   const user = new User({
+//     name: req.body.name,
+//     email: req.body.email,
+//     password: req.body.password,
+//     passwordConfirm: req.body.passwordConfirm,
     
-  })
-  const savedUser = await user.save()
-  // console.log(req.body);
-  if(savedUser){
-    req.flash('infoSuccess', 'Your account has been created. Check your email to activate your account')
-    res.redirect('/login');
-  }else{
-    req.flash('infoErrors', 'someting went wrong')
-    res.redirect('/register')
+//   })
+//   const savedUser = await user.save()
+//   // console.log(req.body);
+//   if(savedUser){
+//     req.flash('infoSuccess', 'Your account has been created. Check your email to activate your account')
+//     res.redirect('/login');
+//   }else{
+//     req.flash('infoErrors', 'someting went wrong')
+//     res.redirect('/register')
 
-  }
+//   }
 
-});
+// });
 
 exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
   const category = await Category.findOne({ 'name': req.body.category})

@@ -33,7 +33,7 @@ if(process.env.NODE_ENV === 'development'){
 //body parser
 app.use(express.json( { limit: '50kb' }))
 //cookie parser
-app.use(cookieParser('TinyBlogSecret'));
+app.use(cookieParser());
 // data sanitization of req.body, req.query, req.params
 app.use(xss());
 //rate limiter
@@ -60,7 +60,6 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }))
 // express ejs layout
 app.set('layout', './layouts/main')
-// app.set('layout', './layouts/auth')
 // set views engine
 app.set('view engine', 'ejs');
 // set directory to views folder
@@ -68,16 +67,16 @@ app.set('views', path.join(__dirname, 'views'))
 
 
 
-// app.use((req, res, next) => {
-//   console.log(req.cookies);
-//   next();
-// })
+app.use((req, res, next) => {
+  console.log(req.cookies.jwt);
+  next();
+})
 
 
 
 
 app.use(function(req, res, next) { 
-  res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tiny.cloud" ); 
+  res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tiny.cloud https://cdnjs.cloudflare.com" ); 
   next(); 
 })
 
