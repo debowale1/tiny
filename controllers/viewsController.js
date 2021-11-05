@@ -29,21 +29,22 @@ exports.singlePost = catchAsync( async (req, res, next) => {
   // get 2 related posts (by category) of the current post  
   // const relatedPosts = await Post.find({ category: post.category, slug: { $ne: post.slug} }).select('title slug').sort('+createdAt').limit(2);
   // get the previous post to the current post
-  // let prevPost = await Post.findOne({ _id: {$lt : post._id} }).select('slug').sort({_id: -1}).limit(1);
-  // if(!prevPost) {
-  //   prevPost = await Post.findOne().select('slug').sort({_id: -1 }).limit(1);
-  // }
+  let prevPost = await Post.findOne({ _id: {$lt : post._id} }).select('slug').sort({_id: -1}).limit(1);
+  if(!prevPost) {
+    prevPost = await Post.findOne().select('slug').sort({_id: -1 }).limit(1);
+  }
   // get the next post to the current post
-  // let nextPost = await Post.findOne({ _id: {$gt : post._id} }).select('slug').sort({_id: 1}).limit(1);
-  // if(!nextPost) {
-  //    nextPost = await Post.findOne().select('slug').sort({_id: 1 }).limit(1);
-  // }
+  let nextPost = await Post.findOne({ _id: {$gt : post._id} }).select('slug').sort({_id: 1}).limit(1);
+  if(!nextPost) {
+     nextPost = await Post.findOne().select('slug').sort({_id: 1 }).limit(1);
+  }
+  console.log(prevPost, nextPost);
   res.status(200).render('single-post', {
     post,
     categories,
     // relatedPosts,
-    // prevPost,
-    // nextPost,
+    prevPost,
+    nextPost,
     title: `TinyBlog | ${post.title}`
   });
 });

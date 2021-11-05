@@ -13,7 +13,7 @@
 
     <article class="blog-post">
       <h2 class="blog-post-title"><%= post.title %></h2>
-      <p class="blog-post-meta"><%= post.createdAt.toLocaleString('en-US', {month: 'long', day: 'numeric', year: 'numeric' }) %>  <a href="/user/author/name"><%= post.author %> </a></p>
+      <p class="blog-post-meta"><%= post.createdAt.toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) %>  <a href="/user/author/name"><%= post.author %> </a></p>
 
       <p><%- post.body %> </p>
       <hr>      
@@ -35,8 +35,8 @@
     </article> -->
 
     <nav class="blog-pagination" aria-label="Pagination">
-      <a class="btn btn-outline-primary" href="#">Older</a>
-      <a class="btn btn-outline-secondary disabled">Newer</a>
+      <a class="btn btn-outline-primary" href="/<%= prevPost.slug %>">Previous Post</a>
+      <a class="btn btn-outline-primary" href="/<%= nextPost.slug %>">Next Post</a>
     </nav>
 
   </div>
