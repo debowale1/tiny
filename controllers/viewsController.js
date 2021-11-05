@@ -177,4 +177,12 @@ exports.adminIndex = catchAsync(async(req, res, next) => {
     title: 'Tiny Blog | Dashboard'
   })
 })
+exports.adminAddPost = catchAsync(async(req, res, next) => {
+  const categories = await Category.find();
+  res.status(200).render('admin/add-post', {
+    layout: './layouts/admin',
+    title: 'Tiny Blog | Add Post',
+    categories
+  })
+})
 
