@@ -1,0 +1,42 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="/tiny-admin">Admin</a></li>
+    <li class="breadcrumb-item"><a href="/tiny-admin">Posts</a></li>
+    <li class="breadcrumb-item active" aria-current="page">All Posts</li>
+  </ol>
+</nav>
+<% if(typeof posts === 'undefined' || posts.length <= 0) {%> 
+  <h4>No posts</h4>
+<% }else{ %> 
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Comments</th>
+          <th scope="col">Category</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% posts.forEach(post => { %> 
+            <tr>
+              <td>#</td>
+              <td><a href="/tiny-admin/post/<%= post.slug %>"><h6><%= post.title %></h6></a></td>
+              <td><%= post.numComment %></td>
+              <td><%= post.category.name %></td>
+              <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-outline-secondary">Edit</button>
+                  <button type="button" class="btn btn-outline-secondary">Trash</button>
+                  <!-- <button type="button" class="btn btn-primary">Right</button> -->
+                </div>
+              </td>
+            </tr>
+          <% }) %> 
+      </tbody>
+    </table>
+  </div>
+
+<% } %> 

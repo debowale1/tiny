@@ -185,4 +185,12 @@ exports.adminAddPost = catchAsync(async(req, res, next) => {
     categories
   })
 })
+exports.adminAllPosts = catchAsync(async(req, res, next) => {
+  const posts = await Post.find().sort({ _id: -1 })
+  res.status(200).render('admin/all-posts', {
+    layout: './layouts/admin',
+    title: 'Tiny Blog | Add Post',
+    posts
+  })
+})
 
