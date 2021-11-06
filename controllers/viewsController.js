@@ -11,11 +11,13 @@ exports.index = catchAsync( async (req, res, next) => {
   const posts = await Post.find({ isFeatured: { $ne: true } }).sort({ _id: -1});
   const featuredPosts = await Post.find( {isFeatured: true} ).sort({ _id: -1}).limit(3);
   const categories = await Category.find();
+  const recentPosts = await Post.find().sort({ _id: -1}).limit(5);
   res.status(200).render('index', { 
     title: 'Tiny Blog | All Posts', 
     posts,
     featuredPosts,
-    categories, 
+    categories,
+    recentPosts
   });
 })
 
@@ -191,6 +193,14 @@ exports.adminAllPosts = catchAsync(async(req, res, next) => {
     layout: './layouts/admin',
     title: 'Tiny Blog | Add Post',
     posts
+  })
+})
+exports.adminCategory = catchAsync(async(req, res, next) => {
+  const categories = await Category.find().sort({ _id: -1 })
+  res.status(200).render('admin/category', {
+    layout: './layouts/admin',
+    title: 'Tiny Blog | All Categories',
+    categories
   })
 })
 

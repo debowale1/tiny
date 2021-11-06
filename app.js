@@ -67,10 +67,10 @@ app.set('views', path.join(__dirname, 'views'))
 
 
 
-app.use((req, res, next) => {
-  console.log(req.cookies.jwt);
-  next();
-})
+// app.use((req, res, next) => {
+//   console.log(req.cookies.jwt);
+//   next();
+// })
 
 
 
