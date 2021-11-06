@@ -40,14 +40,15 @@ exports.singlePost = catchAsync( async (req, res, next) => {
   if(!nextPost) {
      nextPost = await Post.findOne().select('slug').sort({_id: 1 }).limit(1);
   }
-  console.log(prevPost, nextPost);
+  const recentPosts = await Post.find().sort({ _id: -1}).limit(5);
   res.status(200).render('single-post', {
     post,
     categories,
     // relatedPosts,
     prevPost,
     nextPost,
-    title: `TinyBlog | ${post.title}`
+    title: `TinyBlog | ${post.title}`,
+    recentPosts
   });
 });
 
@@ -100,10 +101,12 @@ exports.signup = catchAsync( async (req, res, next) => {
 exports.searchPosts = catchAsync( async (req, res, next) => {
   const posts = await Post.find({ $text: { $search: req.body.searchTerm, $diacriticSensitive: true } });
   const categories = await Category.find();
+  const recentPosts = await Post.find().sort({ _id: -1}).limit(5);
   res.status(200).render('search', { 
     title: `Tiny Blog | All Posts`, 
     posts,
     categories, 
+    recentPosts
   });
 });
 

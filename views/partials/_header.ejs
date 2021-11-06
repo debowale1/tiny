@@ -11,8 +11,13 @@
       <form class="me-3" action="/search" method="post">
         <input type="search" name='searchTerm' class="form-control" placeholder="Search" aria-label="search">
       </form>
-      <a class="btn btn-sm btn-outline-secondary me-3" href="/login">Sign in</a>
-      <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
+      <% if(user !== 'undefined') { %> 
+        <a class="btn btn-sm btn-outline-secondary me-3" href="/login"><%= user.name %></a>
+        <a class="btn btn-sm btn-outline-secondary" href="/logout">Log out</a>
+        <% }else if(user === 'undefined'){ %> 
+          <a class="btn btn-sm btn-outline-secondary me-3" href="/login">Sign in</a>
+          <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
+      <% } %> 
     </div>
   </div>
 </header>

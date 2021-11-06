@@ -116,7 +116,7 @@ exports.protect = async (req, res, next) => {
   }
 }
 
-// is logged in middleware, no errors
+// only for rendered pages, no errors
 exports.isLoggedIn = async (req, res, next) => {
 
     if(req.cookies.jwt){  

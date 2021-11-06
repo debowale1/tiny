@@ -11,7 +11,7 @@
       <h4>No posts</h4>
     <% }else{ %> 
       <div class="table-responsive">
-        <table class="table table-striped table-sm">
+        <table class="table table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -29,9 +29,9 @@
                   <td><%= post.numComment %></td>
                   <td><%= post.category.name %></td>
                   <td>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                      <button type="button" class="btn btn-outline-secondary">Edit</button>
-                      <button type="button" class="btn btn-outline-secondary">Trash</button>
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                      <button type="button" class="btn btn-sm btn-outline-danger"> <i class="bi bi-trash"></i> Trash</button>
                     </div>
                   </td>
                 </tr>
