@@ -95,7 +95,7 @@ postSchema.pre(/^find/, function(next){
 //Virtual Populate: 
 postSchema.virtual('comments', {
   ref: 'Comment', // The model to use
-  localField: '_id', // Find people where `localField`
+  localField: '_id', // Find posts where `localField`
   foreignField: 'postId', // is equal to `foreignField`
   // count: true // And only get the number of docs
 });

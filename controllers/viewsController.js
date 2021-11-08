@@ -56,11 +56,13 @@ exports.postsByCategory = catchAsync( async (req, res, next) => {
   const category = await Category.findOne({ 'name': req.params.name })
   const posts = await Post.find({ 'category': category._id }).sort({ _id: -1});
   const categories = await Category.find();
+  const recentPosts = await Post.find().sort({ _id: -1}).limit(5);
   res.status(200).render('posts-by-category', { 
     title: `Tiny Blog | All Posts in ${category.name}`, 
     category,
     posts,
-    categories, 
+    categories,
+    recentPosts 
   });
 });
 
