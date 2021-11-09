@@ -1,3 +1,7 @@
+console.log('Hello from parcel');
+
+
+//# sourceMappingURL=app.js.map
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan')

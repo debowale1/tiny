@@ -1,29 +1,14 @@
-const login = async (email, password) => {
-  try {
-    const res = await axios({
-      method: 'POST',
-      // url: 'http://127.0.0.1:2021/api/v1/users/login',
-      url: 'http://localhost:2021/api/v1/users/login',
-      data: {
-        email,
-        password
-      }
-    })
-    if(res.data.status === 'success'){
-      alert('successfully logged in!');
-      setTimeout(() => {
-        window.location.assign('/')
-      }, 1500)
-    }
-    // console.log(res);
-  } catch (error) {
-    console.log(error.response.data);
-  }
-}
+import '@babel/polyfill'
+import { login } from './auth'
 
-document.getElementById('loginForm').addEventListener('submit', (e) => {
-  e.preventDefault()
-  const email = document.querySelector('.email').value;
-  const password = document.querySelector('.password').value;
-  login(email, password)
-})
+const loginForm = document.getElementById('loginForm')
+
+if(loginForm){
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const email = document.querySelector('.email').value;
+    const password = document.querySelector('.password').value;
+    login(email, password)
+  })
+
+}
