@@ -54,6 +54,9 @@ exports.singlePost = catchAsync( async (req, res, next) => {
 
 exports.postsByCategory = catchAsync( async (req, res, next) => {
   const category = await Category.findOne({ 'name': req.params.name })
+  if(!category){
+    return next(res.status(404).json({status: 'error', message: 'No Category with that name'}))
+  }
   const posts = await Post.find({ 'category': category._id }).sort({ _id: -1});
   const categories = await Category.find();
   const recentPosts = await Post.find().sort({ _id: -1}).limit(5);

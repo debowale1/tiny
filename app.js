@@ -1,7 +1,3 @@
-console.log('Hello from parcel');
-
-
-//# sourceMappingURL=app.js.map
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan')
@@ -15,6 +11,7 @@ const flash = require('connect-flash')
 const session = require('express-session')
 const fileUpload = require('express-fileupload')
 const expressLayouts = require('express-ejs-layouts')
+const compression = require('compression')
 
 const postRouter = require('./routes/postRouter');
 const userRouter = require('./routes/userRouter');
@@ -76,6 +73,7 @@ app.set('views', path.join(__dirname, 'views'))
 //   next();
 // })
 
+app.use(compression())
 
 
 
