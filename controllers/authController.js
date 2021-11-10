@@ -107,6 +107,7 @@ exports.protect = async (req, res, next) => {
     if(!user) return res.status(401).json({status: 'fail', message: 'the user no longer exist'});
     //save the current user in reqest object
     req.user = user;
+    res.locals.user = user;
     next()
   } catch (err) {
     res.status(400).json({

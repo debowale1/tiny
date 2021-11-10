@@ -180,35 +180,45 @@ exports.submitArticleOnPost = catchAsync( async (req, res, next) => {
 });
 
 
-// Admin
+// Admin Dashboard
 exports.adminIndex = catchAsync(async(req, res, next) => {
-  res.status(200).render('admin/index', {
-    layout: './layouts/admin',
-    title: 'Tiny Blog | Dashboard'
+  res.status(200).render('dashboard/index', {
+    layout: './layouts/dashboard',
+    title: 'Tiny Blog | Admin Dashboard'
   })
 })
 exports.adminAddPost = catchAsync(async(req, res, next) => {
   const categories = await Category.find();
-  res.status(200).render('admin/add-post', {
-    layout: './layouts/admin',
+  res.status(200).render('dashboard/add-post', {
+    layout: './layouts/dashboard',
     title: 'Tiny Blog | Add Post',
     categories
   })
 })
 exports.adminAllPosts = catchAsync(async(req, res, next) => {
   const posts = await Post.find().sort({ _id: -1 })
-  res.status(200).render('admin/all-posts', {
-    layout: './layouts/admin',
+  res.status(200).render('dashboard/all-posts', {
+    layout: './layouts/dashboard',
     title: 'Tiny Blog | Add Post',
     posts
   })
 })
 exports.adminCategory = catchAsync(async(req, res, next) => {
   const categories = await Category.find().sort({ _id: -1 })
-  res.status(200).render('admin/category', {
-    layout: './layouts/admin',
+  res.status(200).render('dashboard/category', {
+    layout: './layouts/dashboard',
     title: 'Tiny Blog | All Categories',
     categories
   })
 })
+
+
+// User Dashboard
+exports.userIndex = catchAsync( async(req, res, next) => {
+  res.status(200).render('dashboard/user/index', {
+    layout: './layouts/dashboard',
+    title: 'Tiny Blog | User Dashboard'
+  })
+})
+
 

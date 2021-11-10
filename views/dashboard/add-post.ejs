@@ -1,0 +1,146 @@
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="position-sticky pt-3">
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Posts</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/tiny-admin/all-posts">
+              <span data-feather="file-text"></span>
+              All Posts 
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/tiny-admin/add-post">
+              <span data-feather="plus-circle"></span>
+              Add New
+            </a>
+          </li>
+        </ul>
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Categories</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <span data-feather="plus-circle"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/tiny-admin/category">
+              <span data-feather="home"></span>
+              Categories
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/tiny-admin/tags">
+              <span data-feather="home"></span>
+              Tags
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>Users</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <span data-feather="users"></span>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <span data-feather="file-text"></span>
+              All Users
+            </a>
+          </li>
+        </ul>
+      </div> 
+      
+    </nav>
+
+    
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+      <!-- CONTENT  -->
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/tiny-admin">Admin</a></li>
+          <li class="breadcrumb-item"><a href="/tiny-admin">Posts</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Add Post</li>
+        </ol>
+      </nav>
+      <div class="row">
+
+        <div class="col-9 border-end">
+        
+          <form action="/submit-article" enctype="multipart/form-data" method="POST">
+          
+            <div class="row g-3">
+        
+              <div class="col-12">
+                <label for="email" class="form-label">Title</label>
+                <input type="text" name="title" id="title" class="form-control">
+              </div>
+              
+              <div class="col-12">
+                <label for="description" class="form-label">Body</label>
+                <!-- <textarea>post body here</textarea> -->
+                <textarea name="body" id="body" class="form-control"></textarea>
+              </div>
+              <div class="col-12">
+                <label for="category">Select Category</label>
+                <select class="form-select form-control" name="category" aria-label="Category">
+                  <option selected>Select Category</option>
+                  <% if(categories !== 'undefined'){ %>
+                    <% categories.forEach(category => { %>  
+                    <option value="<%= category.name %>"><%= category.name %> </option>
+                  <% }) %> 
+                  <% } %> 
+                </select>
+              </div>
+              <!-- <div class="col-12">
+                <label for="image">Post Image</label>
+                <input type="file" class="form-control" name="image" accept="image/*">
+              </div> -->
+        
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">Publish</button>
+              </div>
+        
+            </div>
+          
+          </form>
+        
+        </div>
+        <div class="col-3">
+          <div class="position-sticky" style="top: 2rem;">
+            <div class="p-4 mb-3 bg-light rounded">
+              <h4 class="fst-italic">About</h4>
+              <p class="mb-0">Tiny is a blog app.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END CONTENT  -->
+      
+    </main>
+  </div>
+</div>
+
+
