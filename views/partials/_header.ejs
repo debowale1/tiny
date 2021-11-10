@@ -13,7 +13,7 @@
       </form>
       <% if(locals.user !== undefined) { %> 
         <a class="btn btn-sm btn-outline-secondary me-3" href="/login"><%= user.name %></a>
-        <a class="btn btn-sm btn-outline-secondary" href="/logout">Log out</a>
+        <a class="btn btn-sm btn-outline-secondary" id="logout" href="/logout">Log out</a>
         <% }else{ %> 
           <a class="btn btn-sm btn-outline-secondary me-3" href="/login">Sign in</a>
           <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>

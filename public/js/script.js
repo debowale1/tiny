@@ -1,7 +1,8 @@
 import '@babel/polyfill'
-import { login } from './auth'
+import { login, logout } from './auth'
 
 const loginForm = document.getElementById('loginForm')
+const logoutBtn = document.getElementById('logout')
 
 if(loginForm){
   loginForm.addEventListener('submit', (e) => {
@@ -11,4 +12,8 @@ if(loginForm){
     login(email, password)
   })
 
+}
+
+if(logoutBtn){
+  logoutBtn.addEventListener('click', logout)
 }
