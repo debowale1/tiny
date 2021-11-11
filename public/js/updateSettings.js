@@ -20,3 +20,22 @@ export const updateData = async (name, email) => {
     showAlert('danger', error.response.data)
   }
 }
+
+export const updateUserPassword = async (passwordCurrent, password, passwordConfirm) => {
+  try {
+    const res = await axios({
+      method: 'PATCH',
+      url: '/api/v1/users/updateMyPassword',
+      data: {
+        passwordCurrent,
+        password,
+        passwordConfirm
+      }
+    })
+    if(res.data.status === 'success'){
+      showAlert('success', 'password updated successfully!')
+    }
+  } catch (error) {
+    showAlert('danger', error.response.data.error)
+  }
+}

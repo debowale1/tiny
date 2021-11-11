@@ -149,7 +149,7 @@ exports.restrictTo =  (...roles) => {
 }
 
 
-exports.updatePassword = async (req, res, next) => {
+exports.updatePassword = catchAsync(async (req, res, next) => {
   // 1) get user from collection
   const user = await User.findById(req.user.id).select('+password');
   
@@ -164,4 +164,4 @@ exports.updatePassword = async (req, res, next) => {
   await user.save();
   // 4) Log user in, send JWT
   createSendToken(user, 200, res)
-}
+})

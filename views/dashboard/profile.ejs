@@ -30,10 +30,14 @@
           <div class="border-bottom mt-5"></div>
           <h3 class="mt-5">Password Change</h3>
 
-          <form id="passwordChange" method="POST" class="mt-5">
+          <form id="updatePasswordForm" class="mt-5">
           
             <div class="row g-3">
         
+              <div class="col-12">
+                <label for="password" class="form-label">Current Password</label>
+                <input type="password" name="passwordCurrent" id="passwordCurrent" placeholder="***********" class="form-control">
+              </div>
               <div class="col-12">
                 <label for="password" class="form-label">Password</label>
                 <input type="password" name="password" id="password" placeholder="***********" class="form-control">
@@ -45,7 +49,7 @@
               
                       
               <div class="col-12">
-                <button type="submit" class="btn btn-primary">Save Profile</button>
+                <button type="submit" class="btn btn-primary">Update Password</button>
               </div>
         
             </div>
