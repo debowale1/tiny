@@ -1,9 +1,11 @@
 import '@babel/polyfill'
 import { login, logout, register } from './auth'
+import { updateData } from './updateSettings'
 
 const loginForm = document.getElementById('loginForm')
 const registerForm = document.getElementById('registerForm')
 const logoutBtn = document.getElementById('logout')
+const updateDataForm = document.getElementById('updateDataForm')
 
 if(loginForm){
   loginForm.addEventListener('submit', (e) => {
@@ -16,7 +18,7 @@ if(loginForm){
 }
 
 if(registerForm){
-  document.addEventListener('submit', e => {
+  registerForm.addEventListener('submit', e => {
     e.preventDefault()
     const name = document.querySelector('.name').value;
     const email = document.querySelector('.email').value;
@@ -29,3 +31,15 @@ if(registerForm){
 if(logoutBtn){
   logoutBtn.addEventListener('click', logout)
 }
+
+
+if(updateDataForm){
+  updateDataForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    const name = document.querySelector('#name').value;
+    const email = document.querySelector('#email').value;
+    updateData(name, email)
+
+  })
+}
+

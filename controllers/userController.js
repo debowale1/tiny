@@ -1,4 +1,5 @@
 const User =  require('./../models/userModel');
+const catchAsync = require('./../utils/catchAsync')
 const { deleteOne, updateOne, getOne, getAll } = require('./factory');
 
 
@@ -17,7 +18,7 @@ exports.getMe = (req, res, next) => {
 }
 
 
-exports.updateMe = async(req, res, next) => {
+exports.updateMe = catchAsync(async(req, res, next) => {
   // 1) throw an error if user tries to update password
   if(req.body.password || req.body.passwordConfirm){
     return next(res.status(401).json({status: 'error', message: 'You can\'t update password from this route. Please us /updateMyPassword' }));
@@ -37,7 +38,7 @@ exports.updateMe = async(req, res, next) => {
     }
   })
 
-}
+})
 
 exports.deleteMe = async (req, res, next) => {
   //find user by id

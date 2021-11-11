@@ -9,7 +9,8 @@ export const showAlert = (type, msg) => {
   const markup = `<div class="alert alert-${type}" role="alert">
                     ${msg}
                   </div>`
-  document.querySelector('.form-signin').insertAdjacentHTML('afterbegin', markup)
+  // document.querySelector('.form-signin').insertAdjacentHTML('afterbegin', markup)
+  document.querySelector('.alert-container').insertAdjacentHTML('afterbegin', markup)
   window.setTimeout(hideAlert, 5000);
 }
 

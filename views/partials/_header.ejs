@@ -17,12 +17,12 @@
             <%= user.name.split(' ')[0] %>
           </button>
           <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
-            <li><a class="dropdown-item active" href="/me">My Account</a></li>
+            <li><a class="dropdown-item" href="/me">My Account</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            <li><a class="dropdown-item" id="logout" href="/logout">Logout</a></li>
           </ul>
         </div>
-        <a class="btn btn-sm btn-outline-secondary" id="logout" href="/logout">Log out</a>
+        <!-- <a class="btn btn-sm btn-outline-secondary" id="logout" href="/logout">Log out</a> -->
         <% }else{ %> 
           <a class="btn btn-sm btn-outline-secondary me-3" href="/login">Sign in</a>
           <a class="btn btn-sm btn-outline-secondary" href="/register">Sign up</a>
