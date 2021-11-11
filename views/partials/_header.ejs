@@ -12,7 +12,16 @@
         <input type="search" name='searchTerm' class="form-control" placeholder="Search" aria-label="search">
       </form>
       <% if(locals.user !== undefined) { %> 
-        <a class="btn btn-sm btn-outline-secondary me-3" href="/login"><%= user.name %></a>
+        <div class="dropdown me-3">
+          <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+            <%= user.name.split(' ')[0] %>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+            <li><a class="dropdown-item active" href="/me">My Account</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+          </ul>
+        </div>
         <a class="btn btn-sm btn-outline-secondary" id="logout" href="/logout">Log out</a>
         <% }else{ %> 
           <a class="btn btn-sm btn-outline-secondary me-3" href="/login">Sign in</a>
