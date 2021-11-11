@@ -211,14 +211,12 @@ exports.adminCategory = catchAsync(async(req, res, next) => {
     categories
   })
 })
-
-
-// User Dashboard
-exports.userIndex = catchAsync( async(req, res, next) => {
-  res.status(200).render('dashboard/user/index', {
+exports.adminProfile = async(req, res) => {
+  res.status(200).render('dashboard/profile', {
     layout: './layouts/dashboard',
-    title: 'Tiny Blog | User Dashboard'
+    title: 'Tiny Blog | My Profile',
   })
-})
+}
+
 
 

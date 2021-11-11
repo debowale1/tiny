@@ -15,11 +15,7 @@ export const login = async (email, password) => {
     if(res.data.status === 'success'){
       showAlert('success','successfully logged in!');
       setTimeout(() => {
-        if(res.data.data.user.role === 'admin'){
-          window.location.assign('/tiny-admin')
-        }else{
-          window.location.assign('/')
-        }
+        window.location.assign('/')
       }, 1500)
     }
     // console.log(res);
