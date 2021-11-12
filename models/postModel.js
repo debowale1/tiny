@@ -54,6 +54,14 @@ const postSchema = new mongoose.Schema({
     type: Boolean,
     default: false
   },
+  published: {
+    type: Boolean,
+    default: false
+  },
+  isDraft: {
+    type: Boolean,
+    default: false
+  },
   createdAt: {
     type: Date,
     default: Date.now(),
