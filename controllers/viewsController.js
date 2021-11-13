@@ -218,5 +218,10 @@ exports.adminProfile = async(req, res) => {
   })
 }
 
+exports.adminAddPostOnSubmit = async(req, res) => {
+  console.log(res.body);
+  res.status(201).json({message: 'success'})
+}
+
 
 

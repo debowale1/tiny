@@ -21,6 +21,7 @@ router.get('/category/:name', authController.isLoggedIn, viewsController.postsBy
 router.post('/search', viewsController.searchPosts)
 router.post('/submit-article', viewsController.submitArticleOnPost)
 router.post('/register', viewsController.signupOnSubmit)
+router.post('/add-post', viewsController.adminAddPostOnSubmit)
 
 
 
