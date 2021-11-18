@@ -9,13 +9,9 @@
         </ol>
       </nav>
       <div class="row">
-
         <div class="col-9 border-end">
-        
-          <form action="/add-post" enctype="multipart/form-data" method="POST">
-          
+          <form action="/add-post" method="POST">
             <div class="row g-3">
-        
               <div class="col-12">
                 <label for="email" class="form-label">Title</label>
                 <input type="text" name="title" id="title" class="form-control">
@@ -23,7 +19,6 @@
               
               <div class="col-12">
                 <label for="description" class="form-label">Body</label>
-                <!-- <textarea>post body here</textarea> -->
                 <textarea name="body" id="body" class="form-control"></textarea>
               </div>
               <div class="form-check form-switch">
@@ -41,10 +36,6 @@
                   <% } %> 
                 </select>
               </div>
-              <!-- <div class="col-12">
-                <label for="image">Post Image</label>
-                <input type="file" class="form-control" name="image" accept="image/*">
-              </div> -->
         
               <div class="col-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
