@@ -219,8 +219,13 @@ exports.adminProfile = async(req, res) => {
 }
 
 exports.adminAddPostOnSubmit = catchAsync(async(req, res, next) => {
-  // console.log(res.body);
-  res.status(201).json({data: res.body})
+  console.log(req.body);
+  const categories = await Category.find();
+  res.render('dashboard/add-post', {
+    layout: './layouts/dashboard',
+    title: 'Tiny Blog | Add Post',
+    categories
+  })
 })
 
 
