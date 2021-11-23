@@ -28,6 +28,7 @@ exports.singlePost = catchAsync( async (req, res, next) => {
   if(!post){
     return next(res.status(404).json({ status: 'fail', message: 'No post with that slug' }))
   }
+  console.log(post);
   // get 2 related posts (by category) of the current post  
   // const relatedPosts = await Post.find({ category: post.category, slug: { $ne: post.slug} }).select('title slug').sort('+createdAt').limit(2);
   // get the previous post to the current post
