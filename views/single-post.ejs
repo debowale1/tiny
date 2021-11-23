@@ -33,9 +33,16 @@
       <% } %>
     </div>
 
-    
+    <!-- to display comment alert  -->
+    <div class="alert-container"></div>
+
+    <% if(locals.user){ %> 
     <form id="commentForm" class="my-5">
       <div class="row g-3">
+        <div class="col-12">
+          <!-- <label for="postId" class="form-label">post</label> -->
+          <input type="hidden" name="postId" id="postId" class="form-control" value="<%= post._id %>"></input>
+        </div>
         <div class="col-12">
           <label for="comment" class="form-label">Comment</label>
           <textarea name="comment" id="comment" class="form-control" rows="5"></textarea>
@@ -47,6 +54,9 @@
       </div>
     
     </form>
+    <% }else{ %>
+      <p>You are not currently logged in. Please <a href="/login">login</a> here to post a comment</p>
+    <% } %>  
 
 
     <nav class="blog-pagination" aria-label="Pagination">
