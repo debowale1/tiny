@@ -8,12 +8,13 @@
           <li class="breadcrumb-item active" aria-current="page">Add Post</li>
         </ol>
       </nav>
+      <div class="alert-container"></div>
       <div class="row">
         <div class="col-9 border-end">
-          <form action="/add-post" method="POST">
+          <form id="addPostForm">
             <div class="row g-3">
               <div class="col-12">
-                <label for="email" class="form-label">Title</label>
+                <label for="title" class="form-label">Title</label>
                 <input type="text" name="title" id="title" class="form-control">
               </div>
               
@@ -25,6 +26,21 @@
                 <input class="form-check-input" type="checkbox" role="switch" id="featured">
                 <label class="form-check-label" for="featured">Featured Post?</label>
               </div>
+
+              <div class="col-12">
+                <label for="name" class="form-label">Tags</label><br>
+                <small>Example: Tech</small>
+                <div class="tagList">
+                  <div class="tagDiv mb-1">
+                    <input type="text" name="tags" id="tags" class="form-control">
+                  </div>
+                </div>
+              </div>
+      
+              <div class="col-12">
+                <button type="button" class="btn btn-outline-primary" id="addTagsBtn">+ Tags</button>
+              </div>
+
               <div class="col-12">
                 <label for="category">Select Category</label>
                 <select class="form-select form-control" name="category" aria-label="Category">
@@ -39,7 +55,6 @@
         
               <div class="col-12">
                 <button type="submit" class="btn btn-primary">Publish</button>
-                <!-- <button type="submit" class="btn btn-secondary">Save Draft</button> -->
               </div>
         
             </div>

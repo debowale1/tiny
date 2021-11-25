@@ -46,8 +46,7 @@ const postSchema = new mongoose.Schema({
   },
   tags: [
     {
-      type: mongoose.Schema.ObjectId,
-      ref: 'Tag'
+      type: String,
     }
   ],
   isFeatured: {

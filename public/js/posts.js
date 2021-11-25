@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { showAlert } from './alert'
 
-export const createPost = async(title, body, category, image) => {
+export const createPost = async(title, body, category, tags, image) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -10,12 +10,13 @@ export const createPost = async(title, body, category, image) => {
         title,
         body,
         category,
+        tags,
         image
       }
     })
 
     if(res.data.status === 'success')
-      showAlert()
+      showAlert('success', 'New Post Added Successfully!')
     
   } catch (error) {
     showAlert('danger', error.response.data)
