@@ -73,7 +73,10 @@ exports.getAuthor = (req, res, next) => {
     
 
 
-exports.getAllPosts = getAll(Post);
+// exports.getAllPosts = getAll(Post);
+// exports.getAllPosts = async( req, res) => {
+
+// }
 
 exports.getPost = getOne(Post, { path: 'comments' })
 
