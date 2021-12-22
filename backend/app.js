@@ -60,11 +60,11 @@ app.use(session({
 
 app.use(express.urlencoded({ extended: true }))
 // express ejs layout
-app.set('layout', './layouts/main')
-// set views engine
-app.set('view engine', 'ejs');
-// set directory to views folder
-app.set('views', path.join(__dirname, 'views'))
+// app.set('layout', './layouts/main')
+// // set views engine
+// app.set('view engine', 'ejs');
+// // set directory to views folder
+// app.set('views', path.join(__dirname, 'views'))
 
 
 
