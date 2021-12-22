@@ -48,6 +48,7 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "concurrently": "^6.5.1",
     "parcel-bundler": "^1.12.5"
   }
 }
