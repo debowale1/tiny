@@ -20,6 +20,8 @@ const tagRouter = require('./routes/tagRouter');
 const commentRouter = require('./routes/commentRouter');
 const viewsRouter = require('./routes/viewsRouter');
 
+const { errorHandler, notFound } = './middlewares/errorMiddleware'
+
 
 dotenv.config();
 const app = express();
@@ -91,6 +93,12 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/tags', tagRouter);
+
+//Not Found middleware
+app.use(notFound)
+
+//Error middleware
+app.use(errorHandler)
 
 
 

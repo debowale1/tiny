@@ -14,7 +14,8 @@ const router = express.Router();
 router.use('/:postId/comments', commentRouter);
 
 //aliasing
-// router.route('/backend-posts').get(postController.aliasBackendPosts, postController.getAllPosts);
+router.route('/featured-posts').get(postController.aliasFeaturedPosts, postController.getAllPosts);
+router.route('/featured-post').get(postController.getLatestFeaturedPost);
 
 // router.route('/post-stats').get(postController.getPostStats);
 
@@ -25,7 +26,8 @@ router.route('/')
       .post(postController.getAuthor, postController.createPost);
 
 router.route('/:id')
-      .get(postController.getPost)
+      .get(postController.fetchPostById)
+      // .get(postController.getPost)
       .patch(postController.updatePost)
       .delete(authController.restrictTo('admin', 'editor'), postController.deletePost);
 

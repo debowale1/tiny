@@ -17,3 +17,35 @@ export const fetchPosts = () => async (dispatch) => {
     dispatch({ type: postConstants.FETCH_ALL_POSTS_FAIL, payload: error })
   }
 }
+export const fetchFeaturedPosts = () => async (dispatch) => {
+    try {
+      dispatch({ type: postConstants.FETCH_FEATURED_POSTS_REQUEST })
+    // make request to fetch posts
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const {data} = await axios.get('/api/v1/posts/featured-post', config)
+    const {data: { post } } = data
+    dispatch({ type: postConstants.FETCH_FEATURED_POSTS_SUCCESS, payload: post})
+  } catch (error) {
+    dispatch({ type: postConstants.FETCH_FEATURED_POSTS_FAIL, payload: error })
+  }
+}
+export const fetchPost =(id) => async (dispatch) => {
+    try {
+      dispatch({ type: postConstants.FETCH_SINGLE_POST_REQUEST })
+    // make request to fetch posts
+    const config = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+    const {data} = await axios.get(`/api/v1/posts/${id}`, config)
+    
+    dispatch({ type: postConstants.FETCH_SINGLE_POST_SUCCESS, payload: data})
+  } catch (error) {
+    dispatch({ type: postConstants.FETCH_SINGLE_POST_FAIL, payload: error })
+  }
+}
