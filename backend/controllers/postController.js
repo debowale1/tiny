@@ -82,13 +82,13 @@ exports.getAuthor = (req, res, next) => {
 
 
 // exports.getAllPosts = getAll(Post);
-exports.fetchPostById = async(req, res) => {
-  const post = await Post.findById(req.params.id)
-  if(!post){
-    return res.status(404). json({message: 'not found'})
-  }
-  res.json(post)
-}
+// exports.fetchPostById = async(req, res) => {
+//   const post = await Post.findById(req.params.id)
+//   if(!post){
+//     return res.status(404). json({message: 'not found'})
+//   }
+//   res.json(post)
+// }
 
 exports.getPost = getOne(Post, { path: 'comments' })
 

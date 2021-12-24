@@ -7,10 +7,6 @@ const rateLimit = require('express-rate-limit');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cookieParser = require('cookie-parser');
-const flash = require('connect-flash')
-const session = require('express-session')
-const fileUpload = require('express-fileupload')
-const expressLayouts = require('express-ejs-layouts')
 const compression = require('compression')
 
 const postRouter = require('./routes/postRouter');
@@ -20,7 +16,7 @@ const tagRouter = require('./routes/tagRouter');
 const commentRouter = require('./routes/commentRouter');
 const viewsRouter = require('./routes/viewsRouter');
 
-const { errorHandler, notFound } = './middlewares/errorMiddleware'
+const { errorHandler, notFound } = require('./middlewares/errorMiddleware')
 
 
 dotenv.config();
@@ -51,14 +47,14 @@ app.use(mongoSanitize())
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(expressLayouts)
-app.use(fileUpload())
-app.use(flash())
-app.use(session({
-  saveUninitialized: true,
-  secret: 'TinySessionSecret',
-  resave: true
-}))
+// app.use(expressLayouts)
+// app.use(fileUpload())
+// app.use(flash())
+// app.use(session({
+//   saveUninitialized: true,
+//   secret: 'TinySessionSecret',
+//   resave: true
+// }))
 
 app.use(express.urlencoded({ extended: true }))
 // express ejs layout

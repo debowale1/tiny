@@ -1,28 +1,63 @@
-import React, {useEffect} from 'react'
+import React, { useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import {Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import Sidebar from './../components/Sidebar'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
+// import CommentBox from '../components/CommentBox'
 import { fetchPost } from '../actions/postActions'
 
 const Articlepage = () => {
-const {id} = useParams()
-const dispatch = useDispatch()
+  const [comment, setComment] = useState('')
+  const {id} = useParams()
+  const dispatch = useDispatch()
 
-const fetchSinglePost = useSelector(state => state.fetchSinglePost)
-const { error, loading, post } = fetchSinglePost
-console.log(post);
+  const fetchSinglePost = useSelector(state => state.fetchSinglePost)
+  const { error, loading, post } = fetchSinglePost
 
-useEffect(() => {
-  dispatch(fetchPost(id))
-}, [dispatch, id])
+
+  useEffect(() => {
+    dispatch(fetchPost(id))
+  }, [dispatch, id])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(id, comment);
+  }
   return (
     <div className="row g5">
       <div className="col-md-8">
       {loading && <Spinner/>}
       {error && <Message>{error}</Message>} 
-      {/* {post.body} */}
+      
+      <article className="blog-post">
+        <h2 className="blog-post-title">
+          {post?.title}
+        </h2>
+        <p className="blog-post-meta">{new Date(post?.createdAt).toLocaleString('en-US', {month: 'long', day: 'numeric'})} by <Link to="#">{post?.author}</Link></p>
+        <p dangerouslySetInnerHTML={{__html: post?.body}}></p>
+        <hr />
+        {/* show comments */}
+        <p>{`(${post?.comments?.length}) comment on this post`}</p>
+        {post?.comments && post?.comments.map(comment => <p key={comment._id}>{comment.comment}</p>  )}
+        <div className="comment">
+        <form method='post' onSubmit={handleSubmit}>
+          <div className="form-floating">
+              <textarea 
+                className="form-control" 
+                placeholder="Leave a comment here" 
+                id="floatingTextarea2" 
+                style={{height: "100px"}}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}></textarea>
+              <label htmlFor="floatingTextarea2">Comments</label>
+            </div>
+            <button type="submit" className="btn btn-primary my-3">Post Comment</button>
+          </form>
+        </div>
+        {/* <CommentBox /> */}
+      </article>
       </div>
       <div className="col-md-4">
         <Sidebar />

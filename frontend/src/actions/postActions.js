@@ -33,7 +33,7 @@ export const fetchFeaturedPosts = () => async (dispatch) => {
     dispatch({ type: postConstants.FETCH_FEATURED_POSTS_FAIL, payload: error })
   }
 }
-export const fetchPost =(id) => async (dispatch) => {
+export const fetchPost =(slug) => async (dispatch) => {
     try {
       dispatch({ type: postConstants.FETCH_SINGLE_POST_REQUEST })
     // make request to fetch posts
@@ -42,9 +42,10 @@ export const fetchPost =(id) => async (dispatch) => {
         'Content-Type': 'application/json'
       }
     }
-    const {data} = await axios.get(`/api/v1/posts/${id}`, config)
-    
-    dispatch({ type: postConstants.FETCH_SINGLE_POST_SUCCESS, payload: data})
+    const {data} = await axios.get(`/api/v1/posts/${slug}`, config)
+
+    const { data: {data:post} } = data
+    dispatch({ type: postConstants.FETCH_SINGLE_POST_SUCCESS, payload: post})
   } catch (error) {
     dispatch({ type: postConstants.FETCH_SINGLE_POST_FAIL, payload: error })
   }
