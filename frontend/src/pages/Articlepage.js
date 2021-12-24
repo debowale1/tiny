@@ -7,6 +7,7 @@ import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 // import CommentBox from '../components/CommentBox'
 import { fetchPost } from '../actions/postActions'
+import { writeCommentOnPost } from '../actions/commentActions'
 
 const Articlepage = () => {
   const [comment, setComment] = useState('')
@@ -16,6 +17,9 @@ const Articlepage = () => {
   const fetchSinglePost = useSelector(state => state.fetchSinglePost)
   const { error, loading, post } = fetchSinglePost
 
+  const commentCreate = useSelector(state => state.commentCreate)
+  const { error:errorComment, success:successComment } = commentCreate
+
 
   useEffect(() => {
     dispatch(fetchPost(id))
@@ -23,7 +27,8 @@ const Articlepage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(id, comment);
+    dispatch(writeCommentOnPost({postId: id, userId: '60fd08c7d9310d482c9f51df', comment}))
+    setComment('')
   }
   return (
     <div className="row g5">
@@ -39,6 +44,7 @@ const Articlepage = () => {
         <p dangerouslySetInnerHTML={{__html: post?.body}}></p>
         <hr />
         {/* show comments */}
+        {errorComment && <Message>{errorComment.message}</Message>}
         <p>{`(${post?.comments?.length}) comment on this post`}</p>
         {post?.comments && post?.comments.map(comment => <p key={comment._id}>{comment.comment}</p>  )}
         <div className="comment">
