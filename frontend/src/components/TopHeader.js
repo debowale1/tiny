@@ -15,7 +15,7 @@ const TopHeader = () => {
           <Link className="link-secondary" to="/search" aria-label="Search">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="mx-3" role="img" viewBox="0 0 24 24"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"></circle><path d="M21 21l-5.2-5.2"></path></svg>
           </Link>
-          <Link className="btn btn-sm btn-outline-secondary" to="/register">Sign up</Link>
+          <Link className="btn btn-sm btn-outline-secondary" to="/login">Sign in</Link>
         </div>
       </div>
     </header>
