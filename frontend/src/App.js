@@ -1,26 +1,22 @@
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Header from './components/Header'
-import FeaturedPosts from './components/FeaturedPosts'
-import Sidebar from './components/Sidebar'
-import BlogItem from './components/BlogItem'
+import Footer from './components/Footer'
+import Homepage from './pages/Homepage';
+import Articlepage from './pages/Articlepage';
+import Loginpage from './pages/Loginpage';
 function App() {
   return (
-    <>
+    <Router>
       <Header />
       <main className='container'>
-        <FeaturedPosts />
-        <div className="row g5">
-          <div className="col-md-8">
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
-            <BlogItem />
-          </div>
-          <div className="col-md-4">
-            <Sidebar />
-          </div>
-        </div>
+        <Routes>
+          <Route path='/login' element={<Loginpage />} />
+          <Route exact path='/' element={<Homepage />} />
+          <Route path='/:id' element={<Articlepage />} />
+        </Routes>
       </main>
-    </>
+      <Footer />
+    </Router>
   );
 }
 

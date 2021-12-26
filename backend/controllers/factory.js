@@ -1,11 +1,14 @@
-const catchAsync = require('./../utils/catchAsync');
+const asyncHandler = require('express-async-handler')
 
 exports.deleteOne = (Model) => {
-  return catchAsync (async (req, res, next) => {
+  return asyncHandler (async (req, res) => {
     
     const { id } = req.params
     const doc = await Model.findByIdAndDelete(id)
-    if(!doc) return next(res.status(404).json({status: 'error', message: 'doc not found'}));
+    if(!doc){
+      res.status(404)
+      throw new Error('Document not found')
+    }
 
     //send response to client
     res.status(204).json({
@@ -18,7 +21,7 @@ exports.deleteOne = (Model) => {
 }
 
 
-exports.updateOne = Model => catchAsync(async (req, res) => {
+exports.updateOne = Model => asyncHandler(async (req, res) => {
   const { id } = req.params;
   
     const doc = await Model.findByIdAndUpdate(id, req.body, {
@@ -26,7 +29,10 @@ exports.updateOne = Model => catchAsync(async (req, res) => {
       runValidators: true
     });
 
-    if(!doc) return next(res.status(404).json({status: 'error', message: 'No document found with that ID'}));
+    if(!doc){
+      res.status(404)
+      throw new Error('No document found with that ID')
+    }
 
     res.status(200).json({
       status: 'success',
@@ -36,10 +42,13 @@ exports.updateOne = Model => catchAsync(async (req, res) => {
     })
 })
 
-exports.createOne = Model => catchAsync( async (req, res, next) => {
+exports.createOne = Model => asyncHandler( async (req, res, next) => {
 
     const doc = await Model.create(req.body);
-    if(!doc) return next(res.status(404).json({status: 'error', message: 'No document created'}));
+    if(!doc){
+      res.status(404)
+      throw new Error('No document created')
+    }
     res.status(201).json({
       status: 'success',
       data: {
@@ -49,18 +58,22 @@ exports.createOne = Model => catchAsync( async (req, res, next) => {
 
 })
 
-exports.getOne = (Model, populateOption) => catchAsync(async (req, res, next) => {
+exports.getOne = (Model, populateOption) => asyncHandler(async (req, res) => {
   
   // const doc = await Model.findById(req.params.id).populate('comments');
 
   let query = Model.findById(req.params.id);
+  // let query = Model.findOne(req.params.slug);
   if(populateOption) {
     query = query.populate(populateOption);
   }
 
   const doc = await query
 
-  if(!doc) return next(res.status(404).json({status: 'fail', message: 'Not Found'}));
+  if(!doc){
+    res.status(404)
+    throw new Error('Not Found')
+  }
 
   res.status(200).json({
     status: 'success',
@@ -71,7 +84,7 @@ exports.getOne = (Model, populateOption) => catchAsync(async (req, res, next) =>
 });
 
 
-exports.getAll = Model => catchAsync(async (req,res) => {
+exports.getAll = Model => asyncHandler(async (req,res) => {
   
     //save a copy of req.query
     const queryObj = {...req.query};

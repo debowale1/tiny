@@ -5,7 +5,7 @@ const commentRouter = require('./../routes/commentRouter');
 
 const router = express.Router();
 
-router.use(authController.protect);
+// router.use(authController.protect);
 //NESTED ROUTES WITH EXPRESS
 // POST /posts/2f456c556/comments - create new comment for on a post
 // GET /posts/2f456c556/comments - get comments of a particular post
@@ -14,9 +14,10 @@ router.use(authController.protect);
 router.use('/:postId/comments', commentRouter);
 
 //aliasing
-router.route('/backend-posts').get(postController.aliasBackendPosts, postController.getAllPosts);
+// router.route('/featured-posts').get(postController.aliasFeaturedPosts, postController.getAllPosts);
+router.route('/featured-post').get(postController.getLatestFeaturedPost);
 
-router.route('/post-stats').get(postController.getPostStats);
+// router.route('/post-stats').get(postController.getPostStats);
 
 
 
@@ -25,6 +26,7 @@ router.route('/')
       .post(postController.getAuthor, postController.createPost);
 
 router.route('/:id')
+      // .get(postController.fetchPostById)
       .get(postController.getPost)
       .patch(postController.updatePost)
       .delete(authController.restrictTo('admin', 'editor'), postController.deletePost);

@@ -2,16 +2,24 @@ const Post = require('./../models/postModel');
 const { deleteOne, updateOne, createOne, getOne, getAll } = require('./factory');
 
 
-exports.aliasBackendPosts = async (req, res, next) => {
-  req.query.category = "Backend Development";
-  req.query.limit = '5';
-  req.query.fields = 'title,body,category'
+exports.aliasFeaturedPosts = async (req, res, next) => {
+  req.query.isFeatured = true;
+  req.query.limit = '1';
   next();
+}
+exports.getLatestFeaturedPost = async (req, res) => {
+  const featuredPost = await Post.find({isFeatured: true}).limit(1)
+  res.status(200).json({
+    status: 'success',
+    data: {
+      post: featuredPost
+    }
+  })
 }
 
 exports.getAllPosts = async (req,res) => {
   try {
-    // console.log(req.query)
+    console.log(req.query)
     //save a copy of req.query
     const queryObj = {...req.query};
   
@@ -73,7 +81,14 @@ exports.getAuthor = (req, res, next) => {
     
 
 
-exports.getAllPosts = getAll(Post);
+// exports.getAllPosts = getAll(Post);
+// exports.fetchPostById = async(req, res) => {
+//   const post = await Post.findById(req.params.id)
+//   if(!post){
+//     return res.status(404). json({message: 'not found'})
+//   }
+//   res.json(post)
+// }
 
 exports.getPost = getOne(Post, { path: 'comments' })
 
