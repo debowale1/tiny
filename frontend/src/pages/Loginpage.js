@@ -1,29 +1,33 @@
 import React, {useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { login } from './../actions/userActions'
+import Spinner from '../components/Spinner'
+import { login } from '../actions/userActions'
+import Message from '../components/Message'
 
 const Loginpage = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const userLogin = useSelector(state => state.userLogin)
-  const {userInfo} = userLogin
-
-  console.log(userInfo);
+  const {loading, userInfo, error } = userLogin
 
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(login({ email, password }))
-    console.log('logged In');
+    navigate('/')
+    
   }
 
   return (
     <>
      <form className='form-signin' method='post' onSubmit={handleSubmit}>
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-
+        {loading && <Spinner />}
+        {error && <Message>{error}</Message> }
         <div className="form-floating">
           <input 
             type="email" 

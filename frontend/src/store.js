@@ -7,11 +7,11 @@ import { userLoginReducer} from './reducers/userReducers'
 
 
 const reducers = combineReducers({
-  fetchAllPosts: fetchAllPostsReducer,
-  featuredPost: featuredPostReducer,
-  fetchSinglePost: fetchSinglePostReducer,
-  userLogin: userLoginReducer,
-  commentCreate: commentCreateReducer,
+  fetchAllPosts:    fetchAllPostsReducer,
+  featuredPost:     featuredPostReducer,
+  fetchSinglePost:  fetchSinglePostReducer,
+  userLogin:        userLoginReducer,
+  commentCreate:    commentCreateReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
