@@ -1,18 +1,20 @@
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import Homepage from './pages/Homepage';
-import Articlepage from './pages/Articlepage';
-import Loginpage from './pages/Loginpage';
+import HomePage from './pages/HomePage';
+import ArticlePage from './pages/ArticlePage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 function App() {
   return (
     <Router>
       <Header />
       <main className='container'>
         <Routes>
-          <Route path='/login' element={<Loginpage />} />
-          <Route exact path='/' element={<Homepage />} />
-          <Route path='/:id' element={<Articlepage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/:id' element={<ArticlePage />} />
+          <Route exact path='/' element={<HomePage />} />
         </Routes>
       </main>
       <Footer />

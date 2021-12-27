@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { fetchAllPostsReducer, featuredPostReducer, fetchSinglePostReducer } from './reducers/postReducers'
 import { commentCreateReducer } from './reducers/commentReducers'
-import { userLoginReducer} from './reducers/userReducers'
+import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 
 
 const reducers = combineReducers({
@@ -11,6 +11,7 @@ const reducers = combineReducers({
   featuredPost:     featuredPostReducer,
   fetchSinglePost:  fetchSinglePostReducer,
   userLogin:        userLoginReducer,
+  userRegister:        userRegisterReducer,
   commentCreate:    commentCreateReducer,
 })
 

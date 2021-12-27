@@ -2,14 +2,14 @@ import React, { useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import Sidebar from './../components/Sidebar'
+import Sidebar from '../components/Sidebar'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 // import CommentBox from '../components/CommentBox'
 import { fetchPost } from '../actions/postActions'
 import { writeCommentOnPost } from '../actions/commentActions'
 
-const Articlepage = () => {
+const ArticlePage = () => {
   const [comment, setComment] = useState('')
   const {id} = useParams()
   const dispatch = useDispatch()
@@ -72,4 +72,4 @@ const Articlepage = () => {
   )
 }
 
-export default Articlepage
+export default ArticlePage

@@ -1,7 +1,7 @@
 const {promisify} = require('util')
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
-const catchAsync = require('./../utils/catchAsync')
+const asyncHandler = require('express-async-handler')
 
 
 const generateToken = id => {
@@ -33,10 +33,19 @@ const createSendToken = (user, statusCode, res) => {
 }
 
 
-exports.signup = async (req, res) => {
+exports.signup = asyncHandler(async (req, res) => {
   const { name, email, password, passwordConfirm, photo } = req.body;
-  try {
-    const newUser = await User.create({
+  if(!name || !email || !password || !passwordConfirm){
+    res.status(400)
+    throw new Error('please fill every field')
+  }
+  const userExist = await User.findOne({email})
+  if(userExist){
+    res.status(400)
+    throw new Error('User already exists. Please log in instead!')
+  }
+
+    const newUser = new User({
       name,
       email,
       password,
@@ -44,16 +53,13 @@ exports.signup = async (req, res) => {
       photo
     });
 
+    await newUser.save() 
+    console.log(newUser);
     createSendToken(newUser, 201, res);
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      error: 'error signing up'
-    });
-  }
-}
+ 
+})
 
-exports.login = async (req, res) => {
+exports.login = asyncHandler(async (req, res) => {
   
   const { email, password } = req.body;
   try {
@@ -75,19 +81,19 @@ exports.login = async (req, res) => {
       error: 'error logging in'
     });
   }
-}
+})
 
 // logout
-exports.logout = async (req, res) => {
+exports.logout = asyncHandler(async (req, res) => {
   res.cookie('jwt', 'loggedout', {
     expires: new Date(Date.now() + 10 * 1000),
     httpOnly: true,
   });
   res.status(200).json({status: 'success'});
-}
+})
 
 //protect middleware is where you verify if a user is signed in
-exports.protect = async (req, res, next) => {
+exports.protect = asyncHandler(async (req, res, next) => {
   try {
     let token;
     //get the token from req.headers.authorization
@@ -96,18 +102,24 @@ exports.protect = async (req, res, next) => {
     }else if(req.cookies.jwt){
       token = req.cookies.jwt
     }
-
-    if(!token) return res.status(401).json({ status: 'error', message: 'You are not logged. Please log in to access this route'})
+    
+    if(!token) {
+      res.status(401)
+      throw new Error('You are not logged. Please log in to access this route')
+    }
 
     //verify the token
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     //get the user with the payload
     const user = await User.findById(decoded.id);
-    if(!user) return res.status(401).json({status: 'fail', message: 'the user no longer exist'});
+    if(!user){
+      res.status(401)
+      throw new Error('the user no longer exist');
+    } 
     //save the current user in reqest object
     req.user = user;
-    res.locals.user = user;
+    // res.locals.user = user;
     next()
   } catch (err) {
     res.status(400).json({
@@ -115,7 +127,7 @@ exports.protect = async (req, res, next) => {
       err
     });
   }
-}
+})
 
 // only for rendered pages, no errors
 exports.isLoggedIn = async (req, res, next) => {
@@ -149,13 +161,14 @@ exports.restrictTo =  (...roles) => {
 }
 
 
-exports.updatePassword = catchAsync(async (req, res, next) => {
+exports.updatePassword = asyncHandler(async (req, res) => {
   // 1) get user from collection
   const user = await User.findById(req.user.id).select('+password');
   
   // 2) Check if POSTed current password is correct
   if(!(await user.comparePassword(req.body.passwordCurrent, user.password))){
-    return next(res.status(403).json({ status: 'error', message: "the password provided is incorrect" }));
+    res.status(403)
+    throw new Error('the password provided is incorrect')
   }
   // 3) if so, update password
   // User.findByIdAndUpdate() will NOT work because of our validator and presave hooks

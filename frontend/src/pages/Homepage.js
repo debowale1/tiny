@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import BlogItem from './../components/BlogItem'
+import BlogItem from '../components/BlogItem'
 import FeaturedPosts from '../components/FeaturedPosts'
 import Sidebar from '../components/Sidebar'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 import { fetchPosts, fetchFeaturedPosts } from '../actions/postActions'
 
-const Homepage = () => {
+const HomePage = () => {
   const dispatch = useDispatch()
 
   const fetchAllPosts = useSelector(state => state.fetchAllPosts)
@@ -41,4 +41,4 @@ const Homepage = () => {
   )
 }
 
-export default Homepage
+export default HomePage

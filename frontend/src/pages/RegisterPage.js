@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../components/Spinner'
-import { login } from '../actions/userActions'
+import { register } from '../actions/userActions'
 import Message from '../components/Message'
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
   const [password, setPassword] = useState('')
+  const [passwordConfirm, setPasswordConfirm] = useState('')
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -23,7 +25,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(login({ email, password }))
+    dispatch(register(name, email, password, passwordConfirm))
     navigate('/')
     
   }
@@ -36,9 +38,20 @@ const LoginPage = () => {
         {loading && <Spinner />}
         <div className="form-floating">
           <input 
+            type="text" 
+            className="form-control" 
+            id="floatingInputName" 
+            placeholder="John Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <label htmlFor="floatingInput">Email address</label>
+        </div>
+        <div className="form-floating">
+          <input 
             type="email" 
             className="form-control" 
-            id="floatingInput" 
+            id="floatingInputEmail" 
             placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -56,6 +69,18 @@ const LoginPage = () => {
           />
           <label htmlFor="floatingPassword">Password</label>
         </div>
+        <div className="form-floating">
+          <input 
+            type="password" 
+            className="form-control" 
+            id="floatingConfirmPassword" 
+            placeholder="Confirm Password"
+            value={passwordConfirm}
+            onChange={(e) => setPasswordConfirm(e.target.value)}
+          />
+          <label htmlFor="floatingInput">Confirm Password</label>
+        </div>
+        
 
         <div className="checkbox mb-3">
           <label>
@@ -69,4 +94,4 @@ const LoginPage = () => {
   )
 }
 
-export default LoginPage
+export default RegisterPage
