@@ -1,21 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../actions/userActions'
+import { getCategories } from '../actions/categoryActions'
+import Spinner from './Spinner'
+import Message from './Message'
 
 
 
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+
   const userLogin = useSelector(state => state.userLogin)
   let { userInfo } = userLogin
 
-  
+  const fetchCategories = useSelector(state => state.fetchCategories)
+  let { loading, categories, error } = fetchCategories
+
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [dispatch])
 
   const logoutHandler = () => {
     dispatch(logout())
-    navigate('/')
+    navigate('/login')
   }
   return (
     <div className="container">
@@ -59,18 +68,9 @@ const Header = () => {
         </header>
         <div className="nav-scroller py-1 mb-2">
           <nav className="nav d-flex justify-content-between">
-            <a className="p-2 link-secondary" href="/">World</a>
-            <a className="p-2 link-secondary" href="/">U.S.</a>
-            <a className="p-2 link-secondary" href="/">Technology</a>
-            <a className="p-2 link-secondary" href="/">Design</a>
-            <a className="p-2 link-secondary" href="/">Culture</a>
-            <a className="p-2 link-secondary" href="/">Business</a>
-            <a className="p-2 link-secondary" href="/">Politics</a>
-            <a className="p-2 link-secondary" href="/">Opinion</a>
-            <a className="p-2 link-secondary" href="/">Science</a>
-            <a className="p-2 link-secondary" href="/">Health</a>
-            <a className="p-2 link-secondary" href="/">Style</a>
-            <a className="p-2 link-secondary" href="/">Travel</a>
+            {loading && <Spinner /> }
+            {error && <Message variant='danger'>{error}</Message>}
+            {categories?.map(category => <Link key={category._id} className="p-2 link-secondary" to={`/category/${category._id}`}>{category.name}</Link>)}
           </nav>
         </div>
     </div>

@@ -18,6 +18,10 @@ const commentSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     required: [true, 'comment must belong to a post'],
     ref: 'Post'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now()
   }
 },{
   timeStamps: true,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
 import {Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import Sidebar from '../components/Sidebar'
@@ -48,9 +49,19 @@ const ArticlePage = () => {
         <hr />
         {/* show comments */}
         {errorComment && <Message>{errorComment.message}</Message>}
-        <p>{`(${post?.comments?.length}) comment on this post`}</p>
-        {post?.comments && post?.comments.map(comment => <p key={comment._id}>{comment.comment}</p>  )}
-        {userInfo ? (<div className="comment">
+        <p>{post?.comments?.length > 0 ? `(${post?.comments?.length}) comment(s) on this post.` : `Be the first to comment`}</p>
+
+        {post?.comments ? (<div className='list-group'>
+        {post?.comments.map(comment => <div key={comment._id} className={`list-group-item list-group-item-action ${userInfo.data.user._id === comment.userId._id ? 'active': ''}`} aria-current="true">
+          <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1"></h5>
+            <small>{moment(comment.createdAt).fromNow()}</small>
+          </div>
+          <p className="mb-1">{comment.comment}</p>
+          <small className='text-end fst-italic'>{comment.userId.name}</small>
+        </div>  )}
+        </div>) : null}
+        {userInfo ? (<div className="comment my-5">
         <form method='post' onSubmit={handleSubmit}>
           <div className="form-floating">
               <textarea 
