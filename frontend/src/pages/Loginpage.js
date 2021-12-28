@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../components/Spinner'
 import { login } from '../actions/userActions'
@@ -11,15 +11,19 @@ const LoginPage = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const location = useLocation()
+  console.log(location.search);
+
+  const redirect = location.search ? location.search.split('=')[1] : '/'
 
   const userLogin = useSelector(state => state.userLogin)
   const {loading, userInfo, error } = userLogin
 
   useEffect(() => {
     if(userInfo){
-      navigate('/')
+      navigate(redirect)
     }
-  }, [userInfo, navigate])
+  }, [userInfo, navigate, redirect])
 
   const handleSubmit = (e) => {
     e.preventDefault()

@@ -18,23 +18,26 @@ const ArticlePage = () => {
   const { error, loading, post } = fetchSinglePost
 
   const commentCreate = useSelector(state => state.commentCreate)
-  const { error:errorComment, success:successComment } = commentCreate
+  const { loading:loadingComment, error:errorComment, success:successComment } = commentCreate
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
 
   useEffect(() => {
     dispatch(fetchPost(id))
-  }, [dispatch, id])
+  }, [dispatch, id, successComment])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(writeCommentOnPost({postId: id, userId: '60fd08c7d9310d482c9f51df', comment}))
+    dispatch(writeCommentOnPost({postId: id, userId: userInfo.data.user._id, comment}))
     setComment('')
   }
   return (
     <div className="row g5">
       <div className="col-md-8">
       {loading && <Spinner/>}
-      {error && <Message>{error}</Message>} 
+      {error && <Message variant='danger'>{error}</Message>} 
       
       <article className="blog-post">
         <h2 className="blog-post-title">
@@ -47,7 +50,7 @@ const ArticlePage = () => {
         {errorComment && <Message>{errorComment.message}</Message>}
         <p>{`(${post?.comments?.length}) comment on this post`}</p>
         {post?.comments && post?.comments.map(comment => <p key={comment._id}>{comment.comment}</p>  )}
-        <div className="comment">
+        {userInfo ? (<div className="comment">
         <form method='post' onSubmit={handleSubmit}>
           <div className="form-floating">
               <textarea 
@@ -62,7 +65,9 @@ const ArticlePage = () => {
             <button type="submit" className="btn btn-primary my-3">Post Comment</button>
           </form>
         </div>
-        {/* <CommentBox /> */}
+        ) : (<p>Please <Link to={`/login?redirect=/${post?._id}`}>login</Link> to write a comment</p>)}
+        
+        {loadingComment && <Spinner />}
       </article>
       </div>
       <div className="col-md-4">
