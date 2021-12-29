@@ -1,15 +1,16 @@
 import React, { useState, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import moment from 'moment'
 import {Link} from 'react-router-dom'
 import { useParams } from 'react-router-dom'
-import Sidebar from './../components/Sidebar'
+import Sidebar from '../components/Sidebar'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 // import CommentBox from '../components/CommentBox'
 import { fetchPost } from '../actions/postActions'
 import { writeCommentOnPost } from '../actions/commentActions'
 
-const Articlepage = () => {
+const ArticlePage = () => {
   const [comment, setComment] = useState('')
   const {id} = useParams()
   const dispatch = useDispatch()
@@ -18,23 +19,26 @@ const Articlepage = () => {
   const { error, loading, post } = fetchSinglePost
 
   const commentCreate = useSelector(state => state.commentCreate)
-  const { error:errorComment, success:successComment } = commentCreate
+  const { loading:loadingComment, error:errorComment, success:successComment } = commentCreate
+
+  const userLogin = useSelector(state => state.userLogin)
+  const { userInfo } = userLogin
 
 
   useEffect(() => {
     dispatch(fetchPost(id))
-  }, [dispatch, id])
+  }, [dispatch, id, successComment])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(writeCommentOnPost({postId: id, userId: '60fd08c7d9310d482c9f51df', comment}))
+    dispatch(writeCommentOnPost({postId: id, userId: userInfo.data.user._id, comment}))
     setComment('')
   }
   return (
     <div className="row g5">
       <div className="col-md-8">
       {loading && <Spinner/>}
-      {error && <Message>{error}</Message>} 
+      {error && <Message variant='danger'>{error}</Message>} 
       
       <article className="blog-post">
         <h2 className="blog-post-title">
@@ -45,9 +49,19 @@ const Articlepage = () => {
         <hr />
         {/* show comments */}
         {errorComment && <Message>{errorComment.message}</Message>}
-        <p>{`(${post?.comments?.length}) comment on this post`}</p>
-        {post?.comments && post?.comments.map(comment => <p key={comment._id}>{comment.comment}</p>  )}
-        <div className="comment">
+        <p>{post?.comments?.length > 0 ? `(${post?.comments?.length}) comment(s) on this post.` : `Be the first to comment`}</p>
+
+        {post?.comments ? (<div className='list-group'>
+        {post?.comments.map(comment => <div key={comment._id} className={`list-group-item list-group-item-action ${userInfo.data.user._id === comment.userId._id ? 'active': ''}`} aria-current="true">
+          <div className="d-flex w-100 justify-content-between">
+            <h5 className="mb-1"></h5>
+            <small>{moment(comment.createdAt).fromNow()}</small>
+          </div>
+          <p className="mb-1">{comment.comment}</p>
+          <small className='text-end fst-italic'>{comment.userId.name}</small>
+        </div>  )}
+        </div>) : null}
+        {userInfo ? (<div className="comment my-5">
         <form method='post' onSubmit={handleSubmit}>
           <div className="form-floating">
               <textarea 
@@ -62,7 +76,9 @@ const Articlepage = () => {
             <button type="submit" className="btn btn-primary my-3">Post Comment</button>
           </form>
         </div>
-        {/* <CommentBox /> */}
+        ) : (<p>Please <Link to={`/login?redirect=/${post?._id}`}>login</Link> to write a comment</p>)}
+        
+        {loadingComment && <Spinner />}
       </article>
       </div>
       <div className="col-md-4">
@@ -72,4 +88,4 @@ const Articlepage = () => {
   )
 }
 
-export default Articlepage
+export default ArticlePage

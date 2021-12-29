@@ -12,6 +12,22 @@ export const fetchAllPostsReducer = (state = {posts: []}, action) => {
       return state
   }
 }
+
+
+export const fetchPostsByCategoryReducer = (state = { posts: [] }, action) => {
+  switch(action.type){
+    case postConstants.FETCH_POSTS_BY_CATEGORY_REQUEST:
+      return { loading: true}
+    case postConstants.FETCH_POSTS_BY_CATEGORY_SUCCESS:
+      return { loading: false, posts: action.payload }
+    case postConstants.FETCH_POSTS_BY_CATEGORY_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+
 export const featuredPostReducer = (state = {loading: true, featuredPost: {}}, action) => {
   switch(action.type){
     case postConstants.FETCH_FEATURED_POSTS_REQUEST:
