@@ -1,4 +1,5 @@
 const Post = require('./../models/postModel');
+const asyncHandler = require('express-async-handler')
 const { deleteOne, updateOne, createOne, getOne, getAll } = require('./factory');
 
 
@@ -7,6 +8,13 @@ exports.aliasFeaturedPosts = async (req, res, next) => {
   req.query.limit = '1';
   next();
 }
+
+exports.getPostsByCategory = asyncHandler( async (req, res) => {
+  const {id} = req.params
+  const posts = await Post.find({category: id})
+  res.status(200).json(posts)
+})
+
 exports.getLatestFeaturedPost = async (req, res) => {
   const featuredPost = await Post.find({isFeatured: true}).limit(1)
   res.status(200).json({
@@ -19,7 +27,7 @@ exports.getLatestFeaturedPost = async (req, res) => {
 
 exports.getAllPosts = async (req,res) => {
   try {
-    console.log(req.query)
+    // console.log(req.query)
     //save a copy of req.query
     const queryObj = {...req.query};
   
@@ -89,6 +97,8 @@ exports.getAuthor = (req, res, next) => {
 //   }
 //   res.json(post)
 // }
+
+
 
 exports.getPost = getOne(Post, { path: 'comments' })
 

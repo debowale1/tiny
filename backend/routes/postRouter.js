@@ -15,11 +15,12 @@ router.use('/:postId/comments', commentRouter);
 
 //aliasing
 // router.route('/featured-posts').get(postController.aliasFeaturedPosts, postController.getAllPosts);
+// router.route('/posts-by-category').get(postController.aliasPostsByCategories, postController.getAllPosts);
 router.route('/featured-post').get(postController.getLatestFeaturedPost);
 
 // router.route('/post-stats').get(postController.getPostStats);
 
-
+router.route('/category/:id').get(postController.getPostsByCategory);
 
 router.route('/')
       .get(postController.getAllPosts)

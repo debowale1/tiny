@@ -2,11 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const BlogItem = (props) => {
-  const { title, body, createdAt, _id } = props.post
+  const { title, body, createdAt, _id, category } = props.post
   return (
       <div className="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
         <div className="col p-4 d-flex flex-column position-static">
-          <strong className="d-inline-block mb-2 text-primary">World</strong>
+          <strong className="d-inline-block mb-2 text-primary">{category.name}</strong>
           <h3 className="mb-0">{title}</h3>
           <div className="mb-1 text-muted">{new Date(createdAt).toLocaleString('en-US', { month: 'short', day: 'numeric' })}</div>
           <p className="card-text mb-auto">{body.substring(0, 125)}</p>

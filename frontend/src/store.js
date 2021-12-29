@@ -1,7 +1,12 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { fetchAllPostsReducer, featuredPostReducer, fetchSinglePostReducer } from './reducers/postReducers'
+import { 
+  fetchAllPostsReducer, 
+  fetchPostsByCategoryReducer, 
+  featuredPostReducer, 
+  fetchSinglePostReducer 
+} from './reducers/postReducers'
 import { commentCreateReducer } from './reducers/commentReducers'
 import { userLoginReducer, userRegisterReducer } from './reducers/userReducers'
 import { fetchCategoriesReducer } from './reducers/categoryReducers'
@@ -9,6 +14,7 @@ import { fetchCategoriesReducer } from './reducers/categoryReducers'
 
 const reducers = combineReducers({
   fetchAllPosts:    fetchAllPostsReducer,
+  fetchPostsByCategory:    fetchPostsByCategoryReducer,
   featuredPost:     featuredPostReducer,
   fetchSinglePost:  fetchSinglePostReducer,
   userLogin:        userLoginReducer,
