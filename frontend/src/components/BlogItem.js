@@ -9,7 +9,7 @@ const BlogItem = (props) => {
           <strong className="d-inline-block mb-2 text-primary">{category.name}</strong>
           <h3 className="mb-0">{title}</h3>
           <div className="mb-1 text-muted">{new Date(createdAt).toLocaleString('en-US', { month: 'short', day: 'numeric' })}</div>
-          <p className="card-text mb-auto">{body.substring(0, 125)}</p>
+          <p className="card-text mb-auto" dangerouslySetInnerHTML={{__html: body.substring(0, 125)}}></p>
           <Link to={`/${_id}`} className="stretched-link">Continue reading</Link>
         </div>
         <div className="col-auto d-none d-lg-block">
