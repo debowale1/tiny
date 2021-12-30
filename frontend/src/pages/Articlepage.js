@@ -31,8 +31,12 @@ const ArticlePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(writeCommentOnPost({postId: id, userId: userInfo.data.user._id, comment}))
-    setComment('')
+    if(!comment){
+      alert('You can\'t leave an empty comment')
+    }else{
+      dispatch(writeCommentOnPost({postId: id, userId: userInfo.data.user._id, comment}))
+      setComment('')
+    }
   }
   return (
     <div className="row g5">

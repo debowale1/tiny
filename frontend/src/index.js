@@ -5,7 +5,7 @@ import store from './store'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import './sidebar.css';
 import './blog.css';
-// import './dashboard.css';
+import './dashboard.css';
 import './login.css';
 import App from './App';
 

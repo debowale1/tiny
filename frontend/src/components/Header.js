@@ -47,6 +47,9 @@ const Header = () => {
                     <span className="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul className="dropdown-menu">
+                    {userInfo?.data.user.role === 'admin' && (
+                      <li><Link className="dropdown-item" to="/tiny-admin">Admin Dashboard</Link></li>
+                    ) }                    
                     <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
                     <li><Link className="dropdown-item" to="/update-password">Update Password</Link></li>
                     <li><hr className="dropdown-divider" /></li>
