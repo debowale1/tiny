@@ -49,7 +49,7 @@ const ProfilePage = () => {
             { error && <Message variant='danger'>{error}</Message> }
             { success && <Message variant='success'>Profile Updated</Message> }
             <form method="post" onSubmit={submitHandler}>
-              <div className="form-floating">
+              <div className="form-floating mb-3">
                 <input 
                   type="text" 
                   className="form-control" 

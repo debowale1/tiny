@@ -52,3 +52,16 @@ export const fetchSinglePostReducer = (state = { post: {}}, action) => {
       return state
   }
 }
+
+export const createPostReducer = (state = { post: {}}, action) => {
+  switch(action.type){
+    case postConstants.CREATE_POST_REQUEST:
+      return { loading: true}
+    case postConstants.CREATE_POST_SUCCESS:
+      return { loading: false, success: true, post: action.payload }
+    case postConstants.CREATE_POST_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}

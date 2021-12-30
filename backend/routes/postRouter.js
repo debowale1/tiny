@@ -24,7 +24,7 @@ router.route('/category/:id').get(postController.getPostsByCategory);
 
 router.route('/')
       .get(postController.getAllPosts)
-      .post(postController.getAuthor, postController.createPost);
+      .post(authController.protect, authController.restrictTo('admin'), postController.getAuthor, postController.createPost);
 
 router.route('/:id')
       // .get(postController.fetchPostById)

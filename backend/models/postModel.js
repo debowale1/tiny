@@ -42,7 +42,6 @@ const postSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    required: [true, 'A post must have an image'],
   },
   tags: [
     {
