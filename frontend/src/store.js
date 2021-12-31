@@ -7,6 +7,7 @@ import {
   featuredPostReducer, 
   fetchSinglePostReducer, 
   createPostReducer,
+  postUpdateReducer,
 } from './reducers/postReducers'
 import { commentCreateReducer } from './reducers/commentReducers'
 import { 
@@ -24,6 +25,7 @@ const reducers = combineReducers({
   featuredPost:     featuredPostReducer,
   fetchSinglePost:  fetchSinglePostReducer,
   createPost:       createPostReducer,
+  postUpdate:       postUpdateReducer,
   userLogin:        userLoginReducer,
   userRegister:        userRegisterReducer,
   userDetails:      userDetailsReducer,

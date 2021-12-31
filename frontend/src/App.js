@@ -10,12 +10,14 @@ import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
 import AdminPostListPage from './pages/AdminPostListPage';
 import AdminCreatePostPage from './pages/AdminCreatePostPage';
+import AdminEditPostPage from './pages/AdminEditPostPage';
 function App() {
   return (
     <Router>
       <Header />
       <main className='container' style={{ minHeight: '70vh'}}>
         <Routes>
+          <Route path='/tiny-admin/post/:id/edit' element={<AdminEditPostPage />} />
           <Route path='/tiny-admin/create-post' element={<AdminCreatePostPage />} />
           <Route path='/tiny-admin/posts' element={<AdminPostListPage />} />
           <Route path='/tiny-admin' element={<AdminPage />} />

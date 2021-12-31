@@ -40,10 +40,10 @@ export const featuredPostReducer = (state = {loading: true, featuredPost: {}}, a
       return state
   }
 }
-export const fetchSinglePostReducer = (state = { post: {}}, action) => {
+export const fetchSinglePostReducer = (state = { post: {} }, action) => {
   switch(action.type){
     case postConstants.FETCH_SINGLE_POST_REQUEST:
-      return { loading: true}
+      return { loading: true }
     case postConstants.FETCH_SINGLE_POST_SUCCESS:
       return { loading: false, post: action.payload }
     case postConstants.FETCH_SINGLE_POST_FAIL:
@@ -61,6 +61,22 @@ export const createPostReducer = (state = { post: {}}, action) => {
       return { loading: false, success: true, post: action.payload }
     case postConstants.CREATE_POST_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
+
+
+export const postUpdateReducer = (state = { post: {} }, action) => {
+  switch(action.type){
+    case postConstants.UPDATE_POST_REQUEST:
+      return { loading: true }
+    case postConstants.UPDATE_POST_SUCCESS:
+      return { loading: false, success: true }
+    case postConstants.UPDATE_POST_FAIL:
+      return { loading: false, error: action.payload }
+    case postConstants.UPDATE_POST_RESET:
+      return { user: {} }
     default:
       return state
   }

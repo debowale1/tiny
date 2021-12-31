@@ -29,7 +29,7 @@ router.route('/')
 router.route('/:id')
       // .get(postController.fetchPostById)
       .get(postController.getPost)
-      .patch(postController.updatePost)
+      .patch(authController.protect, authController.restrictTo('admin'), postController.updatePost)
       .delete(authController.restrictTo('admin', 'editor'), postController.deletePost);
 
       

@@ -42,7 +42,7 @@ const ArticlePage = () => {
     <div className="row g5">
       <div className="col-md-8">
       {loading && <Spinner/>}
-      {error && <Message variant='danger'>{error}</Message>} 
+      {error && <Message variant='danger'>{error.message}</Message>} 
       
       <article className="blog-post">
         <h2 className="blog-post-title">
