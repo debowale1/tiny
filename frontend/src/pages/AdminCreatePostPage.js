@@ -1,26 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react'
+import JoditEditor from "jodit-react";
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { Editor } from '@tinymce/tinymce-react'
 import AdminNav from '../components/AdminNav'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 import { createNewPost } from '../actions/postActions'
 
 const AdminCreatePostPage = () => {
+  const editor = useRef(null)
   const [title, setTitle] = useState('')
-  const [body, setBody] = useState('')
+  const [content, setContent] = useState('')
   const [snippet, setSnippet] = useState('')
   const [category, setCategory] = useState('')
   const [isFeatured, setIsFeatured] = useState(false)
 
-
-  const editorRef = useRef(null);
-  const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  };
+  const config = {
+		readonly: false // all options from https://xdsoft.net/jodit/doc/
+	}
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -43,7 +40,7 @@ const AdminCreatePostPage = () => {
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(createNewPost({title, body, snippet, isFeatured, category }))
+    dispatch(createNewPost({title, body: content, snippet, isFeatured, category }))
   }
   return (
     <>
@@ -71,30 +68,21 @@ const AdminCreatePostPage = () => {
             <textarea 
               className="form-control" 
               placeholder="Start Writing" 
-              // id="body" 
+              id="body" 
               value={body}
               onChange={(e) => setBody(e.target.value)}
               />
             <label htmlFor="body">Body</label>
           </div> */}
-          <Editor
-            onInit={(evt, editor) => editorRef.current = editor}
-            initialValue="<p>This is the initial content of the editor.</p>"
-            init={{
-              height: 500,
-              menubar: false,
-              plugins: [
-                'advlist autolink lists link image charmap print preview anchor',
-                'searchreplace visualblocks code fullscreen',
-                'insertdatetime media table paste code help wordcount'
-              ],
-              toolbar: 'undo redo | formatselect | ' +
-              'bold italic backcolor | alignleft aligncenter ' +
-              'alignright alignjustify | bullist numlist outdent indent | ' +
-              'removeformat | help',
-              content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
-            }}
-          />
+          <JoditEditor
+            	ref={editor}
+              value={content}
+              config={config}
+		          tabIndex={1} // tabIndex of textarea
+		          onBlur={newContent => setContent(newContent)} 
+              // onChange={newContent => setContent(newContent)}
+            />
+          
           <div className="form-floating mb-3">
             <input 
               type="text" 
