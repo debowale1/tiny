@@ -42,14 +42,16 @@ const Header = () => {
               </Link>
               {userInfo ? (
                 <div className="btn-group">
-                  <button type="button" className="btn btn-outline-secondary">{userInfo.data.user.name}</button>
+                  <button type="button" className="btn btn-outline-secondary">{userInfo?.data?.user?.name}</button>
                   <button type="button" className="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
                     <span className="visually-hidden">Toggle Dropdown</span>
                   </button>
                   <ul className="dropdown-menu">
-                    <li><Link className="dropdown-item" to="#">Action</Link></li>
-                    <li><Link className="dropdown-item" to="#">Another action</Link></li>
-                    <li><Link className="dropdown-item" to="#">Something else here</Link></li>
+                    {userInfo?.data.user.role === 'admin' && (
+                      <li><Link className="dropdown-item" to="/tiny-admin">Admin Dashboard</Link></li>
+                    ) }                    
+                    <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                    <li><Link className="dropdown-item" to="/update-password">Update Password</Link></li>
                     <li><hr className="dropdown-divider" /></li>
                     <li><button type='button' className="dropdown-item" onClick={logoutHandler}>Logout</button></li>
                   </ul>

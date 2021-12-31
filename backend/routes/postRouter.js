@@ -24,12 +24,12 @@ router.route('/category/:id').get(postController.getPostsByCategory);
 
 router.route('/')
       .get(postController.getAllPosts)
-      .post(postController.getAuthor, postController.createPost);
+      .post(authController.protect, authController.restrictTo('admin'), postController.getAuthor, postController.createPost);
 
 router.route('/:id')
       // .get(postController.fetchPostById)
       .get(postController.getPost)
-      .patch(postController.updatePost)
+      .patch(authController.protect, authController.restrictTo('admin'), postController.updatePost)
       .delete(authController.restrictTo('admin', 'editor'), postController.deletePost);
 
       

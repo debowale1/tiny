@@ -71,3 +71,42 @@ export const fetchPost =(slug) => async (dispatch) => {
     dispatch({ type: postConstants.FETCH_SINGLE_POST_FAIL, payload: error })
   }
 }
+
+export const createNewPost =(postData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: postConstants.CREATE_POST_REQUEST })
+    const {userLogin: { userInfo } } = getState()
+  // make request to fetch posts
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`
+    }
+  }
+  const {data} = await axios.post(`/api/v1/posts`, postData, config)
+
+  console.log(data);
+  dispatch({ type: postConstants.CREATE_POST_SUCCESS, payload: data})
+} catch (error) {
+  dispatch({ type: postConstants.CREATE_POST_FAIL, payload: error })
+}
+}
+
+export const updatePost =(postData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: postConstants.UPDATE_POST_REQUEST })
+    const {userLogin: { userInfo } } = getState()
+  // make request to fetch posts
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`
+    }
+  }
+  await axios.patch(`/api/v1/posts/${postData._id}`, postData, config)
+
+  dispatch({ type: postConstants.UPDATE_POST_SUCCESS })
+} catch (error) {
+  dispatch({ type: postConstants.UPDATE_POST_FAIL, payload: error })
+}
+}

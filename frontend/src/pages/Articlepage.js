@@ -31,14 +31,18 @@ const ArticlePage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(writeCommentOnPost({postId: id, userId: userInfo.data.user._id, comment}))
-    setComment('')
+    if(!comment){
+      alert('You can\'t leave an empty comment')
+    }else{
+      dispatch(writeCommentOnPost({postId: id, userId: userInfo.data.user._id, comment}))
+      setComment('')
+    }
   }
   return (
     <div className="row g5">
       <div className="col-md-8">
       {loading && <Spinner/>}
-      {error && <Message variant='danger'>{error}</Message>} 
+      {error && <Message variant='danger'>{error.message}</Message>} 
       
       <article className="blog-post">
         <h2 className="blog-post-title">
