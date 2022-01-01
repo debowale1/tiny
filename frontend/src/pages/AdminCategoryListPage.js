@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 import AdminNav from '../components/AdminNav'
-import { getCategories } from '../actions/categoryActions'
+import { getCategories, deleteCategory  } from '../actions/categoryActions'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 
@@ -18,13 +18,24 @@ const AdminCategoryListPage = () => {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
+  const categoryDelete = useSelector(state => state.categoryDelete)
+  const { loading:loadingDelete, success } = categoryDelete
+
   useEffect(() => {
-    if(!userInfo || userInfo.data.user.role !== 'admin'){
+    if(success){
+      dispatch(getCategories())
+    } else if(!userInfo || userInfo.data.user.role !== 'admin'){
       navigate('/login')
     }else{
       dispatch(getCategories())
     }
-  }, [dispatch, userInfo, navigate])
+  }, [dispatch, userInfo, navigate, success])
+
+  const deleteHandler = (id) => {
+    if(window.confirm('Do you want to delete this category?')){
+      dispatch(deleteCategory(id))
+    }
+  }
   
 
   return (
@@ -36,6 +47,7 @@ const AdminCategoryListPage = () => {
         <div className="col-md-9">
           <h1>All Categories</h1>
           {loading && <Spinner />}
+          {loadingDelete && <Spinner />}
           {error && <Message variant='danger'>{error}</Message>}
           <table className="table table-hover">
             <thead>
@@ -61,7 +73,7 @@ const AdminCategoryListPage = () => {
                           <i className="bi bi-pencil-square"></i>
                           <span className="visually-hidden">Button</span>
                         </Link>
-                        <button type="button" className="btn btn-outline-danger btn-sm">
+                        <button onClick={() => deleteHandler(category._id)} type="button" className="btn btn-outline-danger btn-sm">
                           <i className="bi bi-trash"></i>
                           <span className="visually-hidden">Button</span>
                         </button>

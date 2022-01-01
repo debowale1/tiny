@@ -17,7 +17,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers'
-import { fetchCategoriesReducer, fetchCategoryReducer, categoryUpdateReducer } from './reducers/categoryReducers'
+import { fetchCategoriesReducer, fetchCategoryReducer, categoryUpdateReducer, categoryDeleteReducer } from './reducers/categoryReducers'
 
 
 const reducers = combineReducers({
@@ -36,6 +36,7 @@ const reducers = combineReducers({
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,
   categoryUpdate:          categoryUpdateReducer,
+  categoryDelete:          categoryDeleteReducer
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null

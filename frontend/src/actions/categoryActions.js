@@ -56,3 +56,25 @@ export const updateCategory = (categoryData) => async (dispatch, getState) => {
     dispatch({ type: categoryConstants.UPDATE_CATEGORY_FAIL, payload: error.message })
   }
 }
+
+
+export const deleteCategory = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: categoryConstants.DELETE_CATEGORY_REQUEST })
+
+    const {userLogin: { userInfo } } = getState()
+    // make request to fetch posts
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    await axios.delete(`/api/v1/categories/${id}`, config)
+
+    dispatch({ type: categoryConstants.DELETE_CATEGORY_SUCCESS })
+
+  } catch (error) {
+    dispatch({ type: categoryConstants.DELETE_CATEGORY_FAIL, payload: error })
+  }
+}

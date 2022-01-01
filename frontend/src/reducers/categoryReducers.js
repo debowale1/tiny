@@ -39,3 +39,16 @@ export const categoryUpdateReducer = (state = { category: {} }, action) => {
       return state
   }
 }
+
+export const categoryDeleteReducer = (state = {}, action) => {
+  switch(action.type){
+    case categoryConstants.DELETE_CATEGORY_REQUEST:
+      return { loading: true }
+    case categoryConstants.DELETE_CATEGORY_SUCCESS:
+      return { loading: false, success: true }
+    case categoryConstants.DELETE_CATEGORY_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
