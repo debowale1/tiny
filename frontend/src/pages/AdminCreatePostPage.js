@@ -6,6 +6,7 @@ import AdminNav from '../components/AdminNav'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 import { createNewPost } from '../actions/postActions'
+import { CREATE_POST_RESET } from '../constants/postConstants';
 
 const AdminCreatePostPage = () => {
   const editor = useRef(null)
@@ -29,14 +30,18 @@ const AdminCreatePostPage = () => {
   const { categories } = fetchCategories
 
   const createPost = useSelector(store => store.createPost)
-  const { loading, success, error, post } = createPost
+  const { loading, success, error } = createPost
 
 
   useEffect(() => {
+    if(success){
+      dispatch({ type: CREATE_POST_RESET })
+      navigate('/tiny-admin/posts')
+    }
     if(!userInfo || userInfo.data.user.role !== 'admin'){
       navigate('/login')
     }
-  }, [navigate, userInfo])
+  }, [navigate, userInfo, dispatch, success])
 
   
 

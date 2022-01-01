@@ -17,7 +17,13 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers'
-import { fetchCategoriesReducer, fetchCategoryReducer, categoryUpdateReducer, categoryDeleteReducer } from './reducers/categoryReducers'
+import { 
+  fetchCategoriesReducer, 
+  fetchCategoryReducer, 
+  createCategoryReducer,
+  categoryUpdateReducer, 
+  categoryDeleteReducer 
+} from './reducers/categoryReducers'
 
 
 const reducers = combineReducers({
@@ -35,6 +41,7 @@ const reducers = combineReducers({
   commentCreate:           commentCreateReducer,
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,
+  createCategory:          createCategoryReducer,
   categoryUpdate:          categoryUpdateReducer,
   categoryDelete:          categoryDeleteReducer
 })

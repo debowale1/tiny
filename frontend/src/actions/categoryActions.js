@@ -35,6 +35,26 @@ export const getCategory = (id) => async (dispatch) => {
   }
 }
 
+
+export const createNewCategory = (categoryData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: categoryConstants.CREATE_CATEGORY_REQUEST })
+    const {userLogin: { userInfo } } = getState()
+  // make request to fetch posts
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userInfo.token}`
+    }
+  }
+  const {data} = await axios.post(`/api/v1/categories`, categoryData, config)
+
+  dispatch({ type: categoryConstants.CREATE_CATEGORY_SUCCESS, payload: data})
+} catch (error) {
+  dispatch({ type: categoryConstants.CREATE_CATEGORY_FAIL, payload: error })
+}
+}
+
 export const updateCategory = (categoryData) => async (dispatch, getState) => {
   try {
     dispatch({ type: categoryConstants.FETCH_CATEGORY_REQUEST })

@@ -25,6 +25,21 @@ export const fetchCategoryReducer = (state = { category: {} }, action) => {
   }
 }
 
+export const createCategoryReducer = (state = { category: {}}, action) => {
+  switch(action.type){
+    case categoryConstants.CREATE_CATEGORY_REQUEST:
+      return { loading: true}
+    case categoryConstants.CREATE_CATEGORY_SUCCESS:
+      return { loading: false, success: true, category: action.payload }
+    case categoryConstants.CREATE_CATEGORY_FAIL:
+      return { loading: false, error: action.payload }
+    case categoryConstants.CREATE_CATEGORY_RESET:
+      return { category: {} }
+    default:
+      return state
+  }
+}
+
 export const categoryUpdateReducer = (state = { category: {} }, action) => {
   switch(action.type){
     case categoryConstants.UPDATE_CATEGORY_REQUEST:
