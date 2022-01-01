@@ -16,22 +16,24 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
 } from './reducers/userReducers'
-import { fetchCategoriesReducer } from './reducers/categoryReducers'
+import { fetchCategoriesReducer, fetchCategoryReducer, categoryUpdateReducer } from './reducers/categoryReducers'
 
 
 const reducers = combineReducers({
-  fetchAllPosts:    fetchAllPostsReducer,
+  fetchAllPosts:           fetchAllPostsReducer,
   fetchPostsByCategory:    fetchPostsByCategoryReducer,
-  featuredPost:     featuredPostReducer,
-  fetchSinglePost:  fetchSinglePostReducer,
-  createPost:       createPostReducer,
-  postUpdate:       postUpdateReducer,
-  userLogin:        userLoginReducer,
-  userRegister:        userRegisterReducer,
-  userDetails:      userDetailsReducer,
-  userUpdateProfile: userUpdateProfileReducer,
-  commentCreate:    commentCreateReducer,
-  fetchCategories:    fetchCategoriesReducer,
+  featuredPost:            featuredPostReducer,
+  fetchSinglePost:         fetchSinglePostReducer,
+  createPost:              createPostReducer,
+  postUpdate:              postUpdateReducer,
+  userLogin:               userLoginReducer,
+  userRegister:            userRegisterReducer,
+  userDetails:             userDetailsReducer,
+  userUpdateProfile:       userUpdateProfileReducer,
+  commentCreate:           commentCreateReducer,
+  fetchCategories:         fetchCategoriesReducer,
+  fetchCategory:           fetchCategoryReducer,
+  categoryUpdate:          categoryUpdateReducer,
 })
 
 const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
