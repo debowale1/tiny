@@ -107,6 +107,27 @@ export const updatePost =(postData) => async (dispatch, getState) => {
 
   dispatch({ type: postConstants.UPDATE_POST_SUCCESS })
 } catch (error) {
-  dispatch({ type: postConstants.UPDATE_POST_FAIL, payload: error })
+    dispatch({ type: postConstants.UPDATE_POST_FAIL, payload: error })
+  }
 }
+
+export const deletePost = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: postConstants.DELETE_POST_REQUEST })
+
+    const {userLogin: { userInfo } } = getState()
+    // make request to fetch posts
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    await axios.delete(`/api/v1/posts/${id}`, config)
+
+    dispatch({ type: postConstants.DELETE_POST_SUCCESS })
+
+  } catch (error) {
+    dispatch({ type: postConstants.DELETE_POST_FAIL, payload: error })
+  }
 }

@@ -55,6 +55,18 @@ const AdminCategoryListPage = () => {
                     <td><Link to={`/tiny-admin/category/${category._id}/edit`}>{category.name}</Link></td>
                     <td><Link to={`/tiny-admin/category/${category.id}/edit`}>{category.description}</Link></td>
                     <td>{moment(category.createdAt).fromNow()}</td>
+                    <td>
+                      <div className="btn-group">
+                        <Link to={`/tiny-admin/category/${category._id}/edit`} type="button" className="btn btn-outline-secondary btn-sm">
+                          <i className="bi bi-pencil-square"></i>
+                          <span className="visually-hidden">Button</span>
+                        </Link>
+                        <button type="button" className="btn btn-outline-danger btn-sm">
+                          <i className="bi bi-trash"></i>
+                          <span className="visually-hidden">Button</span>
+                        </button>
+                      </div>
+                    </td>
                   </tr>
                 )
               })}

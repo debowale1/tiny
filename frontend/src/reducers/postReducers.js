@@ -81,3 +81,16 @@ export const postUpdateReducer = (state = { post: {} }, action) => {
       return state
   }
 }
+
+export const postDeleteReducer = (state = {}, action) => {
+  switch(action.type){
+    case postConstants.DELETE_POST_REQUEST:
+      return { loading: true }
+    case postConstants.DELETE_POST_SUCCESS:
+      return { loading: false, success: true }
+    case postConstants.DELETE_POST_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
