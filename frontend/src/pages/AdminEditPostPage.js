@@ -60,6 +60,8 @@ const AdminEditPostPage = () => {
     dispatch(updatePost({_id: id, title, body: content, snippet, isFeatured, category}))
   }
 
+  console.log(category.id);
+
   return (
     <>
      <div className="row g5">
@@ -111,9 +113,13 @@ const AdminEditPostPage = () => {
               onChange={(e) => setSnippet(e.target.value)} />
             <label htmlFor="snippet">Snippet</label>
           </div>
-          <select className="form-select mb-3" aria-label="Category" value={category} onChange={(e) => setCategory(e.target.value)}>
-            <option value=''>--Category--</option>
-            {categories?.map(category => <option key={category._id} value={category._id}>{category.name}</option>)}
+          <select 
+            className="form-select mb-3" 
+            aria-label="Category" 
+            value={category} 
+            onChange={(e) => setCategory(e.target.value)}
+          >
+            {categories?.map(category => <option key={category._id}>{category.name}</option>)}
           </select>
           <div className="form-check mb-3">
             <input 

@@ -116,7 +116,7 @@ exports.getAll = Model => asyncHandler(async (req,res) => {
     //4) PAGINATION
     if(req.query.page){
       const page = +req.query.page || 1;
-      const limit = +req.query.limit || 100;
+      const limit = +req.query.limit || 10;
       const skip = limit * (page - 1);
       query.skip(skip).limit(limit);
     }
