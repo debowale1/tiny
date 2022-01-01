@@ -76,7 +76,7 @@ export const postUpdateReducer = (state = { post: {} }, action) => {
     case postConstants.UPDATE_POST_FAIL:
       return { loading: false, error: action.payload }
     case postConstants.UPDATE_POST_RESET:
-      return { user: {} }
+      return { post: {} }
     default:
       return state
   }
