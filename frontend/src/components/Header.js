@@ -51,7 +51,7 @@ const Header = () => {
                       <li><Link className="dropdown-item" to="/tiny-admin">Admin Dashboard</Link></li>
                     ) }                    
                     <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
-                    <li><Link className="dropdown-item" to="/update-password">Update Password</Link></li>
+                    <li><Link className="dropdown-item" to="/update-my-password">Update Password</Link></li>
                     <li><hr className="dropdown-divider" /></li>
                     <li><button type='button' className="dropdown-item" onClick={logoutHandler}>Logout</button></li>
                   </ul>

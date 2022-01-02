@@ -16,6 +16,7 @@ import {
   userRegisterReducer, 
   userDetailsReducer,
   userUpdateProfileReducer,
+  userUpdatePasswordReducer,
 } from './reducers/userReducers'
 import { 
   fetchCategoriesReducer, 
@@ -38,6 +39,7 @@ const reducers = combineReducers({
   userRegister:            userRegisterReducer,
   userDetails:             userDetailsReducer,
   userUpdateProfile:       userUpdateProfileReducer,
+  userUpdatePassword:      userUpdatePasswordReducer,
   commentCreate:           commentCreateReducer,
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,

@@ -14,7 +14,7 @@ router.get('/logout', authController.logout)
 
 //only signed in user can access these routes
 router.use(authController.protect);
-router.patch('/updateMyPassword', authController.updatePassword);
+router.patch('/updateMyPassword', authController.protect, authController.updatePassword);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 router.get('/me', userController.getMe, userController.getUser);

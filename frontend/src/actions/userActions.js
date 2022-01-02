@@ -93,3 +93,33 @@ export const updateUserProfile = (userData) => async (dispatch, getState) => {
     })
   }
 }
+export const updateMyPassword = (passwordData) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_UPDATE_PASSWORD_REQUEST })
+
+    const {userLogin: { userInfo } } = getState()
+    const config = {
+      headers: {
+        'Content_Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+
+    console.log(passwordData.currentPassword, passwordData.password, passwordData.confirmPassword);
+    
+    const { data } = await axios.patch(
+                    `/api/v1/users/updateMyPassword`, 
+                    {passwordCurrent: passwordData.currentPassword, 
+                    password: passwordData.password, 
+                    passwordConfirm: passwordData.confirmPassword}, 
+                    config
+                    )
+    const { data: { user } } = data
+    dispatch({ type: userConstants.USER_UPDATE_PASSWORD_SUCCESS, payload: user })
+  } catch (error) {
+    dispatch({ 
+      type: userConstants.USER_UPDATE_PASSWORD_FAIL, 
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message
+    })
+  }
+}

@@ -6,6 +6,7 @@ import PostsByCategoryPage from './pages/PostsByCategoryPage';
 import ArticlePage from './pages/ArticlePage';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import UpdatePasswordPage from './pages/UpdatePasswordPage';
 import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
 import AdminPostListPage from './pages/AdminPostListPage';
@@ -30,6 +31,7 @@ function App() {
           <Route path='/tiny-admin' element={<AdminPage />} />
           <Route path='/register' element={<RegisterPage />} />
           <Route path='/login' element={<LoginPage />} />
+          <Route path='/update-my-password' element={<UpdatePasswordPage />} />
           <Route path='/profile' element={<ProfilePage />} />
           <Route path='/category/:id' element={<PostsByCategoryPage />} />
           <Route path='/:id' element={<ArticlePage />} />
