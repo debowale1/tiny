@@ -22,7 +22,7 @@ router.get('/me', userController.getMe, userController.getUser);
 //only admins can access these routes from here
 router.use(authController.restrictTo('admin'))
 router.route('/')
-      .get(userController.getAllUser)
+      .get(authController.protect, authController.restrictTo('admin'), userController.getAllUser)
       .post(userController.createUser);
 
 router.route('/:id')

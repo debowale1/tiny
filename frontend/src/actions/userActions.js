@@ -104,8 +104,6 @@ export const updateMyPassword = (passwordData) => async (dispatch, getState) => 
         Authorization: `Bearer ${userInfo.token}`
       }
     }
-
-    console.log(passwordData.currentPassword, passwordData.password, passwordData.confirmPassword);
     
     const { data } = await axios.patch(
                     `/api/v1/users/updateMyPassword`, 
@@ -119,6 +117,30 @@ export const updateMyPassword = (passwordData) => async (dispatch, getState) => 
   } catch (error) {
     dispatch({ 
       type: userConstants.USER_UPDATE_PASSWORD_FAIL, 
+      payload: error.response && error.response.data.message ? error.response.data.message : error.message
+    })
+  }
+}
+
+export const fetchAllUsers = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_LIST_REQUEST })
+
+    const {userLogin: { userInfo } } = getState()
+    const config = {
+      headers: {
+        'Content_Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    
+    const { data } = await axios.get(`/api/v1/users`, config)
+    
+    const { data: { data:users } } = data
+    dispatch({ type: userConstants.USER_LIST_SUCCESS, payload: users })
+  } catch (error) {
+    dispatch({ 
+      type: userConstants.USER_LIST_FAIL, 
       payload: error.response && error.response.data.message ? error.response.data.message : error.message
     })
   }

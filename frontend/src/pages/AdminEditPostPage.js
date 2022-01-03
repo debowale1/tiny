@@ -60,8 +60,6 @@ const AdminEditPostPage = () => {
     dispatch(updatePost({_id: id, title, body: content, snippet, isFeatured, category}))
   }
 
-  console.log(category.id);
-
   return (
     <>
      <div className="row g5">

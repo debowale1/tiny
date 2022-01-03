@@ -1,15 +1,15 @@
 import * as userConstants from '../constants/userConstants'
 
-export const userLoginReducer = (state = {}, action) => {
+export const userLoginReducer = (state = { userInfo: {} }, action) => {
   switch (action.payload) {
     case userConstants.USER_LOGIN_REQUEST:
       return { loading: true }
     case userConstants.USER_LOGIN_SUCCESS:
-      return { loading: false, userInfo: action.payload }
+      return { loading: false, success: true, userInfo: action.payload }
     case userConstants.USER_LOGIN_FAIL:
       return { loading: false, error: action.payload }
     case userConstants.USER_LOGOUT:
-      return {}
+      return { userInfo: {}}
     default:
       return state;
   }
@@ -22,6 +22,19 @@ export const userRegisterReducer = (state = {}, action) => {
       return { loading: false, userInfo: action.payload }
     case userConstants.USER_REGISTER_FAIL:
       return { loading: false, error: action.payload }
+    default:
+      return state;
+  }
+}
+
+export const userListReducer = (state = { users: [] }, action) => {
+  switch (action.type) {
+    case userConstants.USER_LIST_REQUEST:
+      return { loading: true }
+    case userConstants.USER_LIST_SUCCESS:
+      return { loading: false, users: action.payload }
+    case userConstants.USER_LIST_FAIL:
+      return { loading: false, error: action.payload }  
     default:
       return state;
   }
