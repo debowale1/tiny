@@ -57,7 +57,7 @@ export const createNewCategory = (categoryData) => async (dispatch, getState) =>
 
 export const updateCategory = (categoryData) => async (dispatch, getState) => {
   try {
-    dispatch({ type: categoryConstants.FETCH_CATEGORY_REQUEST })
+    dispatch({ type: categoryConstants.UPDATE_CATEGORY_REQUEST })
   
     const {userLogin: { userInfo } } = getState()
   

@@ -16,6 +16,7 @@ import AdminCreatePostPage from './pages/AdminCreatePostPage';
 import AdminCreateCategoryPage from './pages/AdminCreateCategoryPage';
 import AdminEditPostPage from './pages/AdminEditPostPage';
 import AdminEditCategoryPage from './pages/AdminEditCategoryPage';
+import AdminEditUserPage from './pages/AdminEditUserPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
       <Header />
       <main className='container' style={{ minHeight: '70vh'}}>
         <Routes>
+          <Route path='/tiny-admin/user/:id/edit' element={<AdminEditUserPage />} />
           <Route path='/tiny-admin/category/:id/edit' element={<AdminEditCategoryPage />} />
           <Route path='/tiny-admin/post/:id/edit' element={<AdminEditPostPage />} />
           <Route path='/tiny-admin/create-category' element={<AdminCreateCategoryPage />} />

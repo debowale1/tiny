@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { getUserDetails, updateMyPassword } from '../actions/userActions'
+import { getMyDetails, updateMyPassword } from '../actions/userActions'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 
@@ -28,7 +28,7 @@ const UpdatePasswordPage = () => {
       navigate('/login')
     }else{
       if(!user?.name){
-        dispatch(getUserDetails())
+        dispatch(getMyDetails())
       }
     }
   }, [userInfo, user, dispatch, navigate])

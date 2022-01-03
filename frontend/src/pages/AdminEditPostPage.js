@@ -27,13 +27,13 @@ const AdminEditPostPage = () => {
 
   const {id} = useParams()
 
-  const fetchCategories = useSelector(store => store.fetchCategories)
+  const fetchCategories = useSelector(state => state.fetchCategories)
   const { categories } = fetchCategories
 
-  const fetchSinglePost = useSelector(store => store.fetchSinglePost)
+  const fetchSinglePost = useSelector(state => state.fetchSinglePost)
   const { loading, error, post } = fetchSinglePost
 
-  const postUpdate = useSelector(store => store.postUpdate)
+  const postUpdate = useSelector(state => state.postUpdate)
   const { loading: loadingUpdate, success, error: errorUpdate } = postUpdate
 
 

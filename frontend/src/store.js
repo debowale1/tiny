@@ -18,8 +18,10 @@ import {
   userRegisterReducer, 
   userListReducer,
   userDetailsReducer,
+  userMyDetailsReducer,
   userUpdateProfileReducer,
   userUpdatePasswordReducer,
+  userUpdateReducer,
   userDeleteReducer,
 } from './reducers/userReducers'
 import { 
@@ -43,9 +45,11 @@ const reducers = combineReducers({
   userRegister:            userRegisterReducer,
   userList:                userListReducer,
   userDetails:             userDetailsReducer,
+  userMyDetails:             userMyDetailsReducer,
   userUpdateProfile:       userUpdateProfileReducer,
   userUpdatePassword:      userUpdatePasswordReducer,
   userDelete:              userDeleteReducer,
+  userUpdate:              userUpdateReducer,
   commentCreate:           commentCreateReducer,
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,

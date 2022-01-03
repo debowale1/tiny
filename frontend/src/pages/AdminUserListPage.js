@@ -7,7 +7,7 @@ import AdminNav from '../components/AdminNav'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 import { fetchAllUsers, deleteUser } from '../actions/userActions'
-import { USER_DELETE_RESET } from '../constants/userConstants'
+// import { USER_DELETE_RESET } from '../constants/userConstants'
 
 const AdminUserListPage = () => {
   const dispatch = useDispatch()
@@ -26,7 +26,7 @@ const AdminUserListPage = () => {
 
   useEffect(() => {
     if(success){
-      dispatch({ type: USER_DELETE_RESET })
+      // dispatch({ type: USER_DELETE_RESET })
       dispatch(fetchAllUsers())
     }else if(!userInfo || userInfo.data.user.role !== 'admin'){
       navigate('/login')
@@ -34,8 +34,6 @@ const AdminUserListPage = () => {
       dispatch(fetchAllUsers())
     }
   }, [dispatch, userInfo, navigate, success])
-
-  console.log(users);
 
   const deleteHandler = (id) => {
     if(window.confirm('Do you want to delete this post?')){
