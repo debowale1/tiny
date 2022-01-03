@@ -1,5 +1,5 @@
 const User =  require('./../models/userModel');
-const catchAsync = require('./../utils/catchAsync')
+const asyncHandler = require('express-async-handler')
 const { deleteOne, updateOne, getOne, getAll } = require('./factory');
 
 
@@ -18,10 +18,11 @@ exports.getMe = (req, res, next) => {
 }
 
 
-exports.updateMe = catchAsync(async(req, res, next) => {
+exports.updateMe = asyncHandler(async(req, res) => {
   // 1) throw an error if user tries to update password
   if(req.body.password || req.body.passwordConfirm){
-    return next(res.status(401).json({status: 'error', message: 'You can\'t update password from this route. Please us /updateMyPassword' }));
+    res.status(401)
+    throw new Error('You can\'t update password from this route. Please us /updateMyPassword')
   }
 
   //update the user
@@ -54,13 +55,10 @@ exports.deleteMe = async (req, res, next) => {
 }
 
 
-exports.createUser = async (req, res) => {
-    res.status(500).json({
-      status: 'error',
-      message: "This route is not defined. Please use the /signup route"
-    })
-  
-}
+exports.createUser = asyncHandler(async (req, res) => {
+  res.status(500)
+  throw new Error('This route is not defined. Please use the /signup route')  
+})
 
 exports.getAllUser = getAll(User);
 exports.getUser = getOne(User)

@@ -107,7 +107,7 @@ const AdminEditUserPage = () => {
             </label>
           </div>
           <button type='submit' className='btn btn-primary me-3'>
-            {loadingUpdate ? <Spinner /> : 'Update Category'}
+            {loadingUpdate ? <Spinner /> : 'Update User'}
           </button>
           </form>  
         </div> 
