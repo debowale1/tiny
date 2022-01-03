@@ -6,7 +6,8 @@ import moment from 'moment'
 import AdminNav from '../components/AdminNav'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
-import { fetchAllUsers } from '../actions/userActions'
+import { fetchAllUsers, deleteUser } from '../actions/userActions'
+import { USER_DELETE_RESET } from '../constants/userConstants'
 
 const AdminUserListPage = () => {
   const dispatch = useDispatch()
@@ -19,27 +20,27 @@ const AdminUserListPage = () => {
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
-  // const postDelete = useSelector(state => state.postDelete)
-  // const { loading:loadingDelete, success } = postDelete
+  const userDelete = useSelector(state => state.userDelete)
+  const { loading:loadingDelete, success } = userDelete
 
 
   useEffect(() => {
-    // if(success){
-    //   dispatch(fetchPosts())
-    // }else 
-    if(!userInfo || userInfo.data.user.role !== 'admin'){
+    if(success){
+      dispatch({ type: USER_DELETE_RESET })
+      dispatch(fetchAllUsers())
+    }else if(!userInfo || userInfo.data.user.role !== 'admin'){
       navigate('/login')
     }else{
       dispatch(fetchAllUsers())
     }
-  }, [dispatch, userInfo, navigate])
+  }, [dispatch, userInfo, navigate, success])
 
   console.log(users);
 
   const deleteHandler = (id) => {
-    // if(window.confirm('Do you want to delete this post?')){
-    //   dispatch(deletePost(id))
-    // }
+    if(window.confirm('Do you want to delete this post?')){
+      dispatch(deleteUser(id))
+    }
   }
   
 
@@ -53,8 +54,8 @@ const AdminUserListPage = () => {
           <h1>All Users</h1>
           {loading && <Spinner />}
           {error && <Message variant='danger'>{error}</Message>}
-          {/* {loadingDelete && <Spinner />}
-          {success && <Message variant='success'>Post deleted Successfully!</Message>} */}
+          {loadingDelete && <Spinner />}
+          {success && <Message variant='success'>User deleted Successfully!</Message>}
           <table className="table table-hover">
             <thead>
               <tr>
@@ -62,7 +63,7 @@ const AdminUserListPage = () => {
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Joined On</th>
-                <th scope="col">Active?</th>
+                <th scope="col">Admin?</th>
                 <th scope="col">Actions</th>
               </tr>
             </thead>
@@ -74,7 +75,7 @@ const AdminUserListPage = () => {
                     <td><Link to={`/tiny-admin/user/${user._id}/edit`}>{user.name}</Link></td>
                     <td><Link to={`/tiny-admin/category/${user.email}/edit`}>{user.email}</Link></td>
                     <td>{moment(user.createdAt).fromNow()}</td>
-                    <td>{user.active ? 'Yes' : 'No'}</td>
+                    <td>{user.role === 'admin' ? 'Yes' : 'No'}</td>
                     <td>
                       <div className="btn-group">
                         <Link to={`/tiny-admin/user/${user._id}/edit`} type="button" className="btn btn-outline-secondary btn-sm">

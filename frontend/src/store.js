@@ -10,7 +10,9 @@ import {
   postUpdateReducer,
   postDeleteReducer
 } from './reducers/postReducers'
-import { commentCreateReducer } from './reducers/commentReducers'
+import { 
+  commentCreateReducer 
+} from './reducers/commentReducers'
 import { 
   userLoginReducer, 
   userRegisterReducer, 
@@ -18,6 +20,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer,
   userUpdatePasswordReducer,
+  userDeleteReducer,
 } from './reducers/userReducers'
 import { 
   fetchCategoriesReducer, 
@@ -42,6 +45,7 @@ const reducers = combineReducers({
   userDetails:             userDetailsReducer,
   userUpdateProfile:       userUpdateProfileReducer,
   userUpdatePassword:      userUpdatePasswordReducer,
+  userDelete:              userDeleteReducer,
   commentCreate:           commentCreateReducer,
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,

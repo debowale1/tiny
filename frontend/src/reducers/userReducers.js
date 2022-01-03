@@ -80,3 +80,18 @@ export const userUpdatePasswordReducer = (state = {}, action) => {
       return state;
   }
 }
+
+export const userDeleteReducer = (state = {}, action) => {
+  switch(action.type){
+    case userConstants.USER_DELETE_REQUEST:
+      return { loading: true }
+    case userConstants.USER_DELETE_SUCCESS:
+      return { loading: false, success: true }
+    case userConstants.USER_DELETE_FAIL:
+      return { loading: false, error: action.payload }
+    case userConstants.USER_DELETE_RESET:
+      return { }
+    default:
+      return state
+  }
+}

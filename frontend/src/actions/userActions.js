@@ -145,3 +145,24 @@ export const fetchAllUsers = () => async (dispatch, getState) => {
     })
   }
 }
+
+export const deleteUser = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({ type: userConstants.USER_DELETE_REQUEST })
+
+    const {userLogin: { userInfo } } = getState()
+    // make request to fetch users
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${userInfo.token}`
+      }
+    }
+    await axios.delete(`/api/v1/users/${id}`, config)
+
+    dispatch({ type: userConstants.USER_DELETE_SUCCESS })
+
+  } catch (error) {
+    dispatch({ type: userConstants.USER_DELETE_FAIL, payload: error })
+  }
+}
