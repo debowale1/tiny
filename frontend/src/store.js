@@ -10,14 +10,28 @@ import {
   postUpdateReducer,
   postDeleteReducer
 } from './reducers/postReducers'
-import { commentCreateReducer } from './reducers/commentReducers'
+import { 
+  commentCreateReducer 
+} from './reducers/commentReducers'
 import { 
   userLoginReducer, 
   userRegisterReducer, 
+  userListReducer,
   userDetailsReducer,
+  userMyDetailsReducer,
   userUpdateProfileReducer,
+  userUpdatePasswordReducer,
+  userCreateReducer,
+  userUpdateReducer,
+  userDeleteReducer,
 } from './reducers/userReducers'
-import { fetchCategoriesReducer, fetchCategoryReducer, categoryUpdateReducer, categoryDeleteReducer } from './reducers/categoryReducers'
+import { 
+  fetchCategoriesReducer, 
+  fetchCategoryReducer, 
+  createCategoryReducer,
+  categoryUpdateReducer, 
+  categoryDeleteReducer 
+} from './reducers/categoryReducers'
 
 
 const reducers = combineReducers({
@@ -30,11 +44,18 @@ const reducers = combineReducers({
   postDelete:              postDeleteReducer,
   userLogin:               userLoginReducer,
   userRegister:            userRegisterReducer,
+  userList:                userListReducer,
   userDetails:             userDetailsReducer,
+  userMyDetails:             userMyDetailsReducer,
   userUpdateProfile:       userUpdateProfileReducer,
+  userUpdatePassword:      userUpdatePasswordReducer,
+  userCreate:              userCreateReducer,
+  userDelete:              userDeleteReducer,
+  userUpdate:              userUpdateReducer,
   commentCreate:           commentCreateReducer,
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,
+  createCategory:          createCategoryReducer,
   categoryUpdate:          categoryUpdateReducer,
   categoryDelete:          categoryDeleteReducer
 })

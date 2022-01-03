@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 // import { Link } from 'react-router-dom'
-import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import { getMyDetails, updateUserProfile } from '../actions/userActions'
 import Spinner from '../components/Spinner'
 import Message from '../components/Message'
 
@@ -13,8 +13,8 @@ const ProfilePage = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
 
-  const userDetails = useSelector(state => state.userDetails)
-  const { loading, error, user } = userDetails
+  const userMyDetails = useSelector(state => state.userMyDetails)
+  const { loading, error, user } = userMyDetails
 
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
@@ -28,7 +28,7 @@ const ProfilePage = () => {
       navigate('/login')
     }else{
       if(!user?.name){
-        dispatch(getUserDetails())
+        dispatch(getMyDetails())
       }else{
         setName(user.name)
         setEmail(user.email)

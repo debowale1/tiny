@@ -61,6 +61,8 @@ export const createPostReducer = (state = { post: {}}, action) => {
       return { loading: false, success: true, post: action.payload }
     case postConstants.CREATE_POST_FAIL:
       return { loading: false, error: action.payload }
+    case postConstants.CREATE_POST_RESET:
+      return { post: {} }
     default:
       return state
   }

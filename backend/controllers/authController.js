@@ -60,27 +60,23 @@ exports.signup = asyncHandler(async (req, res) => {
 })
 
 exports.login = asyncHandler(async (req, res) => {
-  
   const { email, password } = req.body;
-  try {
     //check username and password
-    if(!email || !password) return res.status(400).json({status: 'error', message: 'please enter your email and password'});
+    // if(!email || !password){
+    //   res.status(400)
+    //   throw new Error('please enter your email and password');
+    // } 
 
     //check if the user exists and password is correct
     const user = await User.findOne({email}).select('+password');
     // const correctPassword = user.comparePassword(password, user.password);
     if(!user || !(await user.comparePassword(password, user.password))) {
-      return next(res.status(401).json({ status: 'fail', message: 'invalid email or password'}));
+      res.status(401)
+      throw new Error('invalid email or password')
     }
 
     //IF everything fine, create a valid token and send to the user for login
     createSendToken(user, 200, res);    
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      error: 'error logging in'
-    });
-  }
 })
 
 // logout

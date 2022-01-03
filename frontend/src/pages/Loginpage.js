@@ -12,12 +12,12 @@ const LoginPage = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
-  console.log(location.search);
+  
 
   const redirect = location.search ? location.search.split('=')[1] : '/'
 
   const userLogin = useSelector(state => state.userLogin)
-  const {loading, userInfo, error } = userLogin
+  const { loading, success, userInfo, error } = userLogin
 
   useEffect(() => {
     if(userInfo){
@@ -27,17 +27,16 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(login({ email, password }))
-    navigate('/')
-    
+    dispatch(login({ email, password }))    
   }
 
   return (
     <>
+      {loading && <Spinner />}
+      {success && <Message variant='success'>logged in successfully!</Message> }
+      {error && <Message variant='danger'>{error}</Message> }
      <form className='form-signin' method='post' onSubmit={handleSubmit}>
         <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-        {error && <Message>{error}</Message> }
-        {loading && <Spinner />}
         <div className="form-floating">
           <input 
             type="email" 

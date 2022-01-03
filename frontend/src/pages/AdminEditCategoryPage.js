@@ -19,10 +19,10 @@ const AdminEditCategoryPage = () => {
 
   const {id} = useParams()
 
-  const fetchCategory = useSelector(store => store.fetchCategory)
+  const fetchCategory = useSelector(state => state.fetchCategory)
   const { loading, category, error } = fetchCategory
 
-  const categoryUpdate = useSelector(store => store.categoryUpdate)
+  const categoryUpdate = useSelector(state => state.categoryUpdate)
   const { loading: loadingUpdate, success, error: errorUpdate } = categoryUpdate
 
 

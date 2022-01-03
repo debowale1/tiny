@@ -26,7 +26,7 @@ const AdminNav = () => {
               <Link className="nav-link" to="/tiny-admin/users"><i className="bi bi-people-fill"></i> Users</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/tiny-admin/add-user"><i className="bi bi-person-fill"></i> New User</Link>
+              <Link className="nav-link" to="/tiny-admin/create-user"><i className="bi bi-person-fill"></i> New User</Link>
             </li>
           </ul>
     </div>

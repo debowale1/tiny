@@ -14,7 +14,7 @@ router.get('/logout', authController.logout)
 
 //only signed in user can access these routes
 router.use(authController.protect);
-router.patch('/updateMyPassword', authController.updatePassword);
+router.patch('/updateMyPassword', authController.protect, authController.updatePassword);
 router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 router.get('/me', userController.getMe, userController.getUser);
@@ -22,12 +22,12 @@ router.get('/me', userController.getMe, userController.getUser);
 //only admins can access these routes from here
 router.use(authController.restrictTo('admin'))
 router.route('/')
-      .get(userController.getAllUser)
+      .get(authController.protect, authController.restrictTo('admin'), userController.getAllUser)
       .post(userController.createUser);
 
 router.route('/:id')
       .get(userController.getUser)
-      .patch(userController.updateUser)
+      .patch(authController.protect, authController.restrictTo('admin'), userController.updateUser)
       .delete(userController.deleteUser);
 
 
