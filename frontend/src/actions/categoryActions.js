@@ -14,7 +14,9 @@ export const getCategories = () => async (dispatch) => {
   const {data: { data:categories } } = data
   dispatch({ type: categoryConstants.FETCH_ALL_CATEGORY_SUCCESS, payload: categories})
 } catch (error) {
-  dispatch({ type: categoryConstants.FETCH_ALL_CATEGORY_FAIL, payload: error.message })
+  dispatch({ type: categoryConstants.FETCH_ALL_CATEGORY_FAIL, 
+    payload:  error.response && error.response.data.message ? error.response.data.message : error.message 
+  })
 }
 }
 
@@ -31,7 +33,10 @@ export const getCategory = (id) => async (dispatch) => {
   const {data: { data:category } } = data
   dispatch({ type: categoryConstants.FETCH_CATEGORY_SUCCESS, payload: category})
   } catch (error) {
-    dispatch({ type: categoryConstants.FETCH_CATEGORY_FAIL, payload: error.message })
+    dispatch({ 
+      type: categoryConstants.FETCH_CATEGORY_FAIL, 
+      payload:  error.response && error.response.data.message ? error.response.data.message : error.message 
+    })
   }
 }
 
@@ -51,7 +56,8 @@ export const createNewCategory = (categoryData) => async (dispatch, getState) =>
 
   dispatch({ type: categoryConstants.CREATE_CATEGORY_SUCCESS, payload: data})
 } catch (error) {
-  dispatch({ type: categoryConstants.CREATE_CATEGORY_FAIL, payload: error })
+  dispatch({ type: categoryConstants.CREATE_CATEGORY_FAIL, 
+    payload:  error.response && error.response.data.message ? error.response.data.message : error.message })
 }
 }
 
@@ -73,7 +79,8 @@ export const updateCategory = (categoryData) => async (dispatch, getState) => {
     dispatch({ type: categoryConstants.FETCH_CATEGORY_SUCCESS, payload: data})
     
   } catch (error) {
-    dispatch({ type: categoryConstants.UPDATE_CATEGORY_FAIL, payload: error.message })
+    dispatch({ type: categoryConstants.UPDATE_CATEGORY_FAIL, 
+      payload:  error.response && error.response.data.message ? error.response.data.message : error.message })
   }
 }
 
@@ -95,6 +102,7 @@ export const deleteCategory = (id) => async (dispatch, getState) => {
     dispatch({ type: categoryConstants.DELETE_CATEGORY_SUCCESS })
 
   } catch (error) {
-    dispatch({ type: categoryConstants.DELETE_CATEGORY_FAIL, payload: error })
+    dispatch({ type: categoryConstants.DELETE_CATEGORY_FAIL, 
+      payload:  error.response && error.response.data.message ? error.response.data.message : error.message })
   }
 }

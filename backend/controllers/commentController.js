@@ -7,7 +7,7 @@ exports.getAllComments = catchAsync(async(req, res, next) => {
   
   if(req.params.postId) filter = {postId: req.params.postId};
   
-  comments = await Comment.find(filter);
+  const comments = await Comment.find(filter);
 
 
   res.status(200).json({

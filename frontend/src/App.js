@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage';
 import AdminPage from './pages/AdminPage';
 import AdminPostListPage from './pages/AdminPostListPage';
 import AdminCategoryListPage from './pages/AdminCategoryListPage';
+import AdminCommentListPage from './pages/AdminCommentListPage';
 import AdminUserListPage from './pages/AdminUserListPage';
 import AdminCreatePostPage from './pages/AdminCreatePostPage';
 import AdminCreateCategoryPage from './pages/AdminCreateCategoryPage';
@@ -32,6 +33,7 @@ function App() {
           <Route path='/tiny-admin/create-category' element={<AdminCreateCategoryPage />} />
           <Route path='/tiny-admin/create-post' element={<AdminCreatePostPage />} />
           <Route path='/tiny-admin/categories' element={<AdminCategoryListPage />} />
+          <Route path='/tiny-admin/comments' element={<AdminCommentListPage />} />
           <Route path='/tiny-admin/posts' element={<AdminPostListPage />} />
           <Route path='/tiny-admin/users' element={<AdminUserListPage />} />
           <Route path='/tiny-admin' element={<AdminPage />} />

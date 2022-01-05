@@ -12,3 +12,16 @@ export const commentCreateReducer = (state = { }, action) => {
       return state
   }
 }
+
+export const commentListReducer = (state= { comments: [] }, action) => {
+  switch (action.type) {
+    case commentConstants.COMMENT_LIST_REQUEST:
+      return { loading: true }
+    case commentConstants.COMMENT_LIST_SUCCESS:
+      return { loading: false, comments: action.payload }
+    case commentConstants.COMMENT_LIST_FAIL:
+      return { loading: false, error: action.payload }  
+    default:
+      return state
+  }
+}
