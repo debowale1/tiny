@@ -66,9 +66,9 @@ const AdminCommentListPage = () => {
                 return (
                   <tr key={comment._id}>
                     <th scope="row">{index + 1}</th>
-                    <td><Link to={`/tiny-admin/comment/${comment._id}/edit`}>{comment.comment}</Link></td>
+                    <td><Link to={`/tiny-admin/comment/${comment._id}/edit`}>{`${comment.comment.substring(0, 50)}...`}</Link></td>
                     <td><Link to={`/tiny-admin/user/${comment.userId._id}/edit`}>{comment.userId.name}</Link></td>
-                    <td><Link to={`/`}>{comment.postId}</Link></td>
+                    <td><Link to={`/${comment.postId?.title}`}>{comment.postId?.title}</Link></td>
                     <td>{moment(comment.createdAt).fromNow()}</td>
                     <td>
                       <div className="btn-group">

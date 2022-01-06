@@ -29,25 +29,25 @@ const commentSchema = new mongoose.Schema({
   toJSon: {virtuals: true},
 })
 
-// commentSchema.pre(/^find/, function(next){
-//   this.populate({
-//     path: 'postId',
-//     select: 'title'
-//   }).populate({
-//     path: 'userId',
-//     select: 'name photo'
-//   })
-
-//   next()
-// })
 commentSchema.pre(/^find/, function(next){
   this.populate({
+    path: 'postId',
+    select: 'title -tags -category'
+  }).populate({
     path: 'userId',
-    select: 'name photo createdAt'
+    select: 'name photo'
   })
 
   next()
 })
+// commentSchema.pre(/^find/, function(next){
+//   this.populate({
+//     path: 'userId',
+//     select: 'name photo createdAt'
+//   })
+
+//   next()
+// })
 
 //Statics methods
 commentSchema.statics.calcTotalComments = async function(postId){
