@@ -23,6 +23,10 @@ const AdminNav = () => {
             </li>
             <hr />
             <li className="nav-item">
+              <Link className="nav-link" to="/tiny-admin/comments"><i className="bi bi-chat-right-text-fill"></i> Manage Comments</Link>
+            </li>
+            <hr />
+            <li className="nav-item">
               <Link className="nav-link" to="/tiny-admin/users"><i className="bi bi-people-fill"></i> Users</Link>
             </li>
             <li className="nav-item">

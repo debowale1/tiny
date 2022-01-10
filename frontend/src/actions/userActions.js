@@ -187,7 +187,8 @@ export const updateUser = (userData) => async (dispatch, getState) => {
     dispatch({ type: userConstants.USER_UPDATE_SUCCESS })    
     dispatch({ type: userConstants.USER_DETAILS_SUCCESS, payload: data })
   } catch (error) {
-    dispatch({ type: userConstants.USER_UPDATE_FAIL, payload: error.message })
+    dispatch({ type: userConstants.USER_UPDATE_FAIL,
+      payload:  error.response && error.response.data.message ? error.response.data.message : error.message })
   }
 }
 
@@ -208,7 +209,8 @@ export const deleteUser = (id) => async (dispatch, getState) => {
     dispatch({ type: userConstants.USER_DELETE_SUCCESS })
 
   } catch (error) {
-    dispatch({ type: userConstants.USER_DELETE_FAIL, payload: error })
+    dispatch({ type: userConstants.USER_DELETE_FAIL, 
+      payload:  error.response && error.response.data.message ? error.response.data.message : error.message })
   }
 }
 export const createNewUser = (userData) => async (dispatch, getState) => {
@@ -227,6 +229,7 @@ export const createNewUser = (userData) => async (dispatch, getState) => {
     dispatch({ type: userConstants.USER_CREATE_SUCCESS })
 
   } catch (error) {
-    dispatch({ type: userConstants.USER_CREATE_FAIL, payload: error })
+    dispatch({ type: userConstants.USER_CREATE_FAIL, 
+      payload:  error.response && error.response.data.message ? error.response.data.message : error.message })
   }
 }

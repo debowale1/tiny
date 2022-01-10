@@ -11,7 +11,8 @@ import {
   postDeleteReducer
 } from './reducers/postReducers'
 import { 
-  commentCreateReducer 
+  commentCreateReducer,
+  commentListReducer,
 } from './reducers/commentReducers'
 import { 
   userLoginReducer, 
@@ -53,6 +54,7 @@ const reducers = combineReducers({
   userDelete:              userDeleteReducer,
   userUpdate:              userUpdateReducer,
   commentCreate:           commentCreateReducer,
+  commentList:             commentListReducer,
   fetchCategories:         fetchCategoriesReducer,
   fetchCategory:           fetchCategoryReducer,
   createCategory:          createCategoryReducer,
