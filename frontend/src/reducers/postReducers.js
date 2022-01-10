@@ -12,6 +12,18 @@ export const fetchAllPostsReducer = (state = {posts: []}, action) => {
       return state
   }
 }
+export const searchAllPostsReducer = (state = {posts: []}, action) => {
+  switch(action.type){
+    case postConstants.SEARCH_POSTS_REQUEST:
+      return { loading: true}
+    case postConstants.SEARCH_POSTS_SUCCESS:
+      return { loading: false, posts: action.payload }
+    case postConstants.SEARCH_POSTS_FAIL:
+      return { loading: false, error: action.payload }
+    default:
+      return state
+  }
+}
 
 
 export const fetchPostsByCategoryReducer = (state = { posts: [] }, action) => {

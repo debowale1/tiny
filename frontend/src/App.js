@@ -19,6 +19,7 @@ import AdminCreateUserPage from './pages/AdminCreateUserPage';
 import AdminEditPostPage from './pages/AdminEditPostPage';
 import AdminEditCategoryPage from './pages/AdminEditCategoryPage';
 import AdminEditUserPage from './pages/AdminEditUserPage';
+import SearchPage from './pages/SearchPage';
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path='/login' element={<LoginPage />} />
           <Route path='/update-my-password' element={<UpdatePasswordPage />} />
           <Route path='/profile' element={<ProfilePage />} />
+          <Route path='/search/:keyword' element={<SearchPage />} />
           <Route path='/category/:id' element={<PostsByCategoryPage />} />
           <Route path='/:id' element={<ArticlePage />} />
           <Route exact path='/' element={<HomePage />} />

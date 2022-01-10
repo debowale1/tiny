@@ -8,7 +8,7 @@ import Message from '../components/Message'
 import { fetchPosts, fetchFeaturedPosts } from '../actions/postActions'
 
 const HomePage = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch()  
 
   const fetchAllPosts = useSelector(state => state.fetchAllPosts)
   const { loading, posts, error } = fetchAllPosts

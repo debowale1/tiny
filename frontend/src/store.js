@@ -8,7 +8,8 @@ import {
   fetchSinglePostReducer, 
   createPostReducer,
   postUpdateReducer,
-  postDeleteReducer
+  postDeleteReducer,
+  searchAllPostsReducer,
 } from './reducers/postReducers'
 import { 
   commentCreateReducer,
@@ -43,6 +44,7 @@ const reducers = combineReducers({
   createPost:              createPostReducer,
   postUpdate:              postUpdateReducer,
   postDelete:              postDeleteReducer,
+  searchAllPosts:          searchAllPostsReducer,
   userLogin:               userLoginReducer,
   userRegister:            userRegisterReducer,
   userList:                userListReducer,

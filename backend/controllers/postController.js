@@ -27,7 +27,6 @@ exports.getLatestFeaturedPost = async (req, res) => {
 
 exports.getAllPosts = async (req,res) => {
   try {
-    // console.log(req.query)
     //save a copy of req.query
     const queryObj = {...req.query};
   
@@ -81,6 +80,19 @@ exports.getAllPosts = async (req,res) => {
     })
   }
 }
+
+exports.searchPosts = asyncHandler(async(req, res) => {
+   // search
+   const keyword = req.query.keyword ? {
+    title: {
+      $regex: req.query.keyword,
+      $options: 'i'
+    }
+  } : {}
+
+  const posts = await Post.find({...keyword})
+  res.status(200).json(posts)
+})
 
 exports.getAuthor = (req, res, next) => {
   req.body.author = req.user.name;

@@ -22,6 +22,9 @@ router.route('/featured-post').get(postController.getLatestFeaturedPost);
 
 router.route('/category/:id').get(postController.getPostsByCategory);
 
+router.route('/search')
+      .get(postController.searchPosts)
+
 router.route('/')
       .get(postController.getAllPosts)
       .post(authController.protect, authController.restrictTo('admin'), postController.getAuthor, postController.createPost);
