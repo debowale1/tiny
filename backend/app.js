@@ -76,6 +76,7 @@ app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/tags', tagRouter);
 
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
 
 if(process.env.NODE_ENV === 'production'){
