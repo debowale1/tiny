@@ -47,29 +47,15 @@ app.use(mongoSanitize())
 // serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(expressLayouts)
-// app.use(fileUpload())
-// app.use(flash())
-// app.use(session({
-//   saveUninitialized: true,
-//   secret: 'TinySessionSecret',
-//   resave: true
-// }))
-
 app.use(express.urlencoded({ extended: true }))
-// express ejs layout
-// app.set('layout', './layouts/main')
-// // set views engine
-// app.set('view engine', 'ejs');
-// // set directory to views folder
-// app.set('views', path.join(__dirname, 'views'))
 
 
 
-// app.use((req, res, next) => {
-//   console.log(req.cookies.jwt);
-//   next();
-// })
+
+app.use((req, res, next) => {
+  console.log(req.cookies.jwt);
+  next();
+})
 
 app.use(compression())
 
@@ -89,6 +75,21 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
 app.use('/api/v1/categories', categoryRouter);
 app.use('/api/v1/tags', tagRouter);
+
+app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+if(process.env.NODE_ENV === 'production'){
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+
+  app.get('*', (req, res) => {
+    return res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  })
+
+}else{
+  app.get('/', (req, res) => {
+    res.send('Welcome to this API...')
+  })
+}
 
 //Not Found middleware
 app.use(notFound)
