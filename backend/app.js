@@ -14,7 +14,6 @@ const userRouter = require('./routes/userRouter');
 const categoryRouter = require('./routes/categoryRouter');
 const tagRouter = require('./routes/tagRouter');
 const commentRouter = require('./routes/commentRouter');
-const viewsRouter = require('./routes/viewsRouter');
 
 const { errorHandler, notFound } = require('./middlewares/errorMiddleware')
 
@@ -69,7 +68,6 @@ app.use(function(req, res, next) {
 
 
 //Mounting Routes
-app.use('/', viewsRouter);
 app.use('/api/v1/posts', postRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/comments', commentRouter);
