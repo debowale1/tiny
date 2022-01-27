@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --detectOpenHandles",
-    "test-watch": "jest --watch",
+    "test-watch": "jest --watch --detectOpenHandles",
     "start": "node backend/server.js",
     "server": "nodemon backend/server.js",
     "client": "cd frontend && npm start",
@@ -42,6 +42,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.13",
     "morgan": "^1.10.0",
+    "pm2": "^5.1.2",
     "slugify": "^1.5.3",
     "string-strip-html": "^8.3.0",
     "tinymce": "^5.10.0",
