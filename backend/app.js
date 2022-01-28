@@ -60,10 +60,10 @@ app.use(compression())
 
 
 
-app.use(function(req, res, next) { 
-  res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tiny.cloud https://cdnjs.cloudflare.com" ); 
-  next(); 
-})
+// app.use(function(req, res, next) { 
+//   res.setHeader( 'Content-Security-Policy', "script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.tiny.cloud https://cdnjs.cloudflare.com" ); 
+//   next(); 
+// })
 
 
 
